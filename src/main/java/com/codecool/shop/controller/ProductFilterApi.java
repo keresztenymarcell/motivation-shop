@@ -7,10 +7,8 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductWithoutBigFDecimal;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,16 +43,7 @@ public class ProductFilterApi extends HttpServlet {
             productList = productService.getProductsForSupplier(id);
         }
 
-        List<ProductWithoutBigFDecimal> newList = new ArrayList<>();
-
-        for (Product product : productList) {
-            newList.add(new ProductWithoutBigFDecimal(product));
-        }
-
-
-
-
-        String productString = new Gson().toJson(newList, ProductWithoutBigFDecimal.class);
+        String productString = new Gson().toJson(productList);
 
 
         PrintWriter out = resp.getWriter();
