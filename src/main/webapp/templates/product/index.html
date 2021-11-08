@@ -43,7 +43,7 @@
     <div>
         <label for="categories"></label>
             <select name="categories" id="categories">
-                    <option th:each="category,iterStat : ${categories}" th:data-index="${iterStat.index}" th:id="${category.id}" th:text="${category.name}" th:value="${category.id}">Category</option>
+                    <option th:each="category,iterStat : ${categories}" th:text="${category.name}" th:value="${category.id}">Category</option>
             </select>
 
         <label for="suppliers"></label>

@@ -7,6 +7,14 @@ const main = {
             main.clearProducts();
             main.fillProductsWithProducts(products);
         })
+
+        const suppliers = document.getElementById("suppliers");
+        suppliers.addEventListener("mouseup", async (event) => {
+            const supplierId = event.target.value;
+            const products = await main.fetchFromApi(`/api/filter?name=supplier&id=${supplierId}`);
+            main.clearProducts();
+            main.fillProductsWithProducts(products);
+        })
     },
     async fetchFromApi(url) {
         const response = await fetch(url);
