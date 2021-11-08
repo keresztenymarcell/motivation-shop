@@ -38,6 +38,17 @@ public class ProductService{
         return productDao.getBy(supplier);
     }
 
+    public List<Product> getAllProducts() {
+        return productDao.getAll();
+    }
+
+    public List<Supplier> getAllSuppliers() {
+        return supplierDao.getAll();
+    }
+
+    public List<ProductCategory> getAllCategories() {
+        return productCategoryDao.getAll();
+    }
 
 
 }
