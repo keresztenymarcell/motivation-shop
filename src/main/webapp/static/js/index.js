@@ -25,6 +25,7 @@ const main = {
         const productsDiv = document.getElementById("products");
 
         for (let i = 0; i < products.length; i++) {
+            console.log(products[i]);
             productsDiv.innerHTML += this.createCardFromProduct(products[i]);
         }
     },
@@ -39,7 +40,7 @@ const main = {
         </div>
         <div class="card-body">
             <div class="card-text">
-                <p class="lead">100 USD???</p>
+                <p class="lead">${product.defaultPrice} ${product.defaultCurrency}</p>
             </div>
             <div class="card-text">
                 <a class="btn btn-success" href="#">Add to cart</a>
