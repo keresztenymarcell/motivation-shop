@@ -2,40 +2,27 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="copy">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light">
-        <!-- Links -->
-        <div class="collapse navbar-collapse" id="basicExampleNav1">
-
-            <!-- Right -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="#!" class="nav-link navbar-link-2 waves-effect">
-                        <span class="badge badge-pill red">1</span>
-                        <i class="fa fa-camera-retro fa-lg"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink3" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="true">
-                        <i class="united kingdom flag m-0"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#!" class="nav-link waves-effect">
-                        Sign in
-                    </a>
-                </li>
-                <li class="nav-item pl-2 mb-2 mb-md-0">
-                    <a href="#!" type="button"
-                       class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">Sign up</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand bg-white navbar-light navbar-fixed-top">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+            <!--<li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>-->
+        </ul>
+        <div style="float:right">
+            <div class="shopingicons mr-auto">
+                <a href="/" class="icons-btn d-inline-block bag"><i class="fa fa-shopping-cart"></i>
+                    <span class="glyphicon glyphicon-shopping-cart"> </span>
+                </a>
+                <span class="number">2</span>
+            </div>
         </div>
-        <!-- Links -->
 
+        <ul class="nav navbar-nav my-2 my-lg-0">
+            <li class="nav-item"><a class="nav-link" href="new_user"><i class="fas fa-user"></i> Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        </ul>
     </nav>
-    <!-- Navbar -->
 </div>
 </body>
 </html>
