@@ -9,6 +9,16 @@ const main = {
         suppliers.addEventListener("mouseup", async (event) => {
             await main.refreshProductsWithFetchedProducts("supplier", event.target.value);
         })
+
+        const cardButtons = document.querySelectorAll(".add-to-cart");
+
+        cardButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                const productId = e.target.dataset.productId;
+                console.log(productId);
+
+            })
+        })
     },
 
     async refreshProductsWithFetchedProducts(title, id) {
@@ -43,7 +53,7 @@ const main = {
                 <p class="lead">${product.defaultPrice} ${product.defaultCurrency}</p>
             </div>
             <div class="card-text">
-                <a class="btn btn-success" href="#">Add to cart</a>
+                <a class="btn btn-success add-to-cart" data-product-id="${product.id}" href="#">Add to cart</a>
             </div>
         </div>
     </div>
