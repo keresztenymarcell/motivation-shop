@@ -1,12 +1,14 @@
 package com.codecool.shop.model;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 
 public class LineItem extends BaseModel{
     private int quantity;
     private final BigDecimal productPrice;
     private BigDecimal itemTotal;
     private int productId;
+    private Currency  currency;
 
 
     public LineItem(Product product) {
@@ -15,6 +17,7 @@ public class LineItem extends BaseModel{
         this.productPrice = product.getDefaultPrice();
         this.productId = product.getId();
         this.itemTotal = product.getDefaultPrice();
+        this.currency = product.getDefaultCurrency();
     }
 
     public void setQuantity(int quantity) {
@@ -32,5 +35,9 @@ public class LineItem extends BaseModel{
 
     public BigDecimal getItemTotal() {
         return itemTotal;
+    }
+
+    public Currency getCurrency() {
+        return currency;
     }
 }

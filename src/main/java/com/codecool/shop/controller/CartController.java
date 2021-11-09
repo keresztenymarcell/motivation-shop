@@ -56,9 +56,7 @@ public class CartController extends HttpServlet {
             new Order(currentUser);
         }
         currentUser.getOrder().addItemToCart(lineItem);
-
-        String totalOrder = "{\"totalItems\":"+currentUser.getOrder().getTotalItems()+",\"totalValue\":"+currentUser.getOrder().getOrderTotalValue()+"}";
-
+        String totalOrder = "{\"totalItems\":"+currentUser.getOrder().getTotalItems()+",\"totalValue\":"+currentUser.getOrder().getOrderTotalValue()+",\"currencyString\":\""+currentUser.getOrder().getCart().stream().findFirst().get().getCurrency()+"\"}";
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

@@ -60,6 +60,4 @@ public class Order extends BaseModel{
         return cart.stream().map(X -> X.getItemTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
-
-
 }

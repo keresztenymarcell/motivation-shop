@@ -107,7 +107,7 @@ const main = {
     },
     increaseCartValue(number){
         const cartContains = document.getElementById("shop-value");
-        cartContains.textContent = number.totalValue;
+        cartContains.textContent = number.totalValue +" "+ number.currencyString;
     },
 
 
