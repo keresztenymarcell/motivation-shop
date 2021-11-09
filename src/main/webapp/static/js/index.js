@@ -88,7 +88,7 @@ const main = {
         orderList.forEach(lineItem => {
             document.getElementById("shopping-cart-dropdown").innerHTML += main.fillLineItemsToCart(lineItem);
         })
-        document.getElementById("shopping-cart-dropdown").innerHTML += "<button>CheckOut</button>";
+        document.getElementById("shopping-cart-dropdown").innerHTML += "<button>CheckOut</button><button>Go to payment</button>";
     },
 
     fillLineItemsToCart(lineItem){
