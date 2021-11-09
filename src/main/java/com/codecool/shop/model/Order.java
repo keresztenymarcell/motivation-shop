@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 
 import javax.sound.sampled.Line;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ public class Order extends BaseModel{
     private final Set<LineItem> cart = new HashSet<>();
     private int userId;
     private int totalItems;
+    private BigDecimal orderTotalValue;
 
     public Order(User user) {
         this.userId = user.getId();
@@ -23,6 +25,7 @@ public class Order extends BaseModel{
         else{
             cart.add(item);
         }
+        this.orderTotalValue = getOrderTotalValue();
         this.totalItems++;
     }
 
@@ -37,6 +40,7 @@ public class Order extends BaseModel{
         if(totalItems!=0){
             this.totalItems--;
         }
+        this.orderTotalValue = getOrderTotalValue();
 
     }
 
@@ -51,4 +55,11 @@ public class Order extends BaseModel{
     public int getTotalItems() {
         return totalItems;
     }
+
+    public BigDecimal getOrderTotalValue(){
+        return cart.stream().map(X -> X.getItemTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
+    }
+
+
+
 }
