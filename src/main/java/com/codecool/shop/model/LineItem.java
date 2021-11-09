@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 public class LineItem extends BaseModel{
 
+
+
     private int quantity;
     private final BigDecimal productPrice;
 
@@ -17,6 +19,10 @@ public class LineItem extends BaseModel{
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
 
