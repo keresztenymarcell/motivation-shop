@@ -33,7 +33,7 @@ public class CartController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         UserDao userDataStore = UserDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,supplierDataStore);
+        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
 
 
         int id;
@@ -51,28 +51,17 @@ public class CartController extends HttpServlet {
         LineItem lineItem = new LineItem(product);
 
         User currentUser = userDataStore.find(1);
-        System.out.println(currentUser);
 
         if(!currentUser.hasOrder()){
             new Order(currentUser);
         }
         currentUser.getOrder().addItemToCart(lineItem);
 
-        System.out.println(currentUser.getOrder().getCart());
-
-
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         out.print("{}");
         out.flush();
-
-
-
-
-
-
-
     }
 
 }
