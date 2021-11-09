@@ -13,12 +13,22 @@ const main = {
         const cardButtons = document.querySelectorAll(".add-to-cart");
 
         cardButtons.forEach(button => {
-            button.addEventListener("click", (e) => {
+            button.addEventListener("click", async (e) => {
                 const productId = e.target.dataset.productId;
                 const url = `/api/add-to-cart?id=${productId}`
-                main.fetchFromApi(url);
+                const number = await main.fetchFromApi(url);
+                main.increaseCartContent(number);
+                main.increaseCartValue(number);
 
             })
+        })
+
+        const cartIcon = document.getElementById("cart-icon");
+        cartIcon.addEventListener("click", async () =>{
+            console.log("itt vagyok!")
+            const url = `/api/order`;
+            const responseOrder = await main.fetchFromApi(url);
+            main.fillShoppingCart(responseOrder);
         })
     },
 
@@ -65,6 +75,42 @@ const main = {
     clearProducts() {
         document.getElementById("products").textContent = "";
     },
+
+    fillShoppingCart(orderList){
+        document.getElementById("shopping-cart-dropdown").textContent = "";
+        this.createListToCart(orderList);
+    },
+
+    createListToCart(orderList){
+        orderList.forEach(lineItem => {
+            document.getElementById("shopping-cart-dropdown").innerHTML += main.fillLineItemsToCart(lineItem);
+        })
+    },
+
+    fillLineItemsToCart(lineItem){
+        return `<li>
+                      <span class="item">
+                        <span class="item-left">
+                            <img  class="cart-img" src=/static/img/product_${lineItem.productId}.jpg alt="" />
+                            <span class="item-info">
+                                <span>${lineItem.name}</span>
+                                <span>${lineItem.quantity}</span>
+                                <span>${lineItem.itemTotal}</span>
+                            </span>
+                        </span>
+                    </span>
+                </li>`
+    },
+    increaseCartContent(number){
+        const cartContains = document.getElementById("shop-contains");
+        cartContains.textContent = number.totalItems;
+    },
+    increaseCartValue(number){
+        const cartContains = document.getElementById("shop-value");
+        cartContains.textContent = number.totalValue +" "+ number.currencyString;
+    },
+
+
 
 }
 main.init();

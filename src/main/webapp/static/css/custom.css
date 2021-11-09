@@ -75,3 +75,11 @@
     color: white;
     font-size: 70px;
 }
+
+.cart-img{
+    height: 30px;
+}
+
+#shopping-cart-dropdown{
+    width: 200px;
+}
