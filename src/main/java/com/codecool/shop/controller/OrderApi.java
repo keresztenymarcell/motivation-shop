@@ -10,7 +10,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.User;
-import com.codecool.shop.service.ProductService;
+import com.codecool.shop.service.Service;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -31,9 +31,9 @@ public class OrderApi extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         UserDao userDataStore = UserDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
+        Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
 
-        User user = userDataStore.find(1);
+        User user = service.getUser(1);
         Set<LineItem> currentOrder = user.getOrder().getCart();
         String productString = new Gson().toJson(currentOrder);
 

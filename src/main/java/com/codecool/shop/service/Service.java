@@ -7,16 +7,17 @@ import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.User;
 
 import java.util.List;
 
-public class ProductService{
+public class Service {
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
     private UserDao userDao;
 
-    public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao, UserDao userDao) {
+    public Service(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao, UserDao userDao) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
         this.supplierDao = supplierDao;
@@ -36,6 +37,14 @@ public class ProductService{
         return supplierDao.find(supplierId);
     }
 
+    public Product getProduct(int productId){
+        return productDao.find(productId);
+    }
+
+    public User getUser(int id){
+        return userDao.find(id);
+    }
+
     public List<Product> getProductsForSupplier(int supplierId){
         var supplier = supplierDao.find(supplierId);
         return productDao.getBy(supplier);
@@ -52,6 +61,5 @@ public class ProductService{
     public List<ProductCategory> getAllCategories() {
         return productCategoryDao.getAll();
     }
-
 
 }

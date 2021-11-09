@@ -12,7 +12,7 @@ import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
-import com.codecool.shop.service.ProductService;
+import com.codecool.shop.service.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +33,7 @@ public class CartController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         UserDao userDataStore = UserDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
+        Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
 
 
         int id;
@@ -47,10 +47,11 @@ public class CartController extends HttpServlet {
             id = 1;
         }
 
-        Product product  = productDataStore.find(id);
+
+        Product product  = service.getProduct(id);
         LineItem lineItem = new LineItem(product);
 
-        User currentUser = userDataStore.find(1);
+        User currentUser = service.getUser(1);
 
         if(!currentUser.hasOrder()){
             new Order(currentUser);

@@ -9,7 +9,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.service.ProductService;
+import com.codecool.shop.service.Service;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -33,7 +33,7 @@ public class ProductFilterApi extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         UserDao userDaoStore = UserDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,supplierDataStore, userDaoStore);
+        Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDaoStore);
 
         String name = req.getParameter("name");
         int id;
@@ -50,9 +50,9 @@ public class ProductFilterApi extends HttpServlet {
         List<Product> productList = new ArrayList<>();
 
         if (name.equals("category")) {
-            productList = productService.getProductsForCategory(id);
+            productList = service.getProductsForCategory(id);
         } else if (name.equals("supplier")) {
-            productList = productService.getProductsForSupplier(id);
+            productList = service.getProductsForSupplier(id);
         }
 
         String productString = new Gson().toJson(productList);
