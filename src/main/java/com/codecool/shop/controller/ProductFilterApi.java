@@ -33,7 +33,16 @@ public class ProductFilterApi extends HttpServlet {
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore,supplierDataStore);
 
         String name = req.getParameter("name");
-        int id = Integer.parseInt(req.getParameter("id"));
+        int id;
+
+        try {
+            id = Integer.parseInt(req.getParameter("id"));
+            if (id < 1) {
+                id = 1;
+            }
+        } catch (NumberFormatException e) {
+            id = 1;
+        }
 
         List<Product> productList = new ArrayList<>();
 
