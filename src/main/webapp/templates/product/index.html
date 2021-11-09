@@ -50,12 +50,12 @@
     <div>
         <label for="categories"></label>
             <select name="categories" id="categories">
-                    <option th:each="category,iterStat : ${categories}" th:text="${category.name}" th:value="${category.id}">Category</option>
+                    <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Category</option>
             </select>
 
         <label for="suppliers"></label>
         <select name="suppliers" id="suppliers">
-            <option th:each="supplier,iterStat : ${suppliers}" th:text="${supplier.name}" th:value="${supplier.id}">Supplier</option>
+            <option th:each="supplier : ${suppliers}" th:text="${supplier.name}" th:value="${supplier.id}">Supplier</option>
         </select>
     </div>
 
