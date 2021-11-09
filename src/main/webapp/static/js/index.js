@@ -18,6 +18,7 @@ const main = {
                 const url = `/api/add-to-cart?id=${productId}`
                 const number = await main.fetchFromApi(url);
                 main.increaseCartContent(number);
+                main.increaseCartValue(number);
 
             })
         })
@@ -97,9 +98,6 @@ const main = {
                                 <span>${lineItem.itemTotal}</span>
                             </span>
                         </span>
-                        <span class="item-right">
-                            <button class="btn btn-xs btn-danger pull-right">x</button>
-                        </span>
                     </span>
                 </li>`
     },
@@ -107,6 +105,12 @@ const main = {
         const cartContains = document.getElementById("shop-contains");
         cartContains.textContent = number.totalItems;
     },
+    increaseCartValue(number){
+        const cartContains = document.getElementById("shop-value");
+        cartContains.textContent = number.totalValue;
+    },
+
+
 
 }
 main.init();
