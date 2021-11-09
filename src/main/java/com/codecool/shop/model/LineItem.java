@@ -30,4 +30,7 @@ public class LineItem extends BaseModel{
         return productPrice.multiply(new BigDecimal(quantity));
     }
 
+    public BigDecimal getItemTotal() {
+        return itemTotal;
+    }
 }
