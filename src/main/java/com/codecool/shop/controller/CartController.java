@@ -57,10 +57,12 @@ public class CartController extends HttpServlet {
         }
         currentUser.getOrder().addItemToCart(lineItem);
 
+        String totalOrder = "{\"totalItems\":"+currentUser.getOrder().getTotalItems()+"}";
+
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        out.print("{}");
+        out.print(totalOrder);
         out.flush();
     }
 
