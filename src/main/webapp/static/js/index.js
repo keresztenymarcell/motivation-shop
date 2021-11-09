@@ -20,6 +20,13 @@ const main = {
 
             })
         })
+
+        const cartIcon = document.getElementById("cart-icon");
+        cartIcon.addEventListener("click", async () =>{
+            const url = `/api/order`;
+            const responseOrder = await main.fetchFromApi(url);
+            console.log(responseOrder);
+        })
     },
 
 
