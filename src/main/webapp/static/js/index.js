@@ -82,24 +82,21 @@ const main = {
     },
 
     createListToCart(orderList){
+        document.getElementById("shopping-cart-dropdown").textContent = "";
+        document.getElementById("shopping-cart-dropdown").textContent = orderList.orderTotalValue;
+
         orderList.forEach(lineItem => {
             document.getElementById("shopping-cart-dropdown").innerHTML += main.fillLineItemsToCart(lineItem);
         })
+        document.getElementById("shopping-cart-dropdown").innerHTML += "<button>CheckOut</button>";
     },
 
     fillLineItemsToCart(lineItem){
-        return `<li>
-                      <span class="item">
-                        <span class="item-left">
-                            <img  class="cart-img" src=/static/img/product_${lineItem.productId}.jpg alt="" />
-                            <span class="item-info">
-                                <span>${lineItem.name}</span>
-                                <span>${lineItem.quantity}</span>
-                                <span>${lineItem.itemTotal}</span>
-                            </span>
-                        </span>
-                    </span>
-                </li>`
+        return `<tr><td><img  class="cart-img" src=/static/img/product_${lineItem.productId}.jpg alt="" /></td>       
+                <td>${lineItem.name}</td>
+                <td>${lineItem.quantity}</td>
+                <td>${lineItem.itemTotal}</td></tr>
+               `
     },
     increaseCartContent(number){
         const cartContains = document.getElementById("shop-contains");
