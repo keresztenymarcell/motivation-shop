@@ -6,9 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Order extends BaseModel{
-
-
-
     private final Set<LineItem> cart = new HashSet<>();
     private int userId;
 
