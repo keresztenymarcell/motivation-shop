@@ -9,6 +9,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.User;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -35,6 +36,10 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(tablet);
         ProductCategory elixir = new ProductCategory("Elixir", "Consumable", "A drink.");
         productCategoryDataStore.add(elixir);
+
+
+        User testUser = new User("Teszt Tamás");
+
 
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
