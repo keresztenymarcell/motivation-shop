@@ -15,11 +15,13 @@ const main = {
         cardButtons.forEach(button => {
             button.addEventListener("click", (e) => {
                 const productId = e.target.dataset.productId;
-                console.log(productId);
+                const url = `/api/add-to-cart?id=${productId}`
+                main.fetchFromApi(url);
 
             })
         })
     },
+
 
     async refreshProductsWithFetchedProducts(title, id) {
         const products = await main.fetchFromApi(`/api/filter?name=${title}&id=${id}`);
