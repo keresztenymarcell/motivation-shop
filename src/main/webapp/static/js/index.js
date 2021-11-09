@@ -2,30 +2,30 @@ const main = {
     init() {
         const categories = document.getElementById("categories");
         categories.addEventListener("mouseup", async (event) => {
-            const categoryId = event.target.value;
-            const products = await main.fetchFromApi(`/api/filter?name=category&id=${categoryId}`);
-            main.clearProducts();
-            main.fillProductsWithProducts(products);
+            await main.refreshProductsWithFetchedProducts("category", event.target.value);
         })
 
         const suppliers = document.getElementById("suppliers");
         suppliers.addEventListener("mouseup", async (event) => {
-            const supplierId = event.target.value;
-            const products = await main.fetchFromApi(`/api/filter?name=supplier&id=${supplierId}`);
-            main.clearProducts();
-            main.fillProductsWithProducts(products);
+            await main.refreshProductsWithFetchedProducts("supplier", event.target.value);
         })
     },
+
+    async refreshProductsWithFetchedProducts(title, id) {
+        const products = await main.fetchFromApi(`/api/filter?name=${title}&id=${id}`);
+        main.clearProducts();
+        main.fillProductsDivWithProducts(products);
+    },
+
     async fetchFromApi(url) {
         const response = await fetch(url);
         return response.json();
     },
 
-    fillProductsWithProducts(products) {
+    fillProductsDivWithProducts(products) {
         const productsDiv = document.getElementById("products");
 
         for (let i = 0; i < products.length; i++) {
-            console.log(products[i]);
             productsDiv.innerHTML += this.createCardFromProduct(products[i]);
         }
     },
