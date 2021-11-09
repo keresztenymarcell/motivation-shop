@@ -7,11 +7,14 @@ import java.util.Set;
 
 public class Order extends BaseModel{
 
-    private final Set<LineItem> cart = new HashSet<>();
-    private User user;
 
-    public Order(String name) {
-        super(name);
+
+    private final Set<LineItem> cart = new HashSet<>();
+    private int userId;
+
+    public Order(User user) {
+        this.userId = user.getId();
+        user.setOrder(this);
     }
 
     public void addItemToCart(LineItem item){
@@ -37,6 +40,10 @@ public class Order extends BaseModel{
 
     private boolean checkIfItemInCart(LineItem item){
         return cart.stream().anyMatch(lineItem -> lineItem.getName().equals(item.getName()));
+    }
+
+    public Set<LineItem> getCart() {
+        return cart;
     }
 
 
