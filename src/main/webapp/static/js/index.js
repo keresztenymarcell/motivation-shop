@@ -34,6 +34,7 @@ const main = {
 
 
     async refreshProductsWithFetchedProducts(title, id) {
+        main.clearMainContainerToOneitem();
         const products = await main.fetchFromApi(`/api/filter?name=${title}&id=${id}`);
         main.clearProducts();
         main.fillProductsDivWithProducts(products);
@@ -42,6 +43,14 @@ const main = {
     async fetchFromApi(url) {
         const response = await fetch(url);
         return response.json();
+    },
+
+    clearMainContainerToOneitem() {
+        const mainContainer = document.getElementById("main-container");
+        while (mainContainer.childElementCount > 1) {
+            mainContainer.removeChild(mainContainer.lastChild);
+        }
+
     },
 
     fillProductsDivWithProducts(products) {
