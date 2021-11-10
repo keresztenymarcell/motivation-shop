@@ -36,6 +36,8 @@
 
 <body>
 
+<div th:replace="fragments/nav.html :: copy"></div>
+
 <div class="cart-container">
 
 
@@ -76,12 +78,14 @@
             </div>
             <div th:text="'$' + ${totalPrice}" class="total-amount">$6.18</div>
         </div>
-    <button class="button">Checkout</button>
-    <button class="button">Back</button>
+        <a href="/checkout"><button class="button">Checkout</button></a>
+        <a href="/"><button class="button">Back</button></a>
     </div>
 
 
 </div>
+
+<div th:replace="fragments/footer.html :: copy"></div>
 
 
 </body>
