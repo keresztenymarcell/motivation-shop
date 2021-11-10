@@ -1,6 +1,8 @@
 package com.codecool.shop.model;
 
 
+import com.google.gson.Gson;
+
 import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -63,18 +65,8 @@ public class Order extends BaseModel{
         return cart.stream().map(X -> X.getItemTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
-    public void checkOrder(){
-        if(!orderSuccessful){
-            showErrorMessage();
-        }
-
-    }
-
-    private void showErrorMessage(){
-        JOptionPane.showMessageDialog(null, "Order unsuccessful", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
     public void saveToJson(){
+        Gson gson = new Gson();
 
     }
 
