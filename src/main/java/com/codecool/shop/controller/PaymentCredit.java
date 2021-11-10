@@ -10,6 +10,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.LineItem;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
 import com.google.gson.Gson;
@@ -37,24 +38,27 @@ public class PaymentCredit extends HttpServlet {
         Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
 
         User user = service.getUser(1);
-
-        String isSuccess;
+        Order orderWithPaymentDetails = new Order(user);
 
         String cvv = req.getParameter("cvv");
         if(cvv.equals("666")){
-            isSuccess = "false";
-            user.getOrder().setSuccessPayment(false);
+            orderWithPaymentDetails.setSuccessPayment(false);
             System.out.println("false");
 
         }else{
-            isSuccess = "true";
-            user.getOrder().setPaymentMethod("credit");
-            user.getOrder().setSuccessPayment(true);
+            orderWithPaymentDetails.setPaymentMethod("credit");
+            orderWithPaymentDetails.setSuccessPayment(true);
             System.out.println("true");
         }
 
+        String responseString = new Gson().toJson(orderWithPaymentDetails);
 
-        String responseString = "{\"paymentSuccess\":\""+isSuccess+"\"}";
+
+        //String responseString = "{\"paymentSuccess\":\""+isSuccess+"\"}";
+        /*String totalOrder = "{\"totalItems\":"+currentUser.getOrder().getTotalItems()+"," +
+                "\"totalValue\":"+currentUser.getOrder().getOrderTotalValue()+"," +
+                "\"currencyString\":\""+currentUser.getOrder().getCart().stream().findFirst().get().getCurrency()+"\"}";*/
+
         System.out.println(responseString);
 
         PrintWriter out = resp.getWriter();
