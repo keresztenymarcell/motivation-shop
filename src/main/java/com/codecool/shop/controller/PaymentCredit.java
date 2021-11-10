@@ -43,7 +43,6 @@ public class PaymentCredit extends HttpServlet {
         String cvv = req.getParameter("cvv");
         if(cvv.equals("666")){
             isSuccess = "false";
-            user.getOrder().setPaymentMethod("credit");
             user.getOrder().setSuccessPayment(false);
             System.out.println("false");
 
@@ -54,7 +53,9 @@ public class PaymentCredit extends HttpServlet {
             System.out.println("true");
         }
 
-        String responseString = new Gson().toJson(isSuccess);
+
+        String responseString = "{\"paymentSuccess\":\""+isSuccess+"\"}";
+        System.out.println(responseString);
 
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");

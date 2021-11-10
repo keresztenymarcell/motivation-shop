@@ -16,7 +16,8 @@ const pay = {
         const url = `/payment/credit?cvv=${CVV}`;
         const isSuccess = await pay.fetchFromApi(url)
         console.log(isSuccess);
-        if (isSuccess == "true"){
+        if (isSuccess.paymentSuccess === "true"){
+            console.log("Validation was successfull please close the modal!");
             const paymentCheckUrl=`/payment`;
             await pay.fetchFromApi(paymentCheckUrl);
         }
@@ -31,7 +32,7 @@ const pay = {
         const url = `/payment/paypal?user=${payPalUser}`;
         const isSuccess = await pay.fetchFromApi(url)
         console.log(isSuccess);
-        if (isSuccess == "true"){
+        if (isSuccess.paymentSuccess == "true"){
             const paymentCheckUrl=`/payment`;
             await pay.fetchFromApi(paymentCheckUrl);
         }
