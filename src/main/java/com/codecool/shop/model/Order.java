@@ -14,8 +14,14 @@ public class Order extends BaseModel{
     private int userId;
     private int totalItems;
     private BigDecimal orderTotalValue;
-    private boolean orderSuccessful = true;
-    private String paymentMode;
+    private String orderName;
+    private String email;
+    private String country;
+    private String zipcode;
+    private String address;
+    private boolean isSuccessPayment = false;
+    private String paymentMethod;
+
 
     public Order(User user) {
         this.userId = user.getId();
@@ -74,4 +80,58 @@ public class Order extends BaseModel{
 
     }
 
+    public boolean isSuccessPayment() {
+        return isSuccessPayment;
+    }
+
+    public void setSuccessPayment(boolean successPayment) {
+        isSuccessPayment = successPayment;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }
