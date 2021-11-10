@@ -1,5 +1,5 @@
 body{
-    margin: 0;
+    margin: 3%;
     padding: 0;
     background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
     height: 100vh;
@@ -9,7 +9,7 @@ body{
 }
 .cart-container{
     width: 70%;
-    height: 85%;
+    height: auto;
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0px 25px 40px #1687d933;
@@ -22,6 +22,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
 .heading{
     font-size: 20px;
@@ -130,9 +131,12 @@ hr{
     margin-right: 5%;
 }
 .checkout{
+    display: flex;
+    flex-direction: column;
     float: right;
-    margin-right: 5%;
+    margin: 5%;
     width: 28%;
+
 }
 .total{
     width: 100%;
@@ -170,4 +174,9 @@ hr{
     font-family: ‘Open Sans’;
     font-weight: 600;
     color: #202020;
+}
+
+.items-container{
+    display: flex;
+    flex-direction: column;
 }
