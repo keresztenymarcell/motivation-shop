@@ -80,6 +80,14 @@
     height: 30px;
 }
 
+.lineItemName{
+    width: 50px;
+}
+
+.td1{
+    width: 50px;
+}
+
 table{
     width: 350px;
     font-size: 20px;
