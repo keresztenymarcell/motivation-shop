@@ -11,6 +11,11 @@ public class Order extends BaseModel{
     private int userId;
     private int totalItems;
     private BigDecimal orderTotalValue;
+    private String orderName;
+    private String email;
+    private String country;
+    private String zipcode;
+    private String address;
 
     public Order(User user) {
         this.userId = user.getId();
@@ -60,4 +65,43 @@ public class Order extends BaseModel{
         return cart.stream().map(X -> X.getItemTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }
