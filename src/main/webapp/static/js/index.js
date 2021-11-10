@@ -39,6 +39,14 @@ const main = {
     async refreshProductsWithFetchedProducts(title, id) {
         main.clearMainContainerToOneitem();
         const products = await main.fetchFromApi(`/api/filter?name=${title}&id=${id}`);
+        let currentTitle;
+        console.log(products)
+        if (title === "category") {
+            currentTitle = products[0].productCategory.name;
+        } else if (title === "supplier") {
+            currentTitle = products[0].supplier.name;
+        }
+        main.setCardTitle(currentTitle);
         main.clearProducts();
         main.fillProductsDivWithProducts(products);
         main.loadAddToCartButtonsWithEventListeners()
@@ -55,6 +63,11 @@ const main = {
             mainContainer.removeChild(mainContainer.lastChild);
         }
 
+    },
+
+    setCardTitle(title) {
+        const cardTitle = document.getElementById("category-title");
+        cardTitle.textContent = title;
     },
 
     fillProductsDivWithProducts(products) {
