@@ -27,6 +27,8 @@ public class OrderConfirmation extends HttpServlet {
         User user = userDao.find(1);
         Order order = user.getOrder();
 
+
+        order.saveToJson();
         context.setVariable("userId", order.getTotalItems());
 
         engine.process("confirmation.html", context, response.getWriter());

@@ -5,7 +5,14 @@ import com.google.gson.Gson;
 
 import javax.sound.sampled.Line;
 import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -71,9 +78,20 @@ public class Order extends BaseModel{
         return cart.stream().map(X -> X.getItemTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
-    public void saveToJson(){
-        Gson gson = new Gson();
+    public void saveToJson() throws IOException {
+//        String filename = System.getProperty("user.home") + "/Documents/Textfiles/" + "order" + id + ".json";
+        String filename = "src/main/webapp/order" + id + ".json";
+        System.out.println(filename);
+//        Path path = Paths.get(filename);
+//        Files.createFile(path);
+        FileWriter writer = new FileWriter(filename);
 
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+        System.out.println(json);
+
+        writer.write(json, 0, json.length());
+        writer.close();
     }
 
     public void sendEmail(){

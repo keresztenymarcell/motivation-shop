@@ -64,7 +64,6 @@ public class CartController extends HttpServlet {
         out.print(totalOrder);
         out.flush();
 
-        currentUser.getOrder().checkOrder();
     }
 
 }
