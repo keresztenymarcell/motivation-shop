@@ -40,4 +40,8 @@ public class LineItem extends BaseModel{
     public Currency getCurrency() {
         return currency;
     }
+
+    public int getProductId() {
+        return productId;
+    }
 }
