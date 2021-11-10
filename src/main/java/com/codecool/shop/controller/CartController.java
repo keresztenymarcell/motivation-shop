@@ -63,6 +63,8 @@ public class CartController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         out.print(totalOrder);
         out.flush();
+
+        currentUser.getOrder().checkOrder();
     }
 
 }

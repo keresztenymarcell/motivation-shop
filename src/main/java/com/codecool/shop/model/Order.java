@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 
 import javax.sound.sampled.Line;
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,8 @@ public class Order extends BaseModel{
     private int userId;
     private int totalItems;
     private BigDecimal orderTotalValue;
+    private boolean orderSuccessful = true;
+    private String paymentMode;
 
     public Order(User user) {
         this.userId = user.getId();
@@ -58,6 +61,25 @@ public class Order extends BaseModel{
 
     public BigDecimal getOrderTotalValue(){
         return cart.stream().map(X -> X.getItemTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
+    }
+
+    public void checkOrder(){
+        if(!orderSuccessful){
+            showErrorMessage();
+        }
+
+    }
+
+    private void showErrorMessage(){
+        JOptionPane.showMessageDialog(null, "Order unsuccessful", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void saveToJson(){
+
+    }
+
+    public void sendEmail(){
+
     }
 
 }
