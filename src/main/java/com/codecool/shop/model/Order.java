@@ -16,6 +16,9 @@ public class Order extends BaseModel{
     private String country;
     private String zipcode;
     private String address;
+    private boolean isSuccessPayment = false;
+    private String paymentMethod;
+
 
     public Order(User user) {
         this.userId = user.getId();
@@ -65,6 +68,21 @@ public class Order extends BaseModel{
         return cart.stream().map(X -> X.getItemTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
+    public boolean isSuccessPayment() {
+        return isSuccessPayment;
+    }
+
+    public void setSuccessPayment(boolean successPayment) {
+        isSuccessPayment = successPayment;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
     public void setOrderName(String orderName) {
         this.orderName = orderName;
     }
