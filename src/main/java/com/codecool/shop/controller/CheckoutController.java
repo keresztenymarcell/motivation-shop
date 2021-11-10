@@ -26,11 +26,11 @@ public class CheckoutController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        String name = req.getParameter("name");
-        String email = req.getParameter("email");
-        String country = req.getParameter("country");
-        String zipcode = req.getParameter("zipcode");
-        String address = req.getParameter("address");
+        String name = req.getParameter("name"); // cant be null
+        String email = req.getParameter("email"); // check
+        String country = req.getParameter("country"); // cant be null
+        String zipcode = req.getParameter("zipcode"); // can be null
+        String address = req.getParameter("address"); // cant be null
 
         boolean x = false;
         if (name.equals("Gergő")) {
@@ -39,8 +39,11 @@ public class CheckoutController extends HttpServlet {
 
         if (!x) {
             context.setVariable("message", "Bad job!");
-
+            engine.process("product/checkout.html", context, resp.getWriter());
+        } else {
+            // here we can connect Betty's servlet with the payment
+            resp.sendRedirect("/");
         }
-        engine.process("product/checkout.html", context, resp.getWriter());
+
     }
 }
