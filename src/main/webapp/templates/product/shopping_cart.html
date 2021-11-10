@@ -7,7 +7,7 @@
 
     <title>Motivation Shop</title>
 
-    <script th:src="@{/static/js/index.js}" defer></script>
+    <script th:src="@{/static/js/shopping_cart.js}" defer></script>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -27,6 +27,7 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
     <link rel="stylesheet" type="text/css" href="/static/css/shopping_cart.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -37,10 +38,14 @@
 
 <div class="cart-container">
 
+
+
     <div class="header">
         <h3 class="heading">Shopping Cart</h3>
         <h5 class="action">Remove all</h5>
     </div>
+
+    <div class="items-container">
 
     <div th:each="product : ${shoppingCart}" class="Cart-Items">
         <div class="image-box">
@@ -48,12 +53,11 @@
         </div>
         <div class="about">
             <h1 th:text="${product.name}" class="title">Product Name</h1>
-<!--            <h3  th:text="${product.getDescription()}" class="subtitle">desc</h3>-->
         </div>
         <div class="counter">
-            <div class="btn" id="btnPlus">+</div>
-            <div th:text="${product.quantity}" class="count">2</div>
-            <div class="btn" id="btnMinus">-</div>
+            <div class="btn" id="btnPlus" th:data-product-id="${product.productId}">+</div>
+            <div th:id="'count' + ${product.productId}" th:text="${product.quantity}" class="count">2</div>
+            <div class="btn" id="btnMinus" th:data-product-id="${product.productId}">-</div>
         </div>
         <div class="prices">
             <div th:text="'$'+ ${product.itemTotal}" class="amount">$2.99</div>
@@ -61,6 +65,8 @@
         </div>
 
     </div>
+    </div>
+
     <hr>
     <div class="checkout">
         <div class="total">
@@ -70,7 +76,10 @@
             </div>
             <div th:text="'$' + ${totalPrice}" class="total-amount">$6.18</div>
         </div>
-    <button class="button">Checkout</button></div>
+    <button class="button">Checkout</button>
+    <button class="button">Back</button>
+    </div>
+
 
 </div>
 
