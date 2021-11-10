@@ -64,7 +64,8 @@ public class CheckoutController extends HttpServlet {
 
             System.out.println(currentOrder);
             // here we can connect Betty's servlet with the payment
-            resp.sendRedirect("/");
+            // engine.process("product/payment.html", context, resp.getWriter());
+            resp.sendRedirect("/payment-page");
         }
 
     }
