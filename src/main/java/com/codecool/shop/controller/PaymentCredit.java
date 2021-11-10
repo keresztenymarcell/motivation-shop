@@ -51,16 +51,12 @@ public class PaymentCredit extends HttpServlet {
             System.out.println("true");
         }
 
+        createJsonFromObject(resp, orderWithPaymentDetails);
+    }
+
+    static void createJsonFromObject(HttpServletResponse resp, Order orderWithPaymentDetails) throws IOException {
         String responseString = new Gson().toJson(orderWithPaymentDetails);
-
-
-        //String responseString = "{\"paymentSuccess\":\""+isSuccess+"\"}";
-        /*String totalOrder = "{\"totalItems\":"+currentUser.getOrder().getTotalItems()+"," +
-                "\"totalValue\":"+currentUser.getOrder().getOrderTotalValue()+"," +
-                "\"currencyString\":\""+currentUser.getOrder().getCart().stream().findFirst().get().getCurrency()+"\"}";*/
-
         System.out.println(responseString);
-
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
