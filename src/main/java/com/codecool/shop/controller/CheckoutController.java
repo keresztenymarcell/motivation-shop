@@ -62,7 +62,6 @@ public class CheckoutController extends HttpServlet {
             currentOrder.setZipcode(zipcode);
             currentOrder.setAddress(address);
 
-            System.out.println(currentOrder);
             // here we can connect Betty's servlet with the payment
             // engine.process("product/payment.html", context, resp.getWriter());
             resp.sendRedirect("/payment-page");

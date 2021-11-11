@@ -47,9 +47,6 @@ public class EditCartController extends HttpServlet {
         context.setVariable("totalPrice", totalPrice);
         context.setVariable("totalItems", totalItems);
 
-
-        System.out.println(shoppingCart);
-
         engine.process("product/shopping_cart.html", context, resp.getWriter());
     }
 

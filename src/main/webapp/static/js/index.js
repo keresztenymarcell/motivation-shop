@@ -39,7 +39,6 @@ const main = {
     async refreshCartIcon() {
         const url = `/api/order`
         const order = await main.fetchFromApi(url);
-        console.log(order.cart)
         if (order.cart.length > 0) {
             main.increaseCartContent(order);
             main.increaseCartValue(order);
@@ -60,7 +59,6 @@ const main = {
         main.clearMainContainerToOneitem();
         const products = await main.fetchFromApi(`/api/filter?name=${title}&id=${id}`);
         let currentTitle;
-        console.log(products)
         if (title === "category") {
             currentTitle = products[0].productCategory.name;
         } else if (title === "supplier") {

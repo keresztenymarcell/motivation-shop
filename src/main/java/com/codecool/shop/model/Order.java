@@ -84,14 +84,12 @@ public class Order extends BaseModel{
     public void saveToJson() throws IOException {
 //        String filename = System.getProperty("user.home") + "/Documents/Textfiles/" + "order" + id + ".json";
         String filename = "src/main/webapp/order" + id + ".json";
-        System.out.println(filename);
 //        Path path = Paths.get(filename);
 //        Files.createFile(path);
         FileWriter writer = new FileWriter(filename);
 
         Gson gson = new Gson();
         String json = gson.toJson(this);
-        System.out.println(json);
 
         writer.write(json, 0, json.length());
         writer.close();
