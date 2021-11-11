@@ -84,14 +84,12 @@ public class Order extends BaseModel{
     public void saveToJson() throws IOException {
 //        String filename = System.getProperty("user.home") + "/Documents/Textfiles/" + "order" + id + ".json";
         String filename = "src/main/webapp/order" + id + ".json";
-        System.out.println(filename);
 //        Path path = Paths.get(filename);
 //        Files.createFile(path);
         FileWriter writer = new FileWriter(filename);
 
         Gson gson = new Gson();
         String json = gson.toJson(this);
-        System.out.println(json);
 
         writer.write(json, 0, json.length());
         writer.close();
@@ -99,7 +97,7 @@ public class Order extends BaseModel{
 
     public void sendEmail() throws MessagingException {
         Properties prop = new Properties();
-        String d_email = "cantataprofana1930@gmail.com";
+        String d_email = "vinczeg1281@gmail.com";
         String d_host = "smtp.gmail.com";
         String d_port = "465";
         prop.put("mail.smtp.user", d_email);
@@ -116,20 +114,21 @@ public class Order extends BaseModel{
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("cantataprofana1930@gmail.com", System.getenv("EMAIL_PASSWORD"));
+                return new PasswordAuthentication("vinczeg1281@gmail.com", System.getenv("EMAIL_PASSWORD"));
             }
         });
 
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("cantataprofana1930@gmail.com"));
+        message.setFrom(new InternetAddress("vinczeg1281@gmail.com"));
         message.setRecipients(
                 Message.RecipientType.TO, InternetAddress.parse("cantataprofana1930@gmail.com"));
         message.setSubject("Mail Subject");
 
-        String msg = "This is my first email using JavaMailer";
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(msg, "text/html");
+        mimeBodyPart.setContent(json, "text/html");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(mimeBodyPart);
