@@ -1,14 +1,9 @@
 const conf = {
     async init() {
-        await conf.fetchFromOrderApi();
+        const order = await conf.fetchFromApi(`/api/order`);
+        await conf.fillConfirmationPage(order);
 
     },
-    async fetchFromOrderApi(){
-        const url = `/api/order`;
-        const order = await conf.fetchFromApi(url);
-        conf.fillConfirmationPage(order);
-    },
-
 
     async fetchFromApi(url) {
         const response = await fetch(url);
@@ -16,24 +11,26 @@ const conf = {
     },
 
 
-    fillConfirmationPage(order) {
+    async fillConfirmationPage(order) {
         console.log(order)
         console.log(order.cart)
         const confirm = document.getElementById("confirm");
         confirm.textContent = "";
-        confirm.innerHTML += conf.fillHeader(productsInCart) + conf.fillAllProduct(productsInCart) + conf.fullSubTotal(productsInCart) + conf.fillFooter(productsInCart);
+        confirm.innerHTML += await conf.fillHeader(order);
+        confirm.innerHTML += conf.fillAllProduct(order.cart) + conf.fullSubTotal(order) + conf.fillFooter(order);
 
 
     },
 
-    fillAllProduct(productsInCart){
+    fillAllProduct(cart){
         const productsDiv = document.getElementById("products");
-        productsInCart.forEach(cart => {
-            productsDiv.innerHTML += conf.fillProduct(cart);
+        cart.forEach(product => {
+            productsDiv.innerHTML += conf.fillProduct(product);
         })
+
     },
 
-    fillHeader(cartValue){
+    async fillHeader(cartValue){
         return `<div class="row d-flex justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -74,15 +71,15 @@ const conf = {
         return totalPrice;
     },
 
-    fillProduct(productsInCart){
+    fillProduct(product){
         return `
                 <tr>
-                    <td width="20%"> <img class="" src=/static/img/product_${product.id}.jpg alt="" /> </td>
-                    <td width="60%"> <span class="font-weight-bold">Men's Sports cap</span>
-                        <div class="product-qty"> <span class="d-block">Quantity:1</span> <span>Color:Dark</span> </div>
+                    <td width="20%"> <img id="conf-page" class="" src=/static/img/product_${product.productId}.jpg alt="" /> </td>
+                    <td width="60%"> <span class="font-weight-bold">${product.name}</span>
+                        <div class="product-qty"> <span class="d-block">Quantity:${product.quantity}</span> </div>
                     </td>
                     <td width="20%">
-                        <div class="text-right"> <span class="font-weight-bold">$67.50</span> </div>
+                        <div class="text-right"> <span class="font-weight-bold">${product.itemTotal}</span> </div>
                     </td>
                 </tr>
                             `
