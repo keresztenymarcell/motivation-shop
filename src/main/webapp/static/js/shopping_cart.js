@@ -4,7 +4,7 @@ function addEventHandlersToItemCountButtons(){
 
     minusButtons.forEach(button => {
         button.addEventListener("click", async (e) => {
-            changeCounterValue(e, -1);
+            await changeCounterValue(e, -1);
             const productId = e.target.dataset.productId;
             await reduceCountAndFetch(productId);
             await updateCart();
@@ -13,12 +13,50 @@ function addEventHandlersToItemCountButtons(){
 
     plusButtons.forEach(button => {
         button.addEventListener("click", async (e) => {
-            changeCounterValue(e, 1);
+            await changeCounterValue(e, 1);
             const productId = e.target.dataset.productId;
             await addCountAndFetch(productId);
             await updateCart();
         })
     })
+}
+
+function addEventHandlerToRemoveAllButton(){
+    const button = document.getElementById("removeAll");
+    const itemsContainer = document.querySelectorAll(".items-container");
+
+    button.addEventListener("click", async () => {
+        await fetchFromApi("/empty-cart");
+        itemsContainer[0].innerHTML = "";
+        const itemsDiv = document.querySelectorAll(".items")[0];
+        const subTotalDiv = document.querySelectorAll(".total-amount")[0];
+        subTotalDiv.innerHTML = "$0";
+        itemsDiv.innerHTML =  "0 items";
+    })
+
+}
+
+function addEventHandlersToRemoveItemButtons(){
+    const removeItemButtons = document.querySelectorAll(".remove")
+
+    removeItemButtons.forEach(button => {
+        button.addEventListener("click",  async (e) => {
+            const productId = e.target.parentNode.dataset.productId;
+            await removeCartItem(productId);
+            await updateCart();
+        })
+    })
+}
+
+async function changeCounterValue(e, value){
+    const productId = e.target.dataset.productId;
+    const countDiv = document.getElementById("count" + productId);
+    let count = countDiv.innerHTML;
+    count = parseInt(count, 10) + value
+    countDiv.innerHTML = count;
+    if(parseInt(count) === 0){
+        await removeCartItem(productId);
+    }
 }
 
 async function removeCartItem(productId) {
@@ -28,25 +66,6 @@ async function removeCartItem(productId) {
         await reduceCountAndFetch(productId);
     }
     cartItem.innerHTML = "";
-}
-
-function addEventHandlersToRemoveItemButtons(){
-    const removeItemButtons = document.querySelectorAll(".remove")
-
-    removeItemButtons.forEach(button => {
-        button.addEventListener("click",  async (e) => {
-            const productId = e.target.parentNode.dataset.productId;
-            await removeCartItem(productId)
-        })
-    })
-}
-
-function changeCounterValue(e, value){
-    const productId = e.target.dataset.productId;
-    const countDiv = document.getElementById("count" + productId);
-    let count = countDiv.innerHTML;
-    count = parseInt(count, 10) + value
-    countDiv.innerHTML = count;
 }
 
 async function updateCart(){
@@ -61,7 +80,6 @@ async function updateCart(){
     itemsDiv.innerHTML = order.totalItems + ' items';
 
     for (let i = 0; i < order.cart.length; i++) {
-        console.log(countDivs[i].innerHTML);
         if(parseInt(countDivs[i].innerHTML)===0){
             cartItemsDivs[i].innerHTML = "";
         }
@@ -92,3 +110,4 @@ async function fetchFromApi(url){
 
 addEventHandlersToItemCountButtons();
 addEventHandlersToRemoveItemButtons();
+addEventHandlerToRemoveAllButton();
