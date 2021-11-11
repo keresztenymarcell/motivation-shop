@@ -18,8 +18,6 @@ public class CheckoutServlet extends HttpServlet {
         User user = ServiceProvider.getService().getUser(1);
         Order order = user.getOrder();
 
-        order.saveCheckout();
-
         response.sendRedirect("/confirmation");
     }
 
