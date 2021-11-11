@@ -30,7 +30,7 @@ public class User extends BaseModel{
     }
 
 
-
-
-
+    public String getEmail() {
+        return email;
+    }
 }

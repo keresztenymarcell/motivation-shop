@@ -4,6 +4,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
+import com.codecool.shop.util.EmailSender;
 import com.codecool.shop.util.ServiceProvider;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -32,7 +33,7 @@ public class OrderConfirmation extends HttpServlet {
 
         order.saveToJson();
         try {
-            order.sendEmail();
+            EmailSender.sendEmail(order, user);
         } catch (MessagingException e) {
             e.printStackTrace();
         }

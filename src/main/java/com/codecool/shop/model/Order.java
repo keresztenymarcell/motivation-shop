@@ -97,48 +97,6 @@ public class Order extends BaseModel{
         writer.close();
     }
 
-    public void sendEmail() throws MessagingException {
-        Properties prop = new Properties();
-        String d_email = "vinczeg1281@gmail.com";
-        String d_host = "smtp.gmail.com";
-        String d_port = "465";
-        prop.put("mail.smtp.user", d_email);
-        prop.put("mail.smtp.host", d_host);
-        prop.put("mail.smtp.port", d_port);
-//        prop.put("mail.smtp.starttls.enable","false");
-        prop.put("mail.smtp.debug", "true");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.socketFactory.port", d_port);
-        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        prop.put("mail.smtp.socketFactory.fallback", "false");
-
-
-        Session session = Session.getInstance(prop, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("vinczeg1281@gmail.com", System.getenv("EMAIL_PASSWORD"));
-            }
-        });
-
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("vinczeg1281@gmail.com"));
-        message.setRecipients(
-                Message.RecipientType.TO, InternetAddress.parse("cantataprofana1930@gmail.com"));
-        message.setSubject("Order Confirmation");
-
-        Gson gson = new Gson();
-        String json = gson.toJson(this);
-
-        MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(json, "text/html");
-
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(mimeBodyPart);
-
-        message.setContent(multipart);
-
-        Transport.send(message);
-    }
 
     public void saveCheckout(){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
