@@ -12,14 +12,11 @@ const conf = {
 
 
     async fillConfirmationPage(order) {
-        console.log(order)
-        console.log(order.cart)
         const confirm = document.getElementById("confirm");
         confirm.textContent = "";
         confirm.innerHTML += await conf.fillHeader(order);
-        confirm.innerHTML += conf.fillAllProduct(order.cart) + conf.fullSubTotal(order) + conf.fillFooter();
-
-
+        confirm.innerHTML += conf.fillAllProduct(order.cart);
+        //confirm.innerHTML += conf.fillFooter(order);
     },
 
     fillAllProduct(cart){
@@ -63,17 +60,9 @@ const conf = {
 
     },
 
-    getTotalPrice(productsInCart){
-        let totalPrice = 0;
-        productsInCart.forEach(product => {
-            totalPrice += product.itemTotal;
-        })
-        return totalPrice;
-    },
 
     fillProduct(product){
-        return `
-                <tr>
+        return `<tr>
                     <td width="20%"> <img id="conf-page" class="" src=/static/img/product_${product.productId}.jpg alt="" /> </td>
                     <td width="60%"> <span class="font-weight-bold">${product.name}</span>
                         <div class="product-qty"> <span class="d-block">Quantity:${product.quantity}</span> </div>
@@ -81,16 +70,16 @@ const conf = {
                     <td width="20%">
                         <div class="text-right"> <span class="font-weight-bold">${product.itemTotal} USD</span> </div>
                     </td>
-                </tr>
-                            `
+                </tr>`
     },
 
-    fullSubTotal(productsInCart){
-        const totalPrice = conf.getTotalPrice(productsInCart);
+
+
+    fillFooter(order){
         return `</tbody>
-                        </table>
-                    </div>
-                <div class="row d-flex justify-content-end">
+                    </table>
+                </div>
+                    <div class="row d-flex justify-content-end">
                         <div class="col-md-5">
                             <table class="table table-borderless">
                                 <tbody class="totals">
@@ -99,23 +88,20 @@ const conf = {
                                         <div class="text-left"> <span class="font-weight-bold">Subtotal</span> </div>
                                     </td>
                                     <td>
-                                        <div class="text-right"> <span class="font-weight-bold">${totalPrice}</span> </div>
+                                        <div class="text-right"> <span class="font-weight-bold">12212</span> </div>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                            <p>We will be sending shipping confirmation email when the item shipped successfully!</p>
+                                    <p class="font-weight-bold mb-0">Thanks for shopping with us!</p> <span>Motivation Team</span>
+                                </div>
+                                <div class="d-flex justify-content-between footer p-3"> <span>Need Help? visit our <a href="#"> help center</a></span> <span>12 Nov, 2021</span> </div>
+                            </div>
+                        </div>
                     </div>`
-    },
-
-    fillFooter(){
-        return `<p>We will be sending shipping confirmation email when the item shipped successfully!</p>
-                    <p class="font-weight-bold mb-0">Thanks for shopping with us!</p> <span>Motivation Team</span>
-                </div>
-                <div class="d-flex justify-content-between footer p-3"> <span>Need Help? visit our <a href="#"> help center</a></span> <span>12 Nov, 2021</span> </div>
-            </div>
-        </div>
-    </div>`
     },
 
 }
