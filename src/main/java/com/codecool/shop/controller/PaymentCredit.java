@@ -38,17 +38,15 @@ public class PaymentCredit extends HttpServlet {
         Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
 
         User user = service.getUser(1);
-        Order orderWithPaymentDetails = new Order(user);
+        Order orderWithPaymentDetails = user.getOrder();
 
         String cvv = req.getParameter("cvv");
         if(cvv.equals("666")){
             orderWithPaymentDetails.setSuccessPayment(false);
-            System.out.println("false");
 
         }else{
             orderWithPaymentDetails.setPaymentMethod("credit");
             orderWithPaymentDetails.setSuccessPayment(true);
-            System.out.println("true");
         }
 
         createJsonFromObject(resp, orderWithPaymentDetails);
@@ -56,7 +54,6 @@ public class PaymentCredit extends HttpServlet {
 
     static void createJsonFromObject(HttpServletResponse resp, Order orderWithPaymentDetails) throws IOException {
         String responseString = new Gson().toJson(orderWithPaymentDetails);
-        System.out.println(responseString);
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

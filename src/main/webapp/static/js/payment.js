@@ -12,32 +12,23 @@ const pay = {
         if(payPalFormOpen === "true" || creditFormOpen === "true"){
             if(payPalFormOpen === "true") {
                 const payPalUser = document.getElementById('paypal-user').value;
-                const url = `/payment/paypal?user=${payPalUser}`;
+                const url = `/payment/paypal?paypal-user=${payPalUser}`;
                 const json = await pay.fetchFromApi(url)
-                console.log(json);
                 if (json.isSuccessPayment == true) {
-                    //const paymentCheckUrl = `/payment`;
                     window.location.href = "http://localhost:8080/payment";
-                    //await pay.fetchFromApi(paymentCheckUrl);
                 }
+                alert("The paypal payment was not successfull!");
+
             }
             else{
                 const CVV = document.getElementById('cvv').value;
                 const url = `/payment/credit?cvv=${CVV}`;
                 const json = await pay.fetchFromApi(url)
-                console.log(json);
                 if (json.isSuccessPayment == true){
-                    //const paymentCheckUrl=`/payment`; //javascript load page
                     window.location.href = "http://localhost:8080/payment";
-                    //await pay.fetchFromApi(paymentCheckUrl);
                 }
-
+                alert("The credit payment was not successfull!");
             }
-            alert("The payment was not successfull!");
-
-        }
-        else{
-            alert("The payment was not successfull!");
         }
     },
 

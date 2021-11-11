@@ -50,7 +50,7 @@ const main = {
         main.setCardTitle(currentTitle);
         main.clearProducts();
         main.fillProductsDivWithProducts(products);
-        main.loadAddToCartButtonsWithEventListeners()
+        main.loadAddToCartButtonsWithEventListeners();
     },
 
     async fetchFromApi(url) {
