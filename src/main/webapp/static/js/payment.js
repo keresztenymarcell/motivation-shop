@@ -52,8 +52,8 @@ const pay = {
                                         <div class="d-flex justify-content-between mb-2"> <span>Total Price</span> <span id="totalPrice" >${cartValue} USD</span> </div>
                                     </div>
                                     <hr class="mt-0 line">
-                                    <div class="p-3"> <button id="confirm" class="btn btn-primary btn-block free-button">Continue confirmation</button>
-                                        <div class="text-center"> <a href="#">Reset my payment and go back</a> </div>
+                                    <div class="p-3"> <button id="confirm" class="btn btn-primary btn-block free-button">Confim Payment</button>
+                                        <div class="text-center"> <a href="#">Back to my Cart</a> </div>
                                     </div>
                                 </div>
                             </div>`
