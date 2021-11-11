@@ -56,8 +56,8 @@ public class Initializer implements ServletContextListener {
 
 
         //setting up products and printing it
-        productDataStore.add(new Product("Julian Treasure", new BigDecimal("8.500"), "USD", "How to speak so that people want to listen.", event, ted));
-        productDataStore.add(new Product("Bill Gates", new BigDecimal("12.500"), "USD", "The next outbreak? We are not ready.", event, ted));
+        productDataStore.add(new Product("Julian Treasure", new BigDecimal("8500"), "USD", "How to speak so that people want to listen.", event, ted));
+        productDataStore.add(new Product("Bill Gates", new BigDecimal("12500"), "USD", "The next outbreak? We are not ready.", event, ted));
         productDataStore.add(new Product("Just Do It rights", new BigDecimal("479"), "USD", "Dooooooooo it!.", trade, nike));
         productDataStore.add(new Product("Never give up!", new BigDecimal("100"), "USD", "I never lose. I either win or I learn.", trade, cola));
         productDataStore.add(new Product("Puppy Poster", new BigDecimal("100"), "USD", "It's not real, but it's cute and motivates you.", poster, amazon));
@@ -69,19 +69,19 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(absolut);
 
         productDataStore.add(new Product("Potion of Happiness", new BigDecimal("30"), "USD", "The potion of choice for anyone feeling a bit under the weather.", elixir, absolut));
-        productDataStore.add(new Product("Potion of Motivation", new BigDecimal("666.69"), "USD", "Do you feel tired after a long TW week? This beverage can fill you with Determination for your upcoming SI tasks like nothing else!", elixir, witchCraftBrewery));
+        productDataStore.add(new Product("Potion of Motivation", new BigDecimal("666.69"), "USD", "Do you feel tired after a long TW week? Grab a bottle!", elixir, witchCraftBrewery));
         productDataStore.add(new Product("Potion of Inspiration", new BigDecimal("999.99"), "USD", "Better than the kiss of any muse.", elixir, witchCraftBrewery));
-        productDataStore.add(new Product("Potion of Endurance", new BigDecimal("399.99"), "USD", "The best potion to keep your muscles strong and your heart brave whenever you need some extra help.", elixir, witchCraftBrewery));
-        productDataStore.add(new Product("Potion of Vigilance", new BigDecimal("449.99"), "USD", "To keep your eyes peeled even in the greatest of exhaustion.", elixir, witchCraftBrewery));
+        productDataStore.add(new Product("Potion of Endurance", new BigDecimal("399.99"), "USD", "The best potion to keep your muscles strong and your heart brave.", elixir, witchCraftBrewery));
+        productDataStore.add(new Product("Potion of Vigilance", new BigDecimal("449.99"), "USD", "To keep your eyes peeled even in the greatest exhaustion.", elixir, witchCraftBrewery));
 
         Supplier perfectPetShop = new Supplier("Perfect Pet Shop", "The perfect shop for perfect wannabe pet owners");
         supplierDataStore.add(perfectPetShop);
         Supplier averagePlantShop = new Supplier("Average Plant Shop", "Not too meh plants for those with no patience for better creatures");
         supplierDataStore.add(averagePlantShop);
 
-        productDataStore.add(new Product("Cool Talking Parrot", new BigDecimal("100"), "USD", "It's a pretty cool parrot. You can teach it to swear at you if you don't study or sing the American anthem while you meditate.", pet, perfectPetShop));
+        productDataStore.add(new Product("Cool Talking Parrot", new BigDecimal("100"), "USD", "It's a pretty cool parrot. You can teach it to swear at you if you don't study.", pet, perfectPetShop));
         productDataStore.add(new Product("Lazy Turtle", new BigDecimal("30"), "USD", "Pretty lazy. If you don't do your job, you'll end up like it.", pet, perfectPetShop));
-        productDataStore.add(new Product("Cactus", new BigDecimal("15"), "USD", "The perfect starter for responsible adults. If you manage to kill this one, there is no hope for you.", plant, averagePlantShop));
+        productDataStore.add(new Product("Cactus", new BigDecimal("15"), "USD", "For 'responsible' adults. If you manage to kill this one, there is no hope for you.", plant, averagePlantShop));
         productDataStore.add(new Product("Philodendron", new BigDecimal("30"), "USD", "Green means good job. Brown means bad job.", plant, averagePlantShop));
 
 
