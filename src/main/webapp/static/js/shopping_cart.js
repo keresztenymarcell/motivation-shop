@@ -8,9 +8,6 @@ function addEventHandlersToItemCountButtons(){
             const productId = e.target.dataset.productId;
             await reduceCountAndFetch(productId);
             await updateCart();
-
-
-
         })
     })
 

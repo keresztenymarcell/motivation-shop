@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
@@ -22,9 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@WebServlet(name = "removeFromCartController", urlPatterns = {"/api/remove-from-cart"}, loadOnStartup = 1)
 
-@WebServlet(name = "cartController", urlPatterns = {"/api/add-to-cart"}, loadOnStartup = 1)
-public class CartController extends HttpServlet {
+
+public class RemoveFromCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,7 +36,6 @@ public class CartController extends HttpServlet {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         UserDao userDataStore = UserDaoMem.getInstance();
         Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
-
 
         int id;
 
@@ -47,22 +48,21 @@ public class CartController extends HttpServlet {
             id = 1;
         }
 
-
         Product product  = service.getProduct(id);
         LineItem lineItem = new LineItem(product);
 
         User currentUser = service.getUser(1);
-
-        if(!currentUser.hasOrder()){
-            new Order(currentUser);
-        }
-        currentUser.getOrder().addItemToCart(lineItem);
-        String totalOrder = "{\"totalItems\":"+currentUser.getOrder().getTotalItems()+",\"totalValue\":"+currentUser.getOrder().getOrderTotalValue()+",\"currencyString\":\""+currentUser.getOrder().getCart().stream().findFirst().get().getCurrency()+"\"}";
+        currentUser.getOrder().removeItemFromCart(lineItem);
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        out.print(totalOrder);
+        out.print("{}");
         out.flush();
     }
 
 }
+
+
+
+
+
