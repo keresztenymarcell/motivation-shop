@@ -16,8 +16,9 @@ const pay = {
                 const json = await pay.fetchFromApi(url)
                 if (json.isSuccessPayment == true) {
                     window.location.href = "http://localhost:8080/payment";
+                } else {
+                    alert("The paypal payment was not successfull!");
                 }
-                alert("The paypal payment was not successfull!");
 
             }
             else{
@@ -26,8 +27,9 @@ const pay = {
                 const json = await pay.fetchFromApi(url)
                 if (json.isSuccessPayment == true){
                     window.location.href = "http://localhost:8080/payment";
+                } else {
+                    alert("The credit payment was not successfull!");
                 }
-                alert("The credit payment was not successfull!");
             }
         }
     },
