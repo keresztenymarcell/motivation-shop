@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
+import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 import com.google.gson.Gson;
 
@@ -25,13 +26,15 @@ public class PaymentPayPal extends HttpServlet {
 
         User user = service.getUser(1);
         Order orderWithPaymentDetails = user.getOrder();
+        String currentTime;
 
         String userName = req.getParameter("paypal-user");
         if(userName.equals("evil")){
             orderWithPaymentDetails.setSuccessPayment(false);
 
         }else{
-            orderWithPaymentDetails.setOrderTime(LocalDateTime.now().toString());
+            currentTime = InputValidator.formatLocalDateToString(LocalDateTime.now());
+            orderWithPaymentDetails.setOrderTime(currentTime);
             orderWithPaymentDetails.setPaymentMethod("paypal");
             orderWithPaymentDetails.setSuccessPayment(true);
         }

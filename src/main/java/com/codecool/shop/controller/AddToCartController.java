@@ -5,6 +5,7 @@ import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
+import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 
 import javax.servlet.ServletException;
@@ -41,6 +42,7 @@ public class AddToCartController extends HttpServlet {
         Order currentOrder;
         Product product  = service.getProduct(id);
         LineItem lineItem = new LineItem(product);
+        String currentTime;
 
         User currentUser = service.getUser(1);
 
@@ -51,7 +53,8 @@ public class AddToCartController extends HttpServlet {
             currentOrder = currentUser.getOrder();
         }
         currentOrder.addItemToCart(lineItem);
-        currentOrder.setOrderTime(LocalDateTime.now().toString());
+        currentTime = InputValidator.formatLocalDateToString(LocalDateTime.now());
+        currentOrder.setOrderTime(currentTime);
 
         PaymentCredit.createJsonFromObject(resp, currentOrder);
     }

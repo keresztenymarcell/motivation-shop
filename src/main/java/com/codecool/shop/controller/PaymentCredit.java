@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
+import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 import com.google.gson.Gson;
 
@@ -28,11 +29,14 @@ public class PaymentCredit extends HttpServlet {
         Order orderWithPaymentDetails = user.getOrder();
 
         String cvv = req.getParameter("cvv");
+        String currentTime;
+
         if(cvv.equals("666")){
             orderWithPaymentDetails.setSuccessPayment(false);
 
         }else{
-            orderWithPaymentDetails.setOrderTime(LocalDateTime.now().toString());
+            currentTime = InputValidator.formatLocalDateToString(LocalDateTime.now());
+            orderWithPaymentDetails.setOrderTime(currentTime);
             orderWithPaymentDetails.setPaymentMethod("credit");
             orderWithPaymentDetails.setSuccessPayment(true);
         }
