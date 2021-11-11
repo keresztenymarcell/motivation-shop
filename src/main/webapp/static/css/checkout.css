@@ -1,5 +1,17 @@
+body {
+    background-color: #f5eee7;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+}
+
+
 .container {
+    margin-top: 100px;
+    width: 900px;
+    height: 50%;
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    justify-content: center;
+}
+
+.lh-condensed { line-height: 1.25; }{
 }

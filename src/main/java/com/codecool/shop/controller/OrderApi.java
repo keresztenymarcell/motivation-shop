@@ -1,6 +1,5 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
-import java.util.Set;
+
 
 @WebServlet(name = "orderApi", urlPatterns = {"/api/order"}, loadOnStartup = 1)
 public class OrderApi extends HttpServlet {
@@ -28,8 +27,6 @@ public class OrderApi extends HttpServlet {
         Order currentOrder = user.getOrder();
         String productString = new Gson().toJson(currentOrder);
         currentOrder.setOrderTime(LocalDateTime.now().toString());
-        /*Set<LineItem> currentOrderCart = currentOrder.getCart();
-        String productString = new Gson().toJson(currentOrderCart);*/
 
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");

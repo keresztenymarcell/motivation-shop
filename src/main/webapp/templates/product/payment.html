@@ -17,16 +17,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
 
 
-
-    <link rel="stylesheet" type="text/css" href="/static/css/payment2.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/checkout.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/payment.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css" />
 
 </head>
 
-<body >
-        <div class="container d-flex justify-content-center mt-5 mb-5" id="paymentCard">
+<div th:replace="fragments/nav.html :: copy"></div>
 
-        </div>
+
+<body >
+    <div class="container d-flex justify-content-center mt-5 mb-5" id="paymentCard">
+    </div>
 </div>
 </body>
 </html>
