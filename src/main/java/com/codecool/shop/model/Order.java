@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -136,6 +138,12 @@ public class Order extends BaseModel{
         message.setContent(multipart);
 
         Transport.send(message);
+    }
+
+    public void saveCheckout(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        String filename = "src/main/webapp/order/checkouts" + id + ".json";
     }
 
     public boolean isSuccessPayment() {
