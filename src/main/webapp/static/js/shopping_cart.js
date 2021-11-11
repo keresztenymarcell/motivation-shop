@@ -30,20 +30,24 @@ function changeCounterValue(e, value){
 }
 
 async function updateCart(){
-    const cart = await fetchOrder();
+    const order = await fetchOrder();
     const itemTotalDivs = document.getElementsByClassName("amount");
+    const subTotalDiv = document.querySelectorAll(".total-amount")[0];
+    const itemsDiv = document.querySelectorAll(".items")[0];
 
-    for (let i = 0; i < cart.length; i++) {
-            itemTotalDivs[i].innerHTML = '$' + cart[i].itemTotal;
+    subTotalDiv.innerHTML = order.orderTotalValue;
+    itemsDiv.innerHTML = order.totalItems + ' items';
+
+    for (let i = 0; i < order.cart.length; i++) {
+            itemTotalDivs[i].innerHTML = '$' + order.cart[i].itemTotal;
     }
+
 }
 
 
 async function reduceCountAndFetch(productId){
     const url = `/api/remove-from-cart?id=${productId}`
     await fetchFromApi(url);
-
-
 }
 
 async function addCountAndFetch(productId){
