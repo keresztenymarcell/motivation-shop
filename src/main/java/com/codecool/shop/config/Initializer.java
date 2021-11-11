@@ -30,10 +30,18 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);
+        Supplier ted = new Supplier("Ted", "TEDx is a program of local, self-organized events that bring people together to share a TED-like experience");
+        supplierDataStore.add(ted);
+        Supplier nike = new Supplier("Nike", "Sport brand");
+        supplierDataStore.add(nike);
+        Supplier cola = new Supplier("Coca-cola", "Drink factory");
+        supplierDataStore.add(cola);
 
         //setting up a new product category
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(tablet);
+        ProductCategory event = new ProductCategory("Event", "Talks", "TEDx is a grassroots initiative, created in the spirit of TED’s overall mission to research and discover “ideas worth spreading.” TEDx brings the spirit of TED to local communities around the globe through TEDx events. These events are organized by passionate individuals who seek to uncover new ideas and to share the latest research in their local areas that spark conversations in their communities.");
+        productCategoryDataStore.add(event);
+        ProductCategory trade = new ProductCategory("Advert", "Video", "A motivating video.");
+        productCategoryDataStore.add(trade);
         ProductCategory elixir = new ProductCategory("Elixir", "Consumable", "A drink.");
         productCategoryDataStore.add(elixir);
         ProductCategory poster = new ProductCategory("Poster", "Picture", "A motivating piece of paper.");
@@ -46,10 +54,12 @@ public class Initializer implements ServletContextListener {
 
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", new BigDecimal("479"), "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", new BigDecimal("89"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        productDataStore.add(new Product("Julian Treasure", new BigDecimal("8.500"), "USD", "How to speak so that people want to listen.", event, ted));
+        productDataStore.add(new Product("Bill Gates", new BigDecimal("12.500"), "USD", "The next outbreak? We are not ready.", event, ted));
+        productDataStore.add(new Product("Just Do It rights", new BigDecimal("479"), "USD", "Dooooooooo it!.", trade, nike));
+        productDataStore.add(new Product("Never give up!", new BigDecimal("100"), "USD", "I never lose. I either win or I learn.", trade, cola));
         productDataStore.add(new Product("TestLa", new BigDecimal("9999"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", elixir, amazon));
         productDataStore.add(new Product("Puppy Poster", new BigDecimal("100"), "USD", "A cute puppy to motivate you.", poster, amazon));
+
     }
 }
