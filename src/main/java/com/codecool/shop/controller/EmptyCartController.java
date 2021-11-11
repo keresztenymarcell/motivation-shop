@@ -10,6 +10,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
+import com.codecool.shop.util.ServiceProvider;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,15 +23,10 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = {"/empty-cart"}, loadOnStartup = 1)
 public class EmptyCartController extends HttpServlet {
 
-    ProductDao productDataStore = ProductDaoMem.getInstance();
-    ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-    UserDao userDataStore = UserDaoMem.getInstance();
-    Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        Service service = ServiceProvider.getService();
         User currentUser = service.getUser(1);
         currentUser.getOrder().emptyCart();
 
