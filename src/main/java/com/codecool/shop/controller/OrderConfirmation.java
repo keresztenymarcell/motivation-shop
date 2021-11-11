@@ -38,6 +38,7 @@ public class OrderConfirmation extends HttpServlet {
             e.printStackTrace();
         }
         context.setVariable("userId", order.getTotalItems());
+        context.setVariable("order", order);
 
         engine.process("confirmation.html", context, response.getWriter());
     }

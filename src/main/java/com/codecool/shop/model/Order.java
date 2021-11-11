@@ -17,6 +17,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -33,6 +36,7 @@ public class Order extends BaseModel{
     private String address;
     private boolean isSuccessPayment = false;
     private String paymentMethod;
+    private String orderTime;
 
 
     public Order(User user) {
@@ -157,5 +161,13 @@ public class Order extends BaseModel{
 
     public String getAddress() {
         return address;
+    }
+
+    public String getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
     }
 }
