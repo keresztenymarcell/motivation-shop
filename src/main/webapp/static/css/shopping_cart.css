@@ -47,7 +47,6 @@ body{
 }
 
 .Cart-items,div {
-    justify-self: center;
     align-self: center;
 }
 
