@@ -65,6 +65,10 @@ public class Order extends BaseModel{
 
     }
 
+    public void emptyCart(){
+        cart.clear();
+    }
+
     private boolean checkIfItemInCart(LineItem item){
         return cart.stream().anyMatch(lineItem -> lineItem.getName().equals(item.getName()));
     }
