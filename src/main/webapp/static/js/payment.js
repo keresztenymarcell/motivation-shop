@@ -16,8 +16,9 @@ const pay = {
                 const json = await pay.fetchFromApi(url)
                 console.log(json);
                 if (json.isSuccessPayment == true) {
-                    const paymentCheckUrl = `/payment`;
-                    await pay.fetchFromApi(paymentCheckUrl);
+                    //const paymentCheckUrl = `/payment`;
+                    window.location.href = "http://localhost:8080/payment";
+                    //await pay.fetchFromApi(paymentCheckUrl);
                 }
             }
             else{
@@ -26,29 +27,18 @@ const pay = {
                 const json = await pay.fetchFromApi(url)
                 console.log(json);
                 if (json.isSuccessPayment == true){
-                    console.log("Validation was successfull please close the modal!");
-                    const paymentCheckUrl=`/payment`;
-                    await pay.fetchFromApi(paymentCheckUrl);
+                    //const paymentCheckUrl=`/payment`; //javascript load page
+                    window.location.href = "http://localhost:8080/payment";
+                    //await pay.fetchFromApi(paymentCheckUrl);
                 }
 
             }
+            alert("The payment was not successfull!");
 
         }
         else{
-            console.log("alert");
+            alert("The payment was not successfull!");
         }
-    },
-
-    async creditHandler() {
-
-
-    },
-
-    async payPalHandler() {
-
-
-
-
     },
 
     async fetchFromApi(url) {

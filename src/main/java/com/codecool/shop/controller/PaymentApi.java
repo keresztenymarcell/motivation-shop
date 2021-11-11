@@ -16,12 +16,6 @@ public class PaymentApi extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("alma");
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        //engine.process("product/confirmation.html", context, resp.getWriter());
         resp.sendRedirect("/confirmation");
-        //resp.sendRedirect("/");
-        //engine.process("product/checkout.html", context, resp.getWriter()); confirmation html
     }
 }
