@@ -51,5 +51,31 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Amazon Fire HD 8", new BigDecimal("89"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
         productDataStore.add(new Product("TestLa", new BigDecimal("9999"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", elixir, amazon));
         productDataStore.add(new Product("Puppy Poster", new BigDecimal("100"), "USD", "A cute puppy to motivate you.", poster, amazon));
+
+
+        Supplier witchCraftBrewery = new Supplier("Witchcraft Brewery", "The most enchanting beverages from all the realms");
+        supplierDataStore.add(witchCraftBrewery);
+        Supplier absolut = new Supplier("Absolut", "Original Sweden alcoholic products");
+        supplierDataStore.add(absolut);
+
+        productDataStore.add(new Product("Potion of Happiness", new BigDecimal("666.69"), "USD", "The potion of choice for anyone feeling a bit under the weather.", elixir, absolut));
+        productDataStore.add(new Product("Potion of Motivation", new BigDecimal("666.69"), "USD", "Do you feel tired after a long TW week? This beverage can fill you with Determination for your upcoming SI tasks like nothing else!", elixir, witchCraftBrewery));
+        productDataStore.add(new Product("Potion of Inspiration", new BigDecimal("666.69"), "USD", "Better than the kiss of any muse.", elixir, witchCraftBrewery));
+        productDataStore.add(new Product("Potion of Endurance", new BigDecimal("399.99"), "USD", "The best potion to keep your muscles strong and your heart brave whenever you need some extra help.", elixir, witchCraftBrewery));
+        productDataStore.add(new Product("Potion of Vigilance", new BigDecimal("449.99"), "USD", "To keep your eyes peeled even in the greatest of exhaustion.", elixir, witchCraftBrewery));
+
+        Supplier perfectPetShop = new Supplier("Perfect Pet Shop", "The perfect shop for perfect wannabe pet owners");
+        supplierDataStore.add(perfectPetShop);
+        Supplier averagePlantShop = new Supplier("Average Plant Shop", "Not too meh plants for those with no patience for better creatures");
+        supplierDataStore.add(averagePlantShop);
+
+
+
+
+
+
+
+
+
     }
 }
