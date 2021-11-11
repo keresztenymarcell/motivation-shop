@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "removeFromCartController", urlPatterns = {"/api/remove-from-cart"}, loadOnStartup = 1)
-
-
 public class RemoveFromCartController extends HttpServlet {
 
     @Override
