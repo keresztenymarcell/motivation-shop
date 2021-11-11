@@ -122,7 +122,7 @@ public class Order extends BaseModel{
         message.setFrom(new InternetAddress("vinczeg1281@gmail.com"));
         message.setRecipients(
                 Message.RecipientType.TO, InternetAddress.parse("cantataprofana1930@gmail.com"));
-        message.setSubject("Mail Subject");
+        message.setSubject("Order Confirmation");
 
         Gson gson = new Gson();
         String json = gson.toJson(this);
