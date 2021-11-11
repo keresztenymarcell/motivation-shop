@@ -1,7 +1,4 @@
 package com.codecool.shop.controller;
-import com.codecool.shop.config.TemplateEngineUtil;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
