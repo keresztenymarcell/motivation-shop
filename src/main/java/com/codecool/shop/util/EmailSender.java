@@ -3,6 +3,7 @@ package com.codecool.shop.util;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import com.google.gson.Gson;
+import org.thymeleaf.context.WebContext;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -13,7 +14,7 @@ import java.util.Properties;
 
 public class EmailSender {
 
-    public static void sendEmail(Order order, User user) throws MessagingException {
+    public static void sendEmail(Order order, String content) throws MessagingException {
         Properties prop = new Properties();
         String d_email = "vinczeg1281@gmail.com";
         String d_host = "smtp.gmail.com";
@@ -45,7 +46,9 @@ public class EmailSender {
         String json = gson.toJson(order);
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(json, "text/html");
+
+
+        mimeBodyPart.setContent(content, "text/html");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(mimeBodyPart);

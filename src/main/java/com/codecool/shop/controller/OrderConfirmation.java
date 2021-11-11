@@ -30,18 +30,18 @@ public class OrderConfirmation extends HttpServlet {
         User user = service.getUser(1);
         Order order = user.getOrder();
 
+        context.setVariable("userId", order.getTotalItems());
+        context.setVariable("order", order);
 
         order.saveToJson();
         try {
-            EmailSender.sendEmail(order, user);
+            EmailSender.sendEmail(order, engine.process("confirmation.html", context));
         } catch (MessagingException e) {
             e.printStackTrace();
         }
 
         user.setOrder(new Order(user));
 
-        context.setVariable("userId", order.getTotalItems());
-        context.setVariable("order", order);
 
         engine.process("confirmation.html", context, response.getWriter());
     }
