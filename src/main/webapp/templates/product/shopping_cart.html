@@ -45,12 +45,13 @@
 
     <div class="header">
         <h3 class="heading">Shopping Cart</h3>
-        <h5 class="action">Remove all</h5>
+        <h5 id ="removeAll" class="action">Remove all</h5>
     </div>
 
     <div class="items-container">
 
-    <div th:each="product : ${shoppingCart}" class="Cart-Items">
+    <div th:each="product : ${shoppingCart}" th:id="cartItem + ${product.productId}" th:data-product-id="${product.productId}" class="Cart-Items">
+
         <div class="image-box">
             <img class="" style= "height:120px; width: 120px" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${product.productId} + '.jpg'" alt="" />
         </div>
@@ -64,8 +65,9 @@
         </div>
         <div class="prices">
             <div th:text="'$'+ ${product.itemTotal}" th:data-product-id="${product.productId}" class="amount">$2.99</div>
-            <div class="remove"><u>Remove</u></div>
+            <div th:data-product-id="${product.productId}" class="remove" ><u>Remove</u></div>
         </div>
+
 
     </div>
     </div>
