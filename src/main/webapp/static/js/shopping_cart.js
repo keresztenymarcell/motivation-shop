@@ -21,6 +21,26 @@ function addEventHandlersToItemCountButtons(){
     })
 }
 
+async function removeCartItem(productId) {
+    const count = document.getElementById("count" + productId).innerHTML;
+    const cartItem = document.getElementById("cartItem" + productId);
+    for (let i = 0; i < count; i++) {
+        await reduceCountAndFetch(productId);
+    }
+    cartItem.innerHTML = "";
+}
+
+function addEventHandlersToRemoveItemButtons(){
+    const removeItemButtons = document.querySelectorAll(".remove")
+
+    removeItemButtons.forEach(button => {
+        button.addEventListener("click",  async (e) => {
+            const productId = e.target.parentNode.dataset.productId;
+            await removeCartItem(productId)
+        })
+    })
+}
+
 function changeCounterValue(e, value){
     const productId = e.target.dataset.productId;
     const countDiv = document.getElementById("count" + productId);
@@ -34,14 +54,19 @@ async function updateCart(){
     const itemTotalDivs = document.getElementsByClassName("amount");
     const subTotalDiv = document.querySelectorAll(".total-amount")[0];
     const itemsDiv = document.querySelectorAll(".items")[0];
+    const cartItemsDivs = document.querySelectorAll(".Cart-Items");
+    const countDivs = document.querySelectorAll(".count");
 
     subTotalDiv.innerHTML = order.orderTotalValue;
     itemsDiv.innerHTML = order.totalItems + ' items';
 
     for (let i = 0; i < order.cart.length; i++) {
-            itemTotalDivs[i].innerHTML = '$' + order.cart[i].itemTotal;
+        console.log(countDivs[i].innerHTML);
+        if(parseInt(countDivs[i].innerHTML)===0){
+            cartItemsDivs[i].innerHTML = "";
+        }
+        itemTotalDivs[i].innerHTML = '$' + order.cart[i].itemTotal;
     }
-
 }
 
 
@@ -65,4 +90,5 @@ async function fetchFromApi(url){
         return response.json();
 }
 
-addEventHandlersToItemCountButtons()
+addEventHandlersToItemCountButtons();
+addEventHandlersToRemoveItemButtons();

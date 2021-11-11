@@ -37,6 +37,7 @@ public class OrderApi extends HttpServlet {
         User user = service.getUser(1);
         Order currentOrder = user.getOrder();
         String productString = new Gson().toJson(currentOrder);
+        System.out.println(productString);
 
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
