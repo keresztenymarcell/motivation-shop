@@ -3,7 +3,14 @@ function addEventHandlersToItemCountButtons(){
     const plusButtons = document.querySelectorAll("#btnPlus");
 
     minusButtons.forEach(button => {
-        button.addEventListener("click", () => {
+        button.addEventListener("click", async (e) => {
+            changeCounterValue(e, -1);
+            const productId = e.target.dataset.productId;
+            await reduceCountAndFetch(productId);
+            await updateCart();
+
+
+
         })
     })
 
@@ -34,8 +41,15 @@ async function updateCart(){
     }
 }
 
+
+async function reduceCountAndFetch(productId){
+    const url = `/api/remove-from-cart?id=${productId}`
+    await fetchFromApi(url);
+
+
+}
+
 async function addCountAndFetch(productId){
-    console.log(productId);
     const url = `/api/add-to-cart?id=${productId}`
     await fetchFromApi(url);
 }
