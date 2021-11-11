@@ -43,7 +43,6 @@ public class PaymentPayPal extends HttpServlet {
         if(userName.equals("evil")){
             isSuccess = "false";
             System.out.println("false");
-            user.getOrder().setPaymentMethod("paypal");
             user.getOrder().setSuccessPayment(false);
 
         }else{
@@ -54,7 +53,6 @@ public class PaymentPayPal extends HttpServlet {
         }
 
         String responseString = new Gson().toJson(isSuccess);
-
 
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
