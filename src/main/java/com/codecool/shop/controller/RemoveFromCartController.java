@@ -1,19 +1,11 @@
 package com.codecool.shop.controller;
 
-
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.LineItem;
-import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
+import com.codecool.shop.util.InputValidator;
+import com.codecool.shop.util.ServiceProvider;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,22 +23,9 @@ public class RemoveFromCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        UserDao userDataStore = UserDaoMem.getInstance();
-        Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
+        Service service = ServiceProvider.getService();
 
-        int id;
-
-        try {
-            id = Integer.parseInt(req.getParameter("id"));
-            if (id < 1) {
-                id = 1;
-            }
-        } catch (NumberFormatException e) {
-            id = 1;
-        }
+        int id = InputValidator.checkIntInput(req.getParameter("id"));
 
         Product product  = service.getProduct(id);
         LineItem lineItem = new LineItem(product);
