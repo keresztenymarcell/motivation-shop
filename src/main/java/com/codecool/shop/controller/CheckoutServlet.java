@@ -20,7 +20,7 @@ public class CheckoutServlet extends HttpServlet {
 
         order.saveCheckout();
 
-        response.sendRedirect("/");
+        response.sendRedirect("/confirmation");
     }
 
     @Override
