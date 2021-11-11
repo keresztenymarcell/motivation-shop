@@ -1,13 +1,5 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
 import com.codecool.shop.util.ServiceProvider;

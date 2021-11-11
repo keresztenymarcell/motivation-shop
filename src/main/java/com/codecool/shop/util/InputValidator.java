@@ -30,7 +30,8 @@ public class InputValidator {
         }
     }
 
-    public static String formatLocalDateToString(LocalDateTime time){
+    public static String formatLocalDateTimeNowToString(){
+        LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return time.format(formatter);
     }

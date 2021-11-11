@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.model.Product;
 import com.codecool.shop.service.Service;
+import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 import com.google.gson.Gson;
 
@@ -25,16 +26,7 @@ public class ProductFilterApi extends HttpServlet {
         Service service = ServiceProvider.getService();
 
         String name = req.getParameter("name");
-        int id;
-
-        try {
-            id = Integer.parseInt(req.getParameter("id"));
-            if (id < 1) {
-                id = 1;
-            }
-        } catch (NumberFormatException e) {
-            id = 1;
-        }
+        int id = InputValidator.checkIntInput(req.getParameter("id"));
 
         List<Product> productList = new ArrayList<>();
 

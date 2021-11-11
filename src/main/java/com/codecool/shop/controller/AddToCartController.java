@@ -14,10 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Set;
 
 
 @WebServlet(name = "cartController", urlPatterns = {"/api/add-to-cart"}, loadOnStartup = 1)
@@ -27,17 +23,7 @@ public class AddToCartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Service service = ServiceProvider.getService();
 
-
-        int id;
-
-        try {
-            id = Integer.parseInt(req.getParameter("id"));
-            if (id < 1) {
-                id = 1;
-            }
-        } catch (NumberFormatException e) {
-            id = 1;
-        }
+        int id = InputValidator.checkIntInput(req.getParameter("id"));
 
         Order currentOrder;
         Product product  = service.getProduct(id);
@@ -53,7 +39,7 @@ public class AddToCartController extends HttpServlet {
             currentOrder = currentUser.getOrder();
         }
         currentOrder.addItemToCart(lineItem);
-        currentTime = InputValidator.formatLocalDateToString(LocalDateTime.now());
+        currentTime = InputValidator.formatLocalDateTimeNowToString();
         currentOrder.setOrderTime(currentTime);
 
         PaymentCredit.createJsonFromObject(resp, currentOrder);
