@@ -54,6 +54,8 @@ public class EmailSender {
 
         Transport.send(message);
 
+        user.setOrder(new Order(user));
+
     }
 
 }
