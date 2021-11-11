@@ -10,18 +10,7 @@ const main = {
             await main.refreshProductsWithFetchedProducts("supplier", event.target.value);
         })
 
-        const cardButtons = document.querySelectorAll(".add-to-cart");
-
-        cardButtons.forEach(button => {
-            button.addEventListener("click", async (e) => {
-                const productId = e.target.dataset.productId;
-                const url = `/api/add-to-cart?id=${productId}`
-                const number = await main.fetchFromApi(url);
-                main.increaseCartContent(number);
-                main.increaseCartValue(number);
-
-            })
-        })
+        this.loadAddToCartButtonsWithEventListeners()
 
         const cartIcon = document.getElementById("cart-icon");
         cartIcon.addEventListener("click", async () =>{
@@ -32,16 +21,53 @@ const main = {
         })
     },
 
+    loadAddToCartButtonsWithEventListeners() {
+        const cardButtons = document.querySelectorAll(".add-to-cart");
+        cardButtons.forEach(button => {
+            button.addEventListener("click", async (e) => {
+                const productId = e.target.dataset.productId;
+                const url = `/api/add-to-cart?id=${productId}`
+                const number = await main.fetchFromApi(url);
+                main.increaseCartContent(number);
+                main.increaseCartValue(number);
+
+            })
+        })
+    },
+
 
     async refreshProductsWithFetchedProducts(title, id) {
+        main.clearMainContainerToOneitem();
         const products = await main.fetchFromApi(`/api/filter?name=${title}&id=${id}`);
+        let currentTitle;
+        console.log(products)
+        if (title === "category") {
+            currentTitle = products[0].productCategory.name;
+        } else if (title === "supplier") {
+            currentTitle = products[0].supplier.name;
+        }
+        main.setCardTitle(currentTitle);
         main.clearProducts();
         main.fillProductsDivWithProducts(products);
+        main.loadAddToCartButtonsWithEventListeners()
     },
 
     async fetchFromApi(url) {
         const response = await fetch(url);
         return response.json();
+    },
+
+    clearMainContainerToOneitem() {
+        const mainContainer = document.getElementById("main-container");
+        while (mainContainer.childElementCount > 1) {
+            mainContainer.removeChild(mainContainer.lastChild);
+        }
+
+    },
+
+    setCardTitle(title) {
+        const cardTitle = document.getElementById("category-title");
+        cardTitle.textContent = title;
     },
 
     fillProductsDivWithProducts(products) {
