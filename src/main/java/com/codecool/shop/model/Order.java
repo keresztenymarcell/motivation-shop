@@ -2,6 +2,8 @@ package com.codecool.shop.model;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -29,10 +31,15 @@ public class Order extends BaseModel{
     private int userId;
     private int totalItems;
     private BigDecimal orderTotalValue;
+    @Expose
     private String orderName;
+    @Expose
     private String email;
+    @Expose
     private String country;
+    @Expose
     private String zipcode;
+    @Expose
     private String address;
     private boolean isSuccessPayment = false;
     private String paymentMethod;
@@ -104,13 +111,27 @@ public class Order extends BaseModel{
 
         writer.write(json, 0, json.length());
         writer.close();
+
+        saveCheckout();
     }
 
 
-    public void saveCheckout(){
+    void saveCheckout() throws IOException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(System.currentTimeMillis());
-        String filename = "src/main/webapp/order/checkouts" + id + ".json";
+        Date millis = new Date(System.currentTimeMillis());
+        String date = formatter.format(millis);
+        String filename = "src/main/webapp/checkouts/" + id + "-" + date + ".json";
+
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(this);
+        System.out.println(json);
+
+        json = json.concat("\n\nOrder confirmed");
+        System.out.println(json);
+        FileWriter writer = new FileWriter(filename);
+        writer.write(json, 0, json.length());
+        writer.close();
+
     }
 
     public boolean isSuccessPayment() {
