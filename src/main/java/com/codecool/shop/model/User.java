@@ -19,6 +19,9 @@ public class User extends BaseModel{
     }
 
     public Order getOrder() {
+        if (order == null){
+            order = new Order(this);
+        }
         return order;
     }
 
