@@ -170,13 +170,13 @@ const main = {
     },
 
 
-    increaseCartContent(cart){
+    increaseCartContent(order){
             const cartContains = document.getElementById("shop-contains");
-            cartContains.textContent = cart.totalItems;
+            cartContains.textContent = order.totalItems;
     },
-    increaseCartValue(number){
+    increaseCartValue(order){
         const cartValue = document.getElementById("shop-value");
-        cartValue.textContent = number.orderTotalValue +" "+ "USD";
+        cartValue.textContent = order.orderTotalValue +" "+ "USD";
     },
 
     getTotalPrice(productsInCart){

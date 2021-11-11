@@ -73,6 +73,7 @@ public class Order extends BaseModel{
 
     public void emptyCart(){
         cart.clear();
+        totalItems = 0;
     }
 
     private boolean checkIfItemInCart(LineItem item){
