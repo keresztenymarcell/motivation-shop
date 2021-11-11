@@ -9,6 +9,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.LineItem;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
 import com.google.gson.Gson;
@@ -34,8 +35,9 @@ public class OrderApi extends HttpServlet {
         Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
 
         User user = service.getUser(1);
-        Set<LineItem> currentOrder = user.getOrder().getCart();
-        String productString = new Gson().toJson(currentOrder);
+        Order currentOrder = user.getOrder();
+        Set<LineItem> currentOrderCart = currentOrder.getCart();
+        String productString = new Gson().toJson(currentOrderCart);
 
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
