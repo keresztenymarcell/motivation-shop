@@ -8,10 +8,11 @@ function addEventHandlersToItemCountButtons(){
     })
 
     plusButtons.forEach(button => {
-        button.addEventListener("click", (e) => {
+        button.addEventListener("click", async (e) => {
             changeCounterValue(e, 1);
-            addCountAndFetch();
-            fetchOrder()
+            const productId = e.target.dataset.productId;
+            await addCountAndFetch(productId);
+            await updateCart();
         })
     })
 }
@@ -24,18 +25,28 @@ function changeCounterValue(e, value){
     countDiv.innerHTML = count;
 }
 
-function addCountAndFetch(productId){
+async function updateCart(){
+    const cart = await fetchOrder();
+    const itemTotalDivs = document.getElementsByClassName("amount");
+
+    for (let i = 0; i < cart.length; i++) {
+            itemTotalDivs[i].innerHTML = '$' + cart[i].itemTotal;
+    }
+}
+
+async function addCountAndFetch(productId){
+    console.log(productId);
     const url = `/api/add-to-cart?id=${productId}`
-    fetchFromApi(url);
+    await fetchFromApi(url);
 }
 
-function fetchOrder(){
+async function fetchOrder(){
     const url = `/api/order`;
-    fetchFromApi(url);
+    return await fetchFromApi(url);
 }
 
-function fetchFromApi(url){
-        const response = fetch(url);
+async function fetchFromApi(url){
+        const response = await fetch(url);
         return response.json();
 }
 
