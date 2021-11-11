@@ -36,11 +36,6 @@ const pay = {
         }
     },
 
-    async fetchFromApi(url) {
-        const response = await fetch(url);
-        return response.json();
-    },
-
     addTotalPrice(productsInCart) {
         let cartValue = pay.getTotalPrice(productsInCart);
         const payCard = document.getElementById("paymentCard");

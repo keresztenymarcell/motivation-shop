@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @WebServlet(name = "orderApi", urlPatterns = {"/api/order"}, loadOnStartup = 1)
@@ -36,6 +37,7 @@ public class OrderApi extends HttpServlet {
 
         User user = service.getUser(1);
         Order currentOrder = user.getOrder();
+        currentOrder.setOrderTime(LocalDateTime.now().toString());
         Set<LineItem> currentOrderCart = currentOrder.getCart();
         String productString = new Gson().toJson(currentOrderCart);
 

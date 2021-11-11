@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @WebServlet(name = "paymentCredit", urlPatterns = {"/payment/credit"}, loadOnStartup = 1)
@@ -45,6 +47,7 @@ public class PaymentCredit extends HttpServlet {
             orderWithPaymentDetails.setSuccessPayment(false);
 
         }else{
+            orderWithPaymentDetails.setOrderTime(LocalDateTime.now().toString());
             orderWithPaymentDetails.setPaymentMethod("credit");
             orderWithPaymentDetails.setSuccessPayment(true);
         }

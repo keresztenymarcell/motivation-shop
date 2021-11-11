@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @WebServlet(name = "paymentPayPal", urlPatterns = {"/payment/paypal"}, loadOnStartup = 1)
 public class PaymentPayPal extends HttpServlet {
@@ -43,6 +45,7 @@ public class PaymentPayPal extends HttpServlet {
             orderWithPaymentDetails.setSuccessPayment(false);
 
         }else{
+            orderWithPaymentDetails.setOrderTime(LocalDateTime.now().toString());
             orderWithPaymentDetails.setPaymentMethod("paypal");
             orderWithPaymentDetails.setSuccessPayment(true);
         }
