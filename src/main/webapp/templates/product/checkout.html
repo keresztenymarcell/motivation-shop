@@ -23,28 +23,28 @@
 <div class="container">
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Billing address</h4>
-        <form action="#" method="post" class="needs-validation" novalidate="">
+        <form action="#" method="post" class="needs-validation">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="" value="" required="" name="name">
+                    <input type="text" class="form-control" id="name" placeholder="" value="" required name="name">
                     <div class="invalid-feedback"> Valid first name is required. </div>
                 </div>
             </div>
             <div class="mb-3">
                 <p th:text="${message}"></p>
                 <label for="email">Email <span class="text-muted"></span></label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email">
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" required name="email">
                 <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
             </div>
             <div class="mb-3">
                 <label for="address">Country</label>
-                <input type="text" class="form-control" id="country" placeholder="Hungary" required="" name="country">
+                <input type="text" class="form-control" id="country" placeholder="Hungary" required name="country">
                 <div class="invalid-feedback"> Please enter your shipping address. </div>
             </div>
             <div class="mb-3">
                 <label for="city">City <span class="text-muted"></span></label>
-                <input type="text" class="form-control" id="city" placeholder="Budapest" name="city">
+                <input type="text" class="form-control" id="city" placeholder="Budapest" required name="city">
             </div>
             <div class="mb-3">
                 <label for="zip">Zip Code: <span class="text-muted"></span></label>
@@ -52,7 +52,7 @@
             </div>
             <div class="mb-3">
                 <label for="address">Address: <span class="text-muted"></span></label>
-                <input type="text" class="form-control" id="address" placeholder="address" name="address">
+                <input type="text" class="form-control" id="address" placeholder="address" required name="address">
             </div>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
         </form>
