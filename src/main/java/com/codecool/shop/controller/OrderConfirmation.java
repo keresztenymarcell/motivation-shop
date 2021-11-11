@@ -37,6 +37,9 @@ public class OrderConfirmation extends HttpServlet {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+
+        user.setOrder(new Order(user));
+
         context.setVariable("userId", order.getTotalItems());
         context.setVariable("order", order);
 

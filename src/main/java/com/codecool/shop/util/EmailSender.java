@@ -53,9 +53,6 @@ public class EmailSender {
         message.setContent(multipart);
 
         Transport.send(message);
-
-        user.setOrder(new Order(user));
-
     }
 
 }
