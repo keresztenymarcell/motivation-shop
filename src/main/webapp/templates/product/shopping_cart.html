@@ -63,7 +63,7 @@
             <div class="btn" id="btnMinus" th:data-product-id="${product.productId}">-</div>
         </div>
         <div class="prices">
-            <div th:text="'$'+ ${product.itemTotal}" class="amount">$2.99</div>
+            <div th:text="'$'+ ${product.itemTotal}" th:data-product-id="${product.productId}" class="amount">$2.99</div>
             <div class="remove"><u>Remove</u></div>
         </div>
 

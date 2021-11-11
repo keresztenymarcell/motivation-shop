@@ -14,4 +14,17 @@ public class InputValidator {
 
         return matcher.matches();
     }
+
+    public static int checkIntInput(String stringInput) {
+        try {
+            int input = Integer.parseInt(stringInput);
+            if (input < 1) {
+                return  1;
+            } else {
+                return input;
+            }
+        } catch (NumberFormatException e) {
+            return 1;
+        }
+    }
 }

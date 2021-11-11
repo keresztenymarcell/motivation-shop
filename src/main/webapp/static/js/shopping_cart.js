@@ -3,15 +3,20 @@ function addEventHandlersToItemCountButtons(){
     const plusButtons = document.querySelectorAll("#btnPlus");
 
     minusButtons.forEach(button => {
-        button.addEventListener("click", () => {
+        button.addEventListener("click", async (e) => {
+            changeCounterValue(e, -1);
+            const productId = e.target.dataset.productId;
+            await reduceCountAndFetch(productId);
+            await updateCart();
         })
     })
 
     plusButtons.forEach(button => {
-        button.addEventListener("click", (e) => {
+        button.addEventListener("click", async (e) => {
             changeCounterValue(e, 1);
-            addCountAndFetch();
-            fetchOrder()
+            const productId = e.target.dataset.productId;
+            await addCountAndFetch(productId);
+            await updateCart();
         })
     })
 }
@@ -24,18 +29,39 @@ function changeCounterValue(e, value){
     countDiv.innerHTML = count;
 }
 
-function addCountAndFetch(productId){
+async function updateCart(){
+    const order = await fetchOrder();
+    const itemTotalDivs = document.getElementsByClassName("amount");
+    const subTotalDiv = document.querySelectorAll(".total-amount")[0];
+    const itemsDiv = document.querySelectorAll(".items")[0];
+
+    subTotalDiv.innerHTML = order.orderTotalValue;
+    itemsDiv.innerHTML = order.totalItems + ' items';
+
+    for (let i = 0; i < order.cart.length; i++) {
+            itemTotalDivs[i].innerHTML = '$' + order.cart[i].itemTotal;
+    }
+
+}
+
+
+async function reduceCountAndFetch(productId){
+    const url = `/api/remove-from-cart?id=${productId}`
+    await fetchFromApi(url);
+}
+
+async function addCountAndFetch(productId){
     const url = `/api/add-to-cart?id=${productId}`
-    fetchFromApi(url);
+    await fetchFromApi(url);
 }
 
-function fetchOrder(){
+async function fetchOrder(){
     const url = `/api/order`;
-    fetchFromApi(url);
+    return await fetchFromApi(url);
 }
 
-function fetchFromApi(url){
-        const response = fetch(url);
+async function fetchFromApi(url){
+        const response = await fetch(url);
         return response.json();
 }
 

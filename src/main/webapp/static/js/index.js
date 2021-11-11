@@ -1,5 +1,5 @@
 const main = {
-    init() {
+    async init() {
         const categories = document.getElementById("categories");
         categories.addEventListener("mouseup", async (event) => {
             await main.refreshProductsWithFetchedProducts("category", event.target.value);
@@ -10,6 +10,7 @@ const main = {
             await main.refreshProductsWithFetchedProducts("supplier", event.target.value);
         })
 
+        await this.refreshCartIcon();
         this.loadAddToCartButtonsWithEventListeners();
 
     },
@@ -20,28 +21,44 @@ const main = {
             button.addEventListener("click", async (e) => {
                 if(button.getAttribute("data-cart") != null){
                     const url = `/api/order`;
-                    const cart = await main.fetchFromApi(url);
-                    main.fillShoppingCart(cart);
+                    const order = await main.fetchFromApi(url);
+                    main.fillShoppingCart(order.cart);
 
                 }
                 else {
                     const productId = e.target.dataset.productId;
                     const url = `/api/add-to-cart?id=${productId}`
-                    const order = await main.fetchFromApi(url);
-                    main.increaseCartContent(order);
-                    main.increaseCartValue(order);
+                    await main.fetchFromApi(url);
+                    await main.refreshCartIcon();
                 }
             })
         })
 
     },
 
+    async refreshCartIcon() {
+        const url = `/api/order`
+        const order = await main.fetchFromApi(url);
+        if (order.cart.length > 0) {
+            main.increaseCartContent(order);
+            main.increaseCartValue(order);
+        } else {
+            main.setUpEmptyCartIcon()
+        }
+    },
+
+    setUpEmptyCartIcon() {
+        const cartContains = document.getElementById("shop-contains");
+        cartContains.textContent = "";
+        const cartValue = document.getElementById("shop-value");
+        cartValue.textContent = "";
+
+    },
 
     async refreshProductsWithFetchedProducts(title, id) {
         main.clearMainContainerToOneitem();
         const products = await main.fetchFromApi(`/api/filter?name=${title}&id=${id}`);
         let currentTitle;
-        console.log(products)
         if (title === "category") {
             currentTitle = products[0].productCategory.name;
         } else if (title === "supplier") {
@@ -154,9 +171,8 @@ const main = {
 
 
     increaseCartContent(cart){
-        const cartContains = document.getElementById("shop-contains");
-        cartContains.textContent = cart.totalItems;
-
+            const cartContains = document.getElementById("shop-contains");
+            cartContains.textContent = cart.totalItems;
     },
     increaseCartValue(number){
         const cartValue = document.getElementById("shop-value");
