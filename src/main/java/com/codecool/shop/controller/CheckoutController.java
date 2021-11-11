@@ -1,17 +1,10 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.service.Service;
 import com.codecool.shop.util.OrderInformationInputChecker;
+import com.codecool.shop.util.ServiceProvider;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -34,11 +27,7 @@ public class CheckoutController extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        UserDao userDaoStore = UserDaoMem.getInstance();
-        Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDaoStore);
+        Service service = ServiceProvider.getService();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -62,7 +51,6 @@ public class CheckoutController extends HttpServlet {
             currentOrder.setZipcode(zipcode);
             currentOrder.setAddress(address);
 
-            System.out.println(currentOrder);
             // here we can connect Betty's servlet with the payment
             // engine.process("product/payment.html", context, resp.getWriter());
             resp.sendRedirect("/payment-page");

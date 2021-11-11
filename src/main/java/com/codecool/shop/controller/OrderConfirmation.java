@@ -1,10 +1,10 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
+import com.codecool.shop.service.Service;
+import com.codecool.shop.util.ServiceProvider;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -24,8 +24,9 @@ public class OrderConfirmation extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
 
-        UserDao userDao = UserDaoMem.getInstance();
-        User user = userDao.find(1);
+        Service service = ServiceProvider.getService();
+
+        User user = service.getUser(1);
         Order order = user.getOrder();
 
 
@@ -38,6 +39,5 @@ public class OrderConfirmation extends HttpServlet {
         context.setVariable("userId", order.getTotalItems());
 
         engine.process("confirmation.html", context, response.getWriter());
-
     }
 }

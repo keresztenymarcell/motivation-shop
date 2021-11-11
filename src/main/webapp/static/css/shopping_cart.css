@@ -1,8 +1,6 @@
 body{
-    margin: 3%;
-    padding: 0;
+    margin-top: 100px;
     background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,7 +15,7 @@ body{
 }
 
 .header{
-    margin: auto;
+    margin: 30px;
     width: 90%;
     height: 15%;
     display: flex;
