@@ -30,11 +30,14 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
     <link rel="stylesheet" type="text/css" href="/static/css/shopping_cart.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css" />
 
 
 </head>
 
 <body>
+
+<div th:replace="fragments/nav.html :: copy"></div>
 
 <div class="cart-container">
 
@@ -76,12 +79,14 @@
             </div>
             <div th:text="'$' + ${totalPrice}" class="total-amount">$6.18</div>
         </div>
-    <button class="button">Checkout</button>
-    <button class="button">Back</button>
+        <a href="/checkout"><button class="button">Checkout</button></a>
+        <a href="/"><button class="button">Back</button></a>
     </div>
 
 
 </div>
+
+<div th:replace="fragments/footer.html :: copy"></div>
 
 
 </body>

@@ -10,6 +10,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.LineItem;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
 import com.google.gson.Gson;
@@ -37,25 +38,22 @@ public class PaymentCredit extends HttpServlet {
         Service service = new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
 
         User user = service.getUser(1);
-
-        String isSuccess;
+        Order orderWithPaymentDetails = user.getOrder();
 
         String cvv = req.getParameter("cvv");
         if(cvv.equals("666")){
-            isSuccess = "false";
-            user.getOrder().setPaymentMethod("credit");
-            user.getOrder().setSuccessPayment(false);
-            System.out.println("false");
+            orderWithPaymentDetails.setSuccessPayment(false);
 
         }else{
-            isSuccess = "true";
-            user.getOrder().setPaymentMethod("credit");
-            user.getOrder().setSuccessPayment(true);
-            System.out.println("true");
+            orderWithPaymentDetails.setPaymentMethod("credit");
+            orderWithPaymentDetails.setSuccessPayment(true);
         }
 
-        String responseString = new Gson().toJson(isSuccess);
+        createJsonFromObject(resp, orderWithPaymentDetails);
+    }
 
+    static void createJsonFromObject(HttpServletResponse resp, Order orderWithPaymentDetails) throws IOException {
+        String responseString = new Gson().toJson(orderWithPaymentDetails);
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

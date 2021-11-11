@@ -28,6 +28,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 
@@ -41,24 +42,28 @@
     <h1>Motivation Shop</h1>
 </div>
 
-<div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
-    <div>
-        <label for="categories"></label>
-            <select name="categories" id="categories">
-                    <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Category</option>
-            </select>
+<div>
+    <label for="categories"></label>
+    <select name="categories" id="categories">
+        <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Category</option>
+    </select>
 
-        <label for="suppliers"></label>
-        <select name="suppliers" id="suppliers">
-            <option th:each="supplier : ${suppliers}" th:text="${supplier.name}" th:value="${supplier.id}">Supplier</option>
-        </select>
+    <label for="suppliers"></label>
+    <select name="suppliers" id="suppliers">
+        <option th:each="supplier : ${suppliers}" th:text="${supplier.name}" th:value="${supplier.id}">Supplier</option>
+    </select>
+</div>
+
+<div id="main-container" class="container">
+    <div class="category-container container" th:each="category,iterStat : ${categories}">
+
+
+    <div class="card">
+        <strong th:text="${category.name}" id="category-title">Category Title</strong>
     </div>
 
     <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${category.products}">
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
@@ -75,6 +80,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 </div>

@@ -1,5 +1,7 @@
 *.class
 
+src/main/webapp/order*
+
 # OS-X
 **/.DS_Store
 

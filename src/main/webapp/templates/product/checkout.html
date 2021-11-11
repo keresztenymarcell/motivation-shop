@@ -31,6 +31,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/static/css/checkout.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css" />
 
 
     <!--Cart Icon-->
@@ -39,7 +40,7 @@
 </head>
 
 <body>
-<div th:replace="nav.html :: copy"></div>
+<div th:replace="fragments/nav.html :: copy"></div>
 
 <div class="jumbotron">
     <h1>Motivation Shop</h1>
@@ -90,7 +91,7 @@
 
 </div>
 
-<div th:replace="footer.html :: copy"></div>
+<div th:replace="fragments/footer.html :: copy"></div>
 
 </body>
 </html>
