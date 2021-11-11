@@ -19,7 +19,7 @@ const pay = {
                 if (json.isSuccessPayment == true) {
                     window.location.href = "http://localhost:8080/payment";
                 } else {
-                    alert("The paypal payment was not successfull!");
+                    alert("The paypal payment was not successful!");
                 }
 
             }
@@ -30,15 +30,10 @@ const pay = {
                 if (json.isSuccessPayment == true){
                     window.location.href = "http://localhost:8080/payment";
                 } else {
-                    alert("The credit payment was not successfull!");
+                    alert("The credit payment was not successful!");
                 }
             }
         }
-    },
-
-    async fetchFromApi(url) {
-        const response = await fetch(url);
-        return response.json();
     },
 
     addTotalPrice(productsInCart) {
@@ -118,8 +113,8 @@ const pay = {
 
     async fetchFromOrderApi(){
         const url = `/api/order`;
-        const cart = await pay.fetchFromApi(url);
-        pay.addTotalPrice(cart);
+        const order = await pay.fetchFromApi(url);
+        pay.addTotalPrice(order.cart);
     },
 
     async fetchFromApi(url) {
