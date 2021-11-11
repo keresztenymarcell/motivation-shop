@@ -147,7 +147,7 @@ const main = {
     addCheckOutButton(){
         return `<div class="row">
                     <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-                        <button class="btn btn-primary btn-block">Checkout</button>
+                        <a href="/shopping-cart"><button class="btn btn-primary btn-block">Edit Cart</button></a>
                     </div>
                 </div>`
     },
