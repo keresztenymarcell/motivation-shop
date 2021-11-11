@@ -8,6 +8,7 @@ import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +30,11 @@ public class OrderConfirmation extends HttpServlet {
 
 
         order.saveToJson();
+        try {
+            order.sendEmail();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
         context.setVariable("userId", order.getTotalItems());
 
         engine.process("confirmation.html", context, response.getWriter());

@@ -3,6 +3,8 @@ package com.codecool.shop.model;
 
 import com.google.gson.Gson;
 
+import javax.mail.*;
+import javax.mail.internet.*;
 import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.io.FileNotFoundException;
@@ -14,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 public class Order extends BaseModel{
@@ -94,8 +97,46 @@ public class Order extends BaseModel{
         writer.close();
     }
 
-    public void sendEmail(){
+    public void sendEmail() throws MessagingException {
+        Properties prop = new Properties();
+        String d_email = "cantataprofana1930@gmail.com";
+        String d_host = "smtp.gmail.com";
+        String d_port = "465";
+        prop.put("mail.smtp.user", d_email);
+        prop.put("mail.smtp.host", d_host);
+        prop.put("mail.smtp.port", d_port);
+//        prop.put("mail.smtp.starttls.enable","false");
+        prop.put("mail.smtp.debug", "true");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.socketFactory.port", d_port);
+        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.put("mail.smtp.socketFactory.fallback", "false");
 
+
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("cantataprofana1930@gmail.com", System.getenv("EMAIL_PASSWORD"));
+            }
+        });
+
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("cantataprofana1930@gmail.com"));
+        message.setRecipients(
+                Message.RecipientType.TO, InternetAddress.parse("cantataprofana1930@gmail.com"));
+        message.setSubject("Mail Subject");
+
+        String msg = "This is my first email using JavaMailer";
+
+        MimeBodyPart mimeBodyPart = new MimeBodyPart();
+        mimeBodyPart.setContent(msg, "text/html");
+
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(mimeBodyPart);
+
+        message.setContent(multipart);
+
+        Transport.send(message);
     }
 
     public boolean isSuccessPayment() {
