@@ -49,11 +49,9 @@ public class Initializer implements ServletContextListener {
         ProductCategory plant = new ProductCategory("Plant", "Plant", "A literal plant. Not as motivating as a pet, but still dies if you don't take care of it.");
         productCategoryDataStore.add(plant);
 
-
         User testUser = new User("Teszt Tamás");
         userDataStore.add(testUser);
         testUser.setOrder(new Order(testUser));
-
 
         //setting up products and printing it
         productDataStore.add(new Product("Julian Treasure", new BigDecimal("8500"), "USD", "How to speak so that people want to listen.", event, ted));
@@ -61,7 +59,6 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Just Do It rights", new BigDecimal("479"), "USD", "Dooooooooo it!.", trade, nike));
         productDataStore.add(new Product("Never give up!", new BigDecimal("100"), "USD", "I never lose. I either win or I learn.", trade, cola));
         productDataStore.add(new Product("Puppy Poster", new BigDecimal("100"), "USD", "It's not real, but it's cute and motivates you.", poster, amazon));
-
 
         Supplier witchCraftBrewery = new Supplier("Witchcraft Brewery", "The most enchanting beverages from all the realms");
         supplierDataStore.add(witchCraftBrewery);
@@ -83,12 +80,5 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Lazy Turtle", new BigDecimal("30"), "USD", "Pretty lazy. If you don't do your job, you'll end up like it.", pet, perfectPetShop));
         productDataStore.add(new Product("Cactus", new BigDecimal("15"), "USD", "For 'responsible' adults. If you manage to kill this one, there is no hope for you.", plant, averagePlantShop));
         productDataStore.add(new Product("Philodendron", new BigDecimal("30"), "USD", "Green means good job. Brown means bad job.", plant, averagePlantShop));
-
-
-
-
-
-
-
     }
 }

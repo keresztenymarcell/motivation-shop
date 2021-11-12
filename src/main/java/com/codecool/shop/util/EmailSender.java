@@ -1,9 +1,6 @@
 package com.codecool.shop.util;
 
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.User;
-import com.google.gson.Gson;
-import org.thymeleaf.context.WebContext;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -43,11 +40,7 @@ public class EmailSender {
                 Message.RecipientType.TO, InternetAddress.parse(Optional.ofNullable(order.getEmail()).orElse("")));
         message.setSubject("Order Confirmation");
 
-        Gson gson = new Gson();
-        String json = gson.toJson(order);
-
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
-
 
         mimeBodyPart.setContent(content, "text/html");
 

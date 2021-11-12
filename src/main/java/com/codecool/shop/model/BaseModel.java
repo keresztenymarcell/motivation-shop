@@ -9,7 +9,7 @@ public class BaseModel {
     protected String name;
     protected String description;
 
-    public BaseModel(){};
+    public BaseModel(){}
 
     public BaseModel(String name) {
         this.name = name;
@@ -50,15 +50,13 @@ public class BaseModel {
         final StringBuilder sb = new StringBuilder();
         for (Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            Object value = null;
+            Object value;
             try {
                 value = field.get(this);
                 if (value != null) {
                     sb.append(field.getName() + ":" + value + ",");
                 }
-            } catch (IllegalAccessException e) {
-
-            }
+            } catch (IllegalAccessException e) {}
         }
         return sb.toString();
     }

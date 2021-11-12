@@ -96,7 +96,7 @@ public class Order extends BaseModel{
     }
 
     public BigDecimal getOrderTotalValue(){
-        return cart.stream().map(X -> X.getItemTotal()).reduce(BigDecimal.ZERO,BigDecimal::add);
+        return cart.stream().map(LineItem::getItemTotal).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
     public void saveToJson() throws IOException {
@@ -132,10 +132,6 @@ public class Order extends BaseModel{
         writer.write(json, 0, json.length());
         writer.close();
 
-    }
-
-    public boolean isSuccessPayment() {
-        return isSuccessPayment;
     }
 
     public void setSuccessPayment(boolean successPayment) {
@@ -175,14 +171,6 @@ public class Order extends BaseModel{
 
     public String getEmail() {
         return email;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getZipcode() {
-        return zipcode;
     }
 
     public String getAddress() {
