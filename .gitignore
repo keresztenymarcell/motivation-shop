@@ -1,6 +1,7 @@
 *.class
 
 src/main/webapp/order*
+src/main/webapp/checkouts/
 
 # OS-X
 **/.DS_Store
