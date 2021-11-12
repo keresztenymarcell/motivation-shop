@@ -10,6 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.util.Optional;
 import java.util.Properties;
 
 public class EmailSender {
@@ -39,7 +40,7 @@ public class EmailSender {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress("vinczeg1281@gmail.com"));
         message.setRecipients(
-                Message.RecipientType.TO, InternetAddress.parse(order.getEmail()));
+                Message.RecipientType.TO, InternetAddress.parse(Optional.ofNullable(order.getEmail()).orElse("")));
         message.setSubject("Order Confirmation");
 
         Gson gson = new Gson();
