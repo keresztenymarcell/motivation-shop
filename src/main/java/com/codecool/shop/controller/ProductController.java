@@ -1,5 +1,8 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.service.Service;
+import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.util.ServiceProvider;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
@@ -23,19 +26,15 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
+        Service service = ServiceProvider.getService();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("category", productService.getProductCategory(1));
-        context.setVariable("products", productService.getProductsForCategory(1));
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
+
+        context.setVariable("categories", service.getAllCategories());
+        context.setVariable("suppliers", service.getAllSuppliers());
+        context.setVariable("products", service.getAllProducts());
+
         engine.process("product/index.html", context, resp.getWriter());
     }
 

@@ -3,9 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="Codecool" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Codecool Shop</title>
+
+    <title>Motivation Shop</title>
+
+    <script th:src="@{/static/js/index.js}" defer></script>
+
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -26,21 +29,42 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
 </head>
 
-<body>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+<body>
+<div th:replace="fragments/nav.html :: copy"></div>
+
+<div class="jumbotron">
+    <h1>Motivation Shop</h1>
 </div>
 
-<div class="container">
+<div>
+    <label for="categories"></label>
+    <select name="categories" id="categories">
+        <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Category</option>
+    </select>
+
+    <label for="suppliers"></label>
+    <select name="suppliers" id="suppliers">
+        <option th:each="supplier : ${suppliers}" th:text="${supplier.name}" th:value="${supplier.id}">Supplier</option>
+    </select>
+</div>
+
+<div id="main-container" class="container">
+    <div class="category-container container" th:each="category,iterStat : ${categories}">
+
+
     <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+        <strong th:text="${category.name}" id="category-title">Category Title</strong>
     </div>
 
     <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${category.products}">
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
@@ -52,16 +76,17 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success add-to-cart" th:data-product-id="${prod.id}" >Add to cart</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
 </div>
 
-<div th:replace="footer.html :: copy"></div>
+<div th:replace="fragments/footer.html :: copy"></div>
 
 </body>
 </html>
