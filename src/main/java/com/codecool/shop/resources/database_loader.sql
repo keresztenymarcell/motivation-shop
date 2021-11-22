@@ -58,7 +58,7 @@ CREATE TABLE products (
                        id          SERIAL PRIMARY KEY NOT NULL,
                        name        VARCHAR(50)           NOT NULL,
                        description VARCHAR                  NOT NULL,
-                       default_price    DECIMAL(10,2)     NOT NULL,
+                       default_price    DECIMAL(20,2)     NOT NULL,
                        default_currency   VARCHAR (200)       NOT NULL,
                        category_id INTEGER                 NOT NULL,
                        supplier_id INTEGER                  NOT NULL
