@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.ShippingDetails;
 import com.codecool.shop.service.Service;
 import com.codecool.shop.util.OrderInformationInputChecker;
 import com.codecool.shop.util.ServiceProvider;
@@ -45,11 +46,12 @@ public class CheckoutController extends HttpServlet {
             engine.process("product/checkout.html", context, resp.getWriter());
         } else {
             Order currentOrder = service.getUser(1).getOrder();
-            currentOrder.setOrderName(name);
-            currentOrder.setEmail(email);
-            currentOrder.setCountry(country);
-            currentOrder.setZipcode(zipcode);
-            currentOrder.setAddress(address);
+            ShippingDetails shippingDetails = currentOrder.getShippingDetails();
+            shippingDetails.setOrderName(name);
+            shippingDetails.setEmail(email);
+            shippingDetails.setCountry(country);
+            shippingDetails.setZipcode(zipcode);
+            shippingDetails.setAddress(address);
 
             // here we can connect Betty's servlet with the payment
             resp.sendRedirect("/payment-page");

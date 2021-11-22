@@ -5,43 +5,31 @@ import java.util.Currency;
 
 public class LineItem extends BaseModel{
     private int quantity;
-    private final BigDecimal productPrice;
-    private BigDecimal itemTotal;
-    private int productId;
-    private Currency  currency;
-
+    private Product product;
 
     public LineItem(Product product) {
         super(product.getName(), product.getDescription());
+        this.product = product;
         this.quantity = 1;
-        this.productPrice = product.getDefaultPrice();
-        this.productId = product.getId();
-        this.itemTotal = product.getDefaultPrice();
-        this.currency = product.getDefaultCurrency();
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        this.itemTotal = calculateTotal();
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    private BigDecimal calculateTotal(){
-        return productPrice.multiply(new BigDecimal(quantity));
-    }
-
     public BigDecimal getItemTotal() {
-        return itemTotal;
+        return product.getDefaultPrice().multiply(new BigDecimal(quantity));
     }
 
     public Currency getCurrency() {
-        return currency;
+        return product.getDefaultCurrency();
     }
 
     public int getProductId() {
-        return productId;
+        return product.getId();
     }
 }

@@ -37,7 +37,7 @@ public class EmailSender {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress("vinczeg1281@gmail.com"));
         message.setRecipients(
-                Message.RecipientType.TO, InternetAddress.parse(Optional.ofNullable(order.getEmail()).orElse("")));
+                Message.RecipientType.TO, InternetAddress.parse(Optional.ofNullable(order.getShippingDetails().getEmail()).orElse("")));
         message.setSubject("Order Confirmation");
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();

@@ -33,7 +33,7 @@ public class OrderConfirmation extends HttpServlet {
         context.setVariable("userId", order.getTotalItems());
         context.setVariable("order", order);
 
-        order.saveToJson();
+        order.getShippingDetails().saveToJson();
         try {
             EmailSender.sendEmail(order, engine.process("confirmation.html", context));
         } catch (MessagingException e) {
