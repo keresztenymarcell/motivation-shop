@@ -83,7 +83,7 @@ async function updateCart(){
         if(parseInt(countDivs[i].innerHTML)===0){
             cartItemsDivs[i].innerHTML = "";
         }
-        itemTotalDivs[i].innerHTML = '$' + order.cart[i].itemTotal;
+        itemTotalDivs[i].innerHTML = '$' + order.cart[i].quantity * order.cart[i].product.defaultPrice;
     }
 }
 
