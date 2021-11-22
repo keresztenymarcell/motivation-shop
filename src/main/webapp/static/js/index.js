@@ -149,14 +149,14 @@ const main = {
 
     },
 
-    fill(product){
+    fill(lineItem){
         return `<div class="row cart-detail">
                     <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-                        <img class="cart-img" src=/static/img/product_${product.productId}.jpg alt="" />
+                        <img class="cart-img" src=/static/img/product_${lineItem.product.id}.jpg alt="" />
                     </div>
-                    <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-                        <p>${product.name}</p>
-                        <span class="price text-info"> ${product.itemTotal}  ${product.currency}</span> <span class="count"> Quantity:${product.quantity}</span>
+                    <div class="col-lg-8 col-sm-8 col-8 cart-detail-lineItem">
+                        <p>${lineItem.name}</p>
+                        <span class="price text-info"> ${lineItem.product.defaultPrice * lineItem.quantity}  ${lineItem.product.defaultCurrency}</span> <span class="count"> Quantity:${lineItem.quantity}</span>
                     </div>
                 </div>`
     },
@@ -182,7 +182,7 @@ const main = {
     getTotalPrice(productsInCart){
         let totalPrice = 0;
         productsInCart.forEach(product => {
-            totalPrice += product.itemTotal;
+            totalPrice += product.product.defaultPrice * product.quantity;
         })
         return totalPrice;
     },

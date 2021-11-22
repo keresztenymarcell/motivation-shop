@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="text-left logo p-2 px-5"> </div>
                 <div class="invoice p-5">
-                    <h5>Your order Confirmed!</h5> <span class="font-weight-bold d-block mt-4" th:text="'Hello, ' +${order.orderName}+'!'"></span> <span>You order has been confirmed and will be shipped in next two days!</span>
+                    <h5>Your order Confirmed!</h5> <span class="font-weight-bold d-block mt-4" th:text="'Hello, ' +${order.shippingDetails.orderName}+'!'"></span> <span>You order has been confirmed and will be shipped in next two days!</span>
                     <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
                         <table class="table table-borderless">
                             <tbody>
@@ -38,7 +38,7 @@
                                     <div class="py-2"> <span class="d-block text-muted">Payment</span> <span th:text="${order.paymentMethod}"></span> </div>
                                 </td>
                                 <td>
-                                    <div class="py-2"> <span class="d-block text-muted">Shiping Address</span> <span th:text="${order.address}"></span> </div>
+                                    <div class="py-2"> <span class="d-block text-muted">Shiping Address</span> <span th:text="${order.shippingDetails.address}"></span> </div>
                                 </td>
                             </tr>
                             </tbody>
