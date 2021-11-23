@@ -31,16 +31,6 @@ public class Order extends BaseModel{
     private int userId;
     private int totalItems;
     private BigDecimal orderTotalValue;
-    @Expose
-    private String orderName;
-    @Expose
-    private String email;
-    @Expose
-    private String country;
-    @Expose
-    private String zipcode;
-    @Expose
-    private String address;
     private boolean isSuccessPayment = false;
     private String paymentMethod;
     private String orderTime;
@@ -100,38 +90,6 @@ public class Order extends BaseModel{
         return cart.stream().map(LineItem::getItemTotal).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
-//    public void saveToJson() throws IOException {
-//        String filename = "src/main/webapp/order" + id + ".json";
-//        FileWriter writer = new FileWriter(filename);
-//
-//        Gson gson = new Gson();
-//        String json = gson.toJson(this);
-//
-//        writer.write(json, 0, json.length());
-//        writer.close();
-//
-//        saveCheckout();
-//    }
-//
-//
-//    void saveCheckout() throws IOException {
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//        Date millis = new Date(System.currentTimeMillis());
-//        String date = formatter.format(millis);
-//        String filename = "src/main/webapp/checkouts/" + id + "-" + date + ".json";
-//
-//        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-//        String json = gson.toJson(this);
-//        System.out.println(json);
-//
-//        json = json.concat("\n\nOrder confirmed");
-//        System.out.println(json);
-//        FileWriter writer = new FileWriter(filename);
-//        writer.write(json, 0, json.length());
-//        writer.close();
-//
-//    }
-
     public void setSuccessPayment(boolean successPayment) {
         isSuccessPayment = successPayment;
     }
@@ -142,37 +100,6 @@ public class Order extends BaseModel{
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getOrderName() {
-        return orderName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getAddress() {
-        return address;
     }
 
     public String getOrderTime() {
