@@ -25,11 +25,12 @@ public class ProductDaoJdbc implements ProductDao {
     @Override
     public Product find(int id) {
         try (Connection conn = dataSource.getConnection()){
-            String sql = "SELECT name, description, default_price, default_currency"
+            String sql = "SELECT name, description, default_price, default_currency";
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return null;
     }
 
     @Override
