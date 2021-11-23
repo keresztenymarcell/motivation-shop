@@ -4,6 +4,7 @@ import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
+import com.codecool.shop.service.OrderService;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
@@ -47,11 +48,13 @@ public class AddToCartController extends HttpServlet {
         else{
             currentOrder = currentUser.getOrder();
         }
-        currentOrder.addItemToCart(lineItem);
-
 
         currentTime = InputValidator.formatLocalDateTimeNowToString();
         currentOrder.setOrderTime(currentTime);
+
+        OrderService orderService = new OrderService(currentOrder);
+        orderService.addCartItem(lineItem);
+
 
         PaymentCredit.createJsonFromObject(resp, currentOrder);
     }
