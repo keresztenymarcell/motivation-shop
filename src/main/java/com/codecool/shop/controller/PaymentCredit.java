@@ -14,13 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "paymentCredit", urlPatterns = {"/payment/credit"}, loadOnStartup = 1)
 public class PaymentCredit extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Service service = ServiceProvider.getService();
+        Service service = null;
+        try {
+            service = ServiceProvider.getService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         User user = service.getUser(1);
         Order orderWithPaymentDetails = user.getOrder();

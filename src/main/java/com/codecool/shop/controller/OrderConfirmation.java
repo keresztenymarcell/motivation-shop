@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "OrderConfirmation", urlPatterns = {"/confirmation"})
 public class OrderConfirmation extends HttpServlet {
@@ -25,7 +26,12 @@ public class OrderConfirmation extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
 
-        Service service = ServiceProvider.getService();
+        Service service = null;
+        try {
+            service = ServiceProvider.getService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         User user = service.getUser(1);
         Order order = user.getOrder();

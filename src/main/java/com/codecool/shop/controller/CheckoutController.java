@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "checkoutController", urlPatterns = {"/checkout"}, loadOnStartup = 1)
 public class CheckoutController extends HttpServlet {
@@ -28,7 +29,12 @@ public class CheckoutController extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Service service = ServiceProvider.getService();
+        Service service = null;
+        try {
+            service = ServiceProvider.getService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());

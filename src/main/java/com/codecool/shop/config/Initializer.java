@@ -1,6 +1,7 @@
 package com.codecool.shop.config;
 
 import com.codecool.shop.dao.implementation.DatabaseManager;
+import com.codecool.shop.util.PropertyProvider;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -20,21 +21,8 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        FileInputStream fis= null;
-        try {
-            fis = new FileInputStream("src/main/resources/connection.properties");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        Properties p=new Properties ();
-        try {
-            p.load (fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String url= (String) p.get ("url");
-        String database= (String) p.get ("database");
-        String password= (String) p.get ("password");
+        Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
+
         String dao= (String) p.get ("dao");
 
         connectionType = dao;

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "paymentController", urlPatterns = {"/payment-page"}, loadOnStartup = 1)
 public class PaymentController extends HttpServlet {
@@ -23,7 +24,12 @@ public class PaymentController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        Service service = ServiceProvider.getService();
+        Service service = null;
+        try {
+            service = ServiceProvider.getService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         User user = service.getUser(1);
         Order order = user.getOrder();
         context.setVariable("order", order);

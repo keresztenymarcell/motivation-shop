@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,12 @@ public class ProductFilterApi extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Service service = ServiceProvider.getService();
+        Service service = null;
+        try {
+            service = ServiceProvider.getService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         String name = req.getParameter("name");
         int id = InputValidator.checkIntInput(req.getParameter("id"));
