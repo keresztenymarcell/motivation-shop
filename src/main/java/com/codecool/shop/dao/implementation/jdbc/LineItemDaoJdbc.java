@@ -1,15 +1,22 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.jdbc;
 
 import com.codecool.shop.dao.LineItemDao;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 
+import javax.sql.DataSource;
 import java.util.List;
 
-public class LineItemDaoMem implements LineItemDao {
+public class LineItemDaoJdbc implements LineItemDao {
 
+    DataSource dataSource;
+
+    public LineItemDaoJdbc(DataSource dataSource){
+        this.dataSource = dataSource;
+    }
     @Override
     public void add(LineItem item) {
+
     }
 
     @Override
@@ -19,6 +26,7 @@ public class LineItemDaoMem implements LineItemDao {
 
     @Override
     public void remove(int id) {
+
     }
 
     @Override
