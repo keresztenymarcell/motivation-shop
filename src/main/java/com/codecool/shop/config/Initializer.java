@@ -14,6 +14,10 @@ import java.util.Properties;
 @WebListener
 public class Initializer implements ServletContextListener {
 
+
+
+    private static String connectionType;
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         FileInputStream fis= null;
@@ -33,10 +37,7 @@ public class Initializer implements ServletContextListener {
         String password= (String) p.get ("password");
         String dao= (String) p.get ("dao");
 
-        System.out.println(url);
-        System.out.println(database);
-        System.out.println(password);
-        System.out.println(dao);
+        connectionType = dao;
 
         if (dao.equals("memory")) {
             System.out.println("I run Mem");
@@ -53,6 +54,10 @@ public class Initializer implements ServletContextListener {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static String getConnectionType() {
+        return connectionType;
     }
 
 }
