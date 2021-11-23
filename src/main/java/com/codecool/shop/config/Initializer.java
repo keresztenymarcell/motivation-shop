@@ -1,8 +1,8 @@
 package com.codecool.shop.config;
 
 import com.codecool.shop.dao.implementation.DatabaseManager;
+import com.codecool.shop.util.Logger;
 import com.codecool.shop.util.PropertyProvider;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContextEvent;
@@ -18,11 +18,12 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
-        Logger logger = LoggerFactory.getLogger(Initializer.class);
-
-
+        Logger logger = new Logger(Initializer.class.getSimpleName());
         logger.info("First info");
+        logger.info("second info");
+        Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
+
+
 
         String dao= (String) p.get ("dao");
 
