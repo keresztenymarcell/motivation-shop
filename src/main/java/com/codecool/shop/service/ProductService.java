@@ -14,7 +14,7 @@ public class ProductService {
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
     private UserDao userDao;
-    private UserService userService;
+
 
 
     public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao, UserDao userDao) {
@@ -22,7 +22,6 @@ public class ProductService {
         this.productCategoryDao = productCategoryDao;
         this.supplierDao = supplierDao;
         this.userDao = userDao;
-        this.userService = new UserService(userDao);
     }
 
     public User getUser(int id){
