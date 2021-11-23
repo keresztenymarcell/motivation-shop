@@ -1,6 +1,6 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.util.ServiceProvider;
 import org.thymeleaf.TemplateEngine;
@@ -19,7 +19,7 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Service service = null;
+        ProductService service = null;
         try {
             service = ServiceProvider.getService();
         } catch (SQLException e) {

@@ -4,7 +4,7 @@ import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 
@@ -22,7 +22,7 @@ public class AddToCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Service service = null;
+        ProductService service = null;
         try {
             service = ServiceProvider.getService();
         } catch (SQLException e) {
@@ -30,6 +30,9 @@ public class AddToCartController extends HttpServlet {
         }
 
         int id = InputValidator.checkIntInput(req.getParameter("id"));
+
+        //service.addItemToCart(id);
+
 
         Order currentOrder;
         Product product  = service.getProduct(id);
@@ -45,6 +48,8 @@ public class AddToCartController extends HttpServlet {
             currentOrder = currentUser.getOrder();
         }
         currentOrder.addItemToCart(lineItem);
+
+
         currentTime = InputValidator.formatLocalDateTimeNowToString();
         currentOrder.setOrderTime(currentTime);
 

@@ -13,8 +13,7 @@ import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
 import com.codecool.shop.dao.implementation.mem.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.mem.UserDaoMem;
-import com.codecool.shop.model.User;
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 
 import java.sql.SQLException;
 
@@ -23,7 +22,7 @@ public class ServiceProvider {
     private final static String connectionType = Initializer.getConnectionType();
 
 
-    public static Service getService() throws SQLException {
+    public static ProductService getService() throws SQLException {
         ProductDao productDataStore = null;
         SupplierDao supplierDataStore = null;
         ProductCategoryDao productCategoryDataStore = null;
@@ -34,7 +33,7 @@ public class ServiceProvider {
             productCategoryDataStore = ProductCategoryDaoMem.getInstance();
             supplierDataStore = SupplierDaoMem.getInstance();
             userDataStore = UserDaoMem.getInstance();
-            return new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
+            return new ProductService(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
         }
         else if(connectionType.equals("jdbc")){
             ProductDaoJdbc.getInstance().connect();
@@ -50,7 +49,7 @@ public class ServiceProvider {
             userDataStore = UserDaoJdbc.getInstance();
 
         }
-        return new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
+        return new ProductService(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
     }
 
 

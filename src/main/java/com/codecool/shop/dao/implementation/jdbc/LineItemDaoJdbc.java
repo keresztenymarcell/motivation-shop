@@ -8,11 +8,16 @@ import javax.sql.DataSource;
 import java.util.List;
 
 public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
+    private static LineItemDaoJdbc instance;
+    private OrderDaoJdbc orderDaoJdbc = OrderDaoJdbc.getInstance();
+    private ProductDaoJdbc productDaoJdbc = ProductDaoJdbc.getInstance();
 
-    DataSource dataSource;
 
-    public LineItemDaoJdbc(DataSource dataSource){
-        this.dataSource = dataSource;
+    public static LineItemDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new LineItemDaoJdbc();
+        }
+        return instance;
     }
     @Override
     public void add(LineItem item) {
