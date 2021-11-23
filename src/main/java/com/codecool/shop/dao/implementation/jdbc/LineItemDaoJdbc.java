@@ -9,8 +9,8 @@ import java.util.List;
 
 public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
     private static LineItemDaoJdbc instance;
-    private OrderDaoJdbc orderDaoJdbc = OrderDaoJdbc.getInstance();
-    private ProductDaoJdbc productDaoJdbc = ProductDaoJdbc.getInstance();
+    //private OrderDaoJdbc orderDaoJdbc = OrderDaoJdbc.getInstance();
+    //private ProductDaoJdbc productDaoJdbc = ProductDaoJdbc.getInstance();
 
 
     public static LineItemDaoJdbc getInstance() {

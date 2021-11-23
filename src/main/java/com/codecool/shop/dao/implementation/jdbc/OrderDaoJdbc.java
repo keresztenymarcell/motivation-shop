@@ -10,7 +10,7 @@ import java.util.List;
 
 public class OrderDaoJdbc extends DatabaseConnection implements OrderDao {
     private static OrderDaoJdbc instance;
-    private LineItemDaoJdbc lineItemDaoJdbc = LineItemDaoJdbc.getInstance();
+    //private LineItemDaoJdbc lineItemDaoJdbc = LineItemDaoJdbc.getInstance();
 
     public static OrderDaoJdbc getInstance() {
         if (instance == null) {
