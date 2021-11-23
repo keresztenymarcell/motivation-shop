@@ -21,8 +21,13 @@ public class Initializer implements ServletContextListener {
         Logger logger = new Logger(Initializer.class.getSimpleName());
         logger.info("First info");
         logger.info("second info");
-        Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
 
+        int temperature = 50;
+        int oldTemp = 30;
+
+        logger.debug("Temperature set to {}. Old temperature was {}.", temperature, oldTemp);
+
+        Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
 
 
         String dao= (String) p.get ("dao");

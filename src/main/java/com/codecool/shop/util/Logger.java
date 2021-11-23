@@ -27,7 +27,7 @@ public class Logger {
 
     }
 
-    public void debug(String message) {
+    public void debug(String message, int temperature, int oldTemp) {
         String log = String.format("%s [DEBUG] %s : %s\n", getDate(), className, message);
         doStuff(log);
 
