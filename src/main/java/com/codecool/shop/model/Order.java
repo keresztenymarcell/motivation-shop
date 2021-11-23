@@ -143,36 +143,13 @@ public class Order extends BaseModel{
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
-    }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getOrderName() {
-        return orderName;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public String getAddress() {
-        return address;
     }
 
     public String getOrderTime() {
