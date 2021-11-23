@@ -6,12 +6,15 @@ import com.codecool.shop.model.User;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class UserDaoJdbc implements UserDao {
+public class UserDaoJdbc extends DatabaseConnection implements UserDao {
 
-    DataSource dataSource;
+    private static UserDaoJdbc instance;
 
-    public UserDaoJdbc(DataSource dataSource){
-        this.dataSource = dataSource;
+    public static UserDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new UserDaoJdbc();
+        }
+        return instance;
     }
 
     @Override

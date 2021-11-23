@@ -10,13 +10,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ProductDaoJdbc implements ProductDao {
+public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
+    private static ProductDaoJdbc instance;
+    private ProductCategoryDaoJdbc productCategoryDaoJDBC = ProductCategoryDaoJdbc.getInstance();
+    private SupplierDaoJdbc supplierDaoJDBC = SupplierDaoJdbc.getInstance();
 
-    DataSource dataSource;
-
-    public ProductDaoJdbc(DataSource dataSource){
-        this.dataSource = dataSource;
+    public static ProductDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new ProductDaoJdbc();
+        }
+        return instance;
     }
+
+
     @Override
     public void add(Product product) {
 
@@ -24,12 +30,6 @@ public class ProductDaoJdbc implements ProductDao {
 
     @Override
     public Product find(int id) {
-        try (Connection conn = dataSource.getConnection()){
-            String sql = "SELECT name, description, default_price, default_currency";
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
         return null;
     }
 

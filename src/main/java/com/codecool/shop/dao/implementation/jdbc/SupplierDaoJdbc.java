@@ -4,15 +4,19 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.util.List;
 
-public class SupplierDaoJdbc implements SupplierDao {
+public class SupplierDaoJdbc extends DatabaseConnection implements SupplierDao {
+    private static SupplierDaoJdbc instance;
 
-    DataSource dataSource;
-
-    public SupplierDaoJdbc(DataSource dataSource){
-        this.dataSource = dataSource;
+    public static SupplierDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new SupplierDaoJdbc();
+        }
+        return instance;
     }
+
     @Override
     public void add(Supplier supplier) {
 

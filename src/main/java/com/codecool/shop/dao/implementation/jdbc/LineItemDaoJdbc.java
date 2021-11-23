@@ -7,7 +7,7 @@ import com.codecool.shop.model.Product;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class LineItemDaoJdbc implements LineItemDao {
+public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
 
     DataSource dataSource;
 
