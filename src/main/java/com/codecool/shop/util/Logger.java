@@ -50,7 +50,7 @@ public class Logger {
 
     private String getDate() {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd hh:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm:ss");
         return now.format(formatter);
     }
 
