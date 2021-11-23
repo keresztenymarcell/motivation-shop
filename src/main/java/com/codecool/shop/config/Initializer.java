@@ -2,16 +2,12 @@ package com.codecool.shop.config;
 
 import com.codecool.shop.dao.implementation.DatabaseManager;
 import com.codecool.shop.util.PropertyProvider;
-import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -23,7 +19,6 @@ public class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
-        BasicConfigurator.configure();
         Logger logger = LoggerFactory.getLogger(Initializer.class);
 
 
