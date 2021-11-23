@@ -2,6 +2,9 @@ package com.codecool.shop.config;
 
 import com.codecool.shop.dao.implementation.DatabaseManager;
 import com.codecool.shop.util.PropertyProvider;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -15,13 +18,16 @@ import java.util.Properties;
 @WebListener
 public class Initializer implements ServletContextListener {
 
-
-
     private static String connectionType;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
+        BasicConfigurator.configure();
+        Logger logger = LoggerFactory.getLogger(Initializer.class);
+
+
+        logger.info("First info");
 
         String dao= (String) p.get ("dao");
 
