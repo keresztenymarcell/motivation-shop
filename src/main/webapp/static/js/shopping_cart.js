@@ -26,7 +26,7 @@ function addEventHandlerToRemoveAllButton(){
     const itemsContainer = document.querySelectorAll(".items-container");
 
     button.addEventListener("click", async () => {
-        await fetchFromApi("/empty-cart");
+        await doDeleteFetch('/api/cart')
         itemsContainer[0].innerHTML = "";
         const itemsDiv = document.querySelectorAll(".items")[0];
         const subTotalDiv = document.querySelectorAll(".total-amount")[0];
@@ -94,7 +94,7 @@ async function reduceCountAndFetch(productId){
 }
 
 async function addCountAndFetch(productId){
-    const url = `/api/add-to-cart?id=${productId}`
+    const url = `/api/cart?id=${productId}`
     await fetchFromApi(url);
 }
 
@@ -106,6 +106,18 @@ async function fetchOrder(){
 async function fetchFromApi(url){
         const response = await fetch(url);
         return response.json();
+}
+
+async function doDeleteFetch(url, ){
+    const response = fetch(url, {
+        method : 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify('')
+    });
+    const content = (await response).json()
 }
 
 addEventHandlersToItemCountButtons();
