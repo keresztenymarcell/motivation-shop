@@ -1,9 +1,6 @@
 package com.codecool.shop.service;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -16,12 +13,16 @@ public class Service {
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
     private UserDao userDao;
+    private OrderDao orderDao;
+    private ShippingDetailsDao shippingDetailsDao;
 
-    public Service(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao, UserDao userDao) {
+    public Service(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao, UserDao userDao, OrderDao orderDao, ShippingDetailsDao shippingDetailsDao) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
         this.supplierDao = supplierDao;
         this.userDao = userDao;
+        this.orderDao = orderDao;
+        this.shippingDetailsDao = shippingDetailsDao;
     }
 
     public ProductCategory getProductCategory(int categoryId){

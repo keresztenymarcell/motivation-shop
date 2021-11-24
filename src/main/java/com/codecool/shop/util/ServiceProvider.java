@@ -1,19 +1,9 @@
 package com.codecool.shop.util;
 
 import com.codecool.shop.config.Initializer;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.dao.implementation.jdbc.ProductCategoryDaoJdbc;
-import com.codecool.shop.dao.implementation.jdbc.ProductDaoJdbc;
-import com.codecool.shop.dao.implementation.jdbc.SupplierDaoJdbc;
-import com.codecool.shop.dao.implementation.jdbc.UserDaoJdbc;
-import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
-import com.codecool.shop.dao.implementation.mem.SupplierDaoMem;
-import com.codecool.shop.dao.implementation.mem.UserDaoMem;
-import com.codecool.shop.model.User;
+import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.implementation.jdbc.*;
+import com.codecool.shop.dao.implementation.mem.*;
 import com.codecool.shop.service.Service;
 
 import java.sql.SQLException;
@@ -28,13 +18,17 @@ public class ServiceProvider {
         SupplierDao supplierDataStore = null;
         ProductCategoryDao productCategoryDataStore = null;
         UserDao userDataStore = null;
+        OrderDao orderDataStore = null;
+        ShippingDetailsDao shippingDetailsDataStore = null;
 
         if(connectionType.equals("memory")){
             productDataStore = ProductDaoMem.getInstance();
             productCategoryDataStore = ProductCategoryDaoMem.getInstance();
             supplierDataStore = SupplierDaoMem.getInstance();
             userDataStore = UserDaoMem.getInstance();
-            return new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
+            orderDataStore = OrderDaoMem.getInstance();
+            shippingDetailsDataStore = ShippingDetailsDaoMem.getInstance();
+            return new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore, orderDataStore, shippingDetailsDataStore);
         }
         else if(connectionType.equals("jdbc")){
             ProductDaoJdbc.getInstance().connect();
@@ -49,8 +43,14 @@ public class ServiceProvider {
             UserDaoJdbc.getInstance().connect();
             userDataStore = UserDaoJdbc.getInstance();
 
+            OrderDaoJdbc.getInstance().connect();
+            orderDataStore = OrderDaoJdbc.getInstance();
+
+            ShippingDetailsDaoJdbc.getInstance().connect();
+            shippingDetailsDataStore = ShippingDetailsDaoJdbc.getInstance();
+
         }
-        return new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
+        return new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore, orderDataStore, shippingDetailsDataStore);
     }
 
 
