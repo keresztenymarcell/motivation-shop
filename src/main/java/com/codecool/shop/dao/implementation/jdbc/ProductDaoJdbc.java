@@ -73,6 +73,7 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
                         rs.getString(3),
                         productCategoryDaoJDBC.find(rs.getInt(6)),
                         supplierDaoJDBC.find(rs.getInt(7)));
+
                 product.setId(rs.getInt(1));
                 result.add(product);
             }

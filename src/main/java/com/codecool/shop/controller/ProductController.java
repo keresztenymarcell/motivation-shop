@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.model.Product;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.util.ServiceProvider;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -32,6 +34,9 @@ public class ProductController extends HttpServlet {
         context.setVariable("categories", service.getAllCategories());
         context.setVariable("suppliers", service.getAllSuppliers());
         context.setVariable("products", service.getAllProducts());
+        List<Product> allProduct = service.getAllProducts();
+        System.out.println(allProduct.get(0));
+
 
         engine.process("product/index.html", context, resp.getWriter());
     }
