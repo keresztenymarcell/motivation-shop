@@ -13,7 +13,7 @@ public class LineItemDaoMem implements LineItemDao {
     }
 
     @Override
-    public Product find(int id) {
+    public LineItem find(int id) {
         return null;
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 public interface LineItemDao {
 
     void add(LineItem item);
-    Product find(int id);
+    LineItem find(int id);
     void remove(int id);
     List<LineItem> getAll(int orderId);
 

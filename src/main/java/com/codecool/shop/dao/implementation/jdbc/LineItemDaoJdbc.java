@@ -5,6 +5,10 @@ import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
@@ -25,7 +29,15 @@ public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
     }
 
     @Override
-    public Product find(int id) {
+    public LineItem find(int id) {
+        try(Connection conn = dataSource.getConnection()){
+            String query = String.format("select * from line_items where id = %d", id);
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
