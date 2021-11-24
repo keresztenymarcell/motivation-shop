@@ -7,6 +7,7 @@ import com.codecool.shop.model.Supplier;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,7 +26,17 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
 
     @Override
     public void add(Product product) {
-
+        try {
+            Connection conn = dataSource.getConnection();
+            String query = String.format("insert into products values (%d %s %s %f %s %d %d)",
+                    product.getId(), product.getName(), product.getDescription(), product.getDefaultPrice(),
+                    product.getDefaultCurrency().getCurrencyCode(), product.getProductCategory().getId(),
+                    product.getSupplier().getId());
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
