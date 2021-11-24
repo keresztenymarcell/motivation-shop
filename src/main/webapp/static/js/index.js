@@ -10,7 +10,7 @@ const main = {
             await main.refreshProductsWithFetchedProducts("supplier", event.target.value);
         })
 
-        //await this.refreshCartIcon();
+        // await this.refreshCartIcon();
         this.loadAddToCartButtonsWithEventListeners();
 
     },
@@ -40,11 +40,11 @@ const main = {
 
     async refreshCartIcon() {
         const url = `/api/order`
-        const order = await main.fetchFromApi(url);
-        console.log(order);
-        if (order.cart.length > 0) {
-            main.increaseCartContent(order);
-            main.increaseCartValue(order);
+        const cart = await main.fetchFromApi(url);
+        console.log(cart);
+        if (cart.lineItems.length > 0) {
+            main.increaseCartContent(cart);
+            main.increaseCartValue(cart);
         } else {
             main.setUpEmptyCartIcon()
         }
@@ -180,7 +180,7 @@ const main = {
     },
     increaseCartValue(order){
         const cartValue = document.getElementById("shop-value");
-        cartValue.textContent = order.orderTotalValue +" "+ "USD";
+        cartValue.textContent = order.totalPrice +" "+ "USD";
     },
 
     getTotalPrice(productsInCart){

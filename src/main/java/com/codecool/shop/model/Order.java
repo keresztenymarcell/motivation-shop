@@ -33,6 +33,7 @@ public class Order extends BaseModel{
         this.orderTotalValue = cart.getTotalPrice();
     }
 
+
     public int getTotalItems() {
         return totalItems;
     }
