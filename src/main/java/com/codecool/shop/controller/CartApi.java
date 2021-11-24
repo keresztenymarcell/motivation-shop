@@ -18,7 +18,7 @@ import java.sql.SQLException;
 
 
 @WebServlet(name = "cartController", urlPatterns = {"/api/cart"}, loadOnStartup = 1)
-public class AddToCartController extends HttpServlet {
+public class CartApi extends HttpServlet {
 
     ShoppingCartService shoppingCartservice = ServiceProvider.getShoppingCartService();
     ProductService productService = ServiceProvider.getProductService();
