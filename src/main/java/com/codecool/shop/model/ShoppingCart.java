@@ -53,4 +53,8 @@ public class ShoppingCart {
         }
         return totalItems;
     }
+
+    public ArrayList<LineItem> getLineItems() {
+        return lineItems;
+    }
 }

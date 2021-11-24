@@ -5,7 +5,6 @@ import com.codecool.shop.model.ShippingDetails;
 import java.util.List;
 
 public interface ShippingDetailsDao {
-
     void add(ShippingDetails item);
     ShippingDetails find(int userId);
     void update(ShippingDetails shippingDetails);

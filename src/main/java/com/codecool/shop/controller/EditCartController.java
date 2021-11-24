@@ -33,7 +33,7 @@ public class EditCartController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         ShoppingCart shoppingCart = shoppingCartService.getCartByUser(1);
 
-        context.setVariable("shoppingCart", shoppingCart);
+        context.setVariable("shoppingCart", shoppingCart.getLineItems());
         context.setVariable("totalPrice", shoppingCart.getTotalPrice());
         context.setVariable("totalItems", shoppingCart.getTotalItems());
 
