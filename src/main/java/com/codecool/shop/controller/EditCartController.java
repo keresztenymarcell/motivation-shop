@@ -22,7 +22,7 @@ import java.util.Set;
 public class EditCartController extends HttpServlet {
     ProductService service = ServiceProvider.getService();
 
-    public EditCartController() throws SQLException {
+    public EditCartController(){
     }
 
     @Override

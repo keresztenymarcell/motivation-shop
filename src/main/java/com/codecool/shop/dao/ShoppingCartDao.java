@@ -12,6 +12,8 @@ public interface ShoppingCartDao {
     void addToShoppingCart(int userId, Product product);
     void deleteShoppingCart(int userId);
     void removeFromShoppingCart(int userId, Product product);
+    void remove(int userId);
+    ShoppingCart get(int userId);
 
 
 

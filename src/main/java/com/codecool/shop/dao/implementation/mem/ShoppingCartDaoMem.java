@@ -49,4 +49,9 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
         shoppingCarts.get(userId).removeFromShoppingCart(product);
 
     }
+
+    @Override
+    public void remove(int userId) {
+        shoppingCarts.remove(userId);
+    }
 }

@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.model.*;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.service.ShoppingCartService;
+import com.codecool.shop.service.UserService;
 import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 
@@ -19,40 +20,30 @@ import java.sql.SQLException;
 @WebServlet(name = "cartController", urlPatterns = {"/api/cart"}, loadOnStartup = 1)
 public class AddToCartController extends HttpServlet {
 
-    ShoppingCartService service = ServiceProvider.getShoppingCartService();
+    ShoppingCartService shoppingCartservice = ServiceProvider.getShoppingCartService();
     ProductService productService = ServiceProvider.getProductService();
+    UserService userService = ServiceProvider.getUserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = InputValidator.checkIntInput(req.getParameter("id"));
+        int productId = InputValidator.checkIntInput(req.getParameter("id"));
 //        int quantity = InputValidator.checkIntInput(req.getParameter("quantity"));
 
-        User currentUser = service.getUser(1);
+        shoppingCartservice.addProductToCart(1, productId);
 
-        ShoppingCart cart = new ShoppingCart();
-        Product product  = service.getProduct(id);
-        LineItem lineItem = new LineItem(product);
-        String currentTime;
+        //PaymentCredit.createJsonFromObject(resp, currentOrder);
+    }
 
-        if(!currentUser.hasCart()){
-            currentOrder = new Order(currentUser);
-        }
-        else{
-            currentOrder = currentUser.getCart();
-        }
-        currentOrder.addItemToCart(lineItem);
-        currentTime = InputValidator.formatLocalDateTimeNowToString();
-        currentOrder.setOrderTime(currentTime);
-
-        PaymentCredit.createJsonFromObject(resp, currentOrder);
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int productId = InputValidator.checkIntInput(req.getParameter("id"));
+        shoppingCartservice.removeProductFromCart(1, productId);
+        //TODO javascript fetch to POST
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductService service = getService();
-        User currentUser = service.getUser(1);
-        currentUser.getCart().emptyCart();
-
+        shoppingCartservice.emptyCart(1);
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
@@ -69,4 +60,5 @@ public class AddToCartController extends HttpServlet {
 //        }
 //        return service;
 //    }
+
 }

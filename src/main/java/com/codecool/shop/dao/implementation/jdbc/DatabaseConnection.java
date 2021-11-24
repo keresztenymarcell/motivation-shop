@@ -10,22 +10,28 @@ import java.util.Properties;
 public abstract class DatabaseConnection {
     protected DataSource dataSource;
 
-    public void connect() throws SQLException {
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
-        String dbName = (String) p.get ("database");
-        String user = (String) p.get ("user");
-        String password = (String) p.get ("password");
+    public void connect(){
+        try{
+            PGSimpleDataSource dataSource = new PGSimpleDataSource();
+            Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
+            String dbName = (String) p.get ("database");
+            String user = (String) p.get ("user");
+            String password = (String) p.get ("password");
 
-        dataSource.setDatabaseName(dbName);
-        dataSource.setUser(user);
-        dataSource.setPassword(password);
+            dataSource.setDatabaseName(dbName);
+            dataSource.setUser(user);
+            dataSource.setPassword(password);
 
 
-        System.out.println("Trying to connect");
-        dataSource.getConnection().close();
-        System.out.println("Connection ok.");
+            System.out.println("Trying to connect");
+            dataSource.getConnection().close();
+            System.out.println("Connection ok.");
 
-        this.dataSource = dataSource;
+            this.dataSource = dataSource;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 }

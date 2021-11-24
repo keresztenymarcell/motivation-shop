@@ -24,11 +24,6 @@ public class ProductService {
         this.userDao = userDao;
     }
 
-    public User getUser(int id){
-        return userDao.find(id);
-    }
-
-
     public ProductCategory getProductCategory(int categoryId){
         return productCategoryDao.find(categoryId);
     }

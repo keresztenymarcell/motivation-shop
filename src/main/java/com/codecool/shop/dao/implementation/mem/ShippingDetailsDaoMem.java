@@ -4,11 +4,13 @@ import com.codecool.shop.dao.ShippingDetailsDao;
 import com.codecool.shop.model.ShippingDetails;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShippingDetailsDaoMem implements ShippingDetailsDao {
 
-    private List<ShippingDetails> data = new ArrayList<>();
+    private Map<Integer, ShippingDetails> data = new HashMap<>();
     private static ShippingDetailsDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.

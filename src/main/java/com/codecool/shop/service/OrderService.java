@@ -19,7 +19,4 @@ public class OrderService {
         this.shippingDetailsDao = shippingDetailsDao;;
     }
 
-
-
-
 }

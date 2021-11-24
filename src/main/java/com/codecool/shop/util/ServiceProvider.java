@@ -4,8 +4,10 @@ import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.jdbc.*;
 import com.codecool.shop.dao.implementation.mem.*;
+import com.codecool.shop.service.OrderService;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.service.ShoppingCartService;
+import com.codecool.shop.service.UserService;
 
 import java.sql.SQLException;
 
@@ -22,48 +24,74 @@ public class ServiceProvider {
     static ShoppingCartDao shoppingCartDataStore = null;
 
 
-    public static void init(){
-        try {
+    public static ProductService getProductService(){
             if (connectionType.equals("memory")) {
                 productDataStore = ProductDaoMem.getInstance();
                 productCategoryDataStore = ProductCategoryDaoMem.getInstance();
                 supplierDataStore = SupplierDaoMem.getInstance();
                 userDataStore = UserDaoMem.getInstance();
-                orderDataStore = OrderDaoMem.getInstance();
-                shippingDetailsDataStore = ShippingDetailsDaoMem.getInstance();
+                return new ProductService(productDataStore, productCategoryDataStore, supplierDataStore, userDataStore);
 
             } else if (connectionType.equals("jdbc")) {
                 ProductDaoJdbc.getInstance().connect();
                 productDataStore = ProductDaoJdbc.getInstance();
-
                 SupplierDaoJdbc.getInstance().connect();
                 supplierDataStore = SupplierDaoJdbc.getInstance();
-
                 ProductCategoryDaoJdbc.getInstance().connect();
                 productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
-
                 UserDaoJdbc.getInstance().connect();
                 userDataStore = UserDaoJdbc.getInstance();
-
-                OrderDaoJdbc.getInstance().connect();
-                orderDataStore = OrderDaoJdbc.getInstance();
-
-                ShippingDetailsDaoJdbc.getInstance().connect();
-                shippingDetailsDataStore = ShippingDetailsDaoJdbc.getInstance();
-
+                return new ProductService(productDataStore, productCategoryDataStore, supplierDataStore, userDataStore);
             }
+        return null;
         }
-            catch(SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-    public static ProductService getProductService(){
-        return new ProductService(productDataStore, productCategoryDataStore, supplierDataStore, userDataStore);
-    }
 
     public static ShoppingCartService getShoppingCartService(){
-        return new ShoppingCartService(shoppingCartDataStore, productDataStore);
+        if(connectionType.equals("memory")){
+            productDataStore = ProductDaoMem.getInstance();
+            shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+            return new ShoppingCartService(shoppingCartDataStore, productDataStore);
+        }
+        else if(connectionType.equals("jdbc")){
+            ProductDaoJdbc.getInstance().connect();
+            productDataStore = ProductDaoJdbc.getInstance();
+            ShippingDetailsDaoJdbc.getInstance().connect();
+            shippingDetailsDataStore = ShippingDetailsDaoJdbc.getInstance();
+            return new ShoppingCartService(shoppingCartDataStore, productDataStore);
+        }
+        return null;
+    }
+
+    public static UserService getUserService(){
+        if(connectionType.equals("memory")){
+            userDataStore = UserDaoMem.getInstance();
+            return new UserService(userDataStore);
+
+        }
+        else if(connectionType.equals("jdbc")){
+            UserDaoJdbc.getInstance().connect();
+            userDataStore = UserDaoJdbc.getInstance();
+            return new UserService(userDataStore);
+        }
+        return null;
+    }
+
+    public static OrderService getOrderService(){
+        if(connectionType.equals("memory")){
+            orderDataStore = OrderDaoMem.getInstance();
+            shippingDetailsDataStore = ShippingDetailsDaoMem.getInstance();
+            return new OrderService(orderDataStore, shippingDetailsDataStore);
+
+        }
+        else if(connectionType.equals("jdbc")){
+            OrderDaoJdbc.getInstance().connect();
+            orderDataStore = OrderDaoJdbc.getInstance();
+            ShippingDetailsDaoJdbc.getInstance().connect();
+            shippingDetailsDataStore = ShippingDetailsDaoJdbc.getInstance();
+            return new OrderService(orderDataStore, shippingDetailsDataStore);
+        }
+        return null;
+
     }
 
 }

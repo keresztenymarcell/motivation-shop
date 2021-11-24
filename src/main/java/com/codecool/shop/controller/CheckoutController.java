@@ -3,7 +3,9 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShippingDetails;
+import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.service.ProductService;
+import com.codecool.shop.service.ShoppingCartService;
 import com.codecool.shop.util.OrderInformationInputChecker;
 import com.codecool.shop.util.ServiceProvider;
 import org.thymeleaf.TemplateEngine;
@@ -20,21 +22,20 @@ import java.sql.SQLException;
 @WebServlet(name = "checkoutController", urlPatterns = {"/checkout"}, loadOnStartup = 1)
 public class CheckoutController extends HttpServlet {
 
+    ProductService productService = ServiceProvider.getProductService();
+    ShoppingCartService shoppingCartService = ServiceProvider.getShoppingCartService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         engine.process("product/checkout.html", context, resp.getWriter());
+
+
+
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        ProductService service = null;
-        try {
-            service = ServiceProvider.getService();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -51,7 +52,9 @@ public class CheckoutController extends HttpServlet {
             context.setVariable("message", errorMessage);
             engine.process("product/checkout.html", context, resp.getWriter());
         } else {
-            Order currentOrder = service.getUser(1).getCart();
+            ShoppingCart cart = shoppingCartService.getCartByUser(1);
+
+
             ShippingDetails shippingDetails = currentOrder.getShippingDetails();
             shippingDetails.setOrderName(name);
             shippingDetails.setEmail(email);
