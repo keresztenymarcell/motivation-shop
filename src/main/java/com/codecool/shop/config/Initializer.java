@@ -1,9 +1,13 @@
 package com.codecool.shop.config;
 
 import com.codecool.shop.dao.implementation.DatabaseManager;
-import com.codecool.shop.util.Logger;
+
 import com.codecool.shop.util.PropertyProvider;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.LoggerFactory;
+
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -18,14 +22,16 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        Logger logger = new Logger(Initializer.class.getSimpleName());
+        PropertyConfigurator.configure("src/main/resources/log4j.properties");
+        Logger logger = Logger.getLogger(Initializer.class);
         logger.info("First info");
         logger.info("second info");
+        logger.warn("Dafuq");
 
         int temperature = 50;
         int oldTemp = 30;
 
-        logger.debug("Temperature set to {}. Old temperature was {}.", temperature, oldTemp);
+        logger.debug("Temperature set to!!!");
 
         Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
 
