@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.Service;
 import com.codecool.shop.util.InputValidator;
