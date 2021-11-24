@@ -47,7 +47,9 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE shipping_descriptions (
+
                        id          SERIAL PRIMARY KEY  NOT NULL,
+                       user_id  INTEGER                 NOT NULL,
                        country   VARCHAR(200)             NOT NULL,
                        zip_code   VARCHAR (200)         NOT NULL,
                        address       VARCHAR (200)       NOT NULL,
@@ -167,4 +169,5 @@ ALTER TABLE ONLY line_items
 ALTER TABLE ONLY shopping_carts
     ADD CONSTRAINT fk_shopping_carts_user_id FOREIGN KEY (user_id) REFERENCES  users(id);
 
-
+ALTER TABLE ONLY shipping_descriptions
+    ADD CONSTRAINT fk_shipping_descriptions_user_id FOREIGN KEY (user_id) REFERENCES users(id);
