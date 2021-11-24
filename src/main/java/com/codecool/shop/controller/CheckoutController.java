@@ -3,7 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShippingDetails;
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 import com.codecool.shop.util.OrderInformationInputChecker;
 import com.codecool.shop.util.ServiceProvider;
 import org.thymeleaf.TemplateEngine;
@@ -29,7 +29,7 @@ public class CheckoutController extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Service service = null;
+        ProductService service = null;
         try {
             service = ServiceProvider.getService();
         } catch (SQLException e) {

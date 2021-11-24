@@ -3,7 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.User;
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 import com.codecool.shop.util.ServiceProvider;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -20,7 +20,7 @@ import java.util.Set;
 
 @WebServlet(urlPatterns = {"/shopping-cart"})
 public class EditCartController extends HttpServlet {
-    Service service = ServiceProvider.getService();
+    ProductService service = ServiceProvider.getService();
 
     public EditCartController() throws SQLException {
     }

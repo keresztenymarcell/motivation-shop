@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.Currency;
 
 public class Product extends BaseModel {
-
     private BigDecimal defaultPrice;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
+
 
 
     public Product(String name, BigDecimal defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
@@ -16,6 +16,7 @@ public class Product extends BaseModel {
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+
     }
 
     public BigDecimal getDefaultPrice() {

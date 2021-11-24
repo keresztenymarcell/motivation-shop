@@ -8,21 +8,23 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class DatabaseManager extends DatabaseConnection{
-
     LineItemDao lineItemDao;
     ProductCategoryDao productCategoryDao;
     ProductDao productDao;
     SupplierDao supplierDao;
     UserDao userDao;
+    OrderDao orderDao;
+    ShippingBillingDao shippingBillingDao;
 
     public void setup() throws SQLException{
         connect();
-        lineItemDao = new LineItemDaoJdbc(dataSource);
+        lineItemDao = new LineItemDaoJdbc();
         productCategoryDao = new ProductCategoryDaoJdbc();
         productDao = new ProductDaoJdbc();
         supplierDao = new SupplierDaoJdbc();
         userDao = new UserDaoJdbc();
-
+        orderDao = new OrderDaoJdbc();
+        shippingBillingDao = new ShippingBillingDaoJdbc();
     }
 
 }
