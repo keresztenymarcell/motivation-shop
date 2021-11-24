@@ -4,7 +4,7 @@ import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.jdbc.*;
 import com.codecool.shop.dao.implementation.mem.*;
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 
 import java.sql.SQLException;
 
@@ -13,7 +13,7 @@ public class ServiceProvider {
     private final static String connectionType = Initializer.getConnectionType();
 
 
-    public static Service getService() throws SQLException {
+    public static ProductService getService() throws SQLException {
         ProductDao productDataStore = null;
         SupplierDao supplierDataStore = null;
         ProductCategoryDao productCategoryDataStore = null;
@@ -26,9 +26,9 @@ public class ServiceProvider {
             productCategoryDataStore = ProductCategoryDaoMem.getInstance();
             supplierDataStore = SupplierDaoMem.getInstance();
             userDataStore = UserDaoMem.getInstance();
-            orderDataStore = OrderDaoMem.getInstance();
-            shippingDetailsDataStore = ShippingDetailsDaoMem.getInstance();
-            return new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore, orderDataStore, shippingDetailsDataStore);
+            //orderDataStore = OrderDaoMem.getInstance();
+            //shippingDetailsDataStore = ShippingDetailsDaoMem.getInstance();
+            return new ProductService(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
         }
         else if(connectionType.equals("jdbc")){
             ProductDaoJdbc.getInstance().connect();
@@ -43,14 +43,14 @@ public class ServiceProvider {
             UserDaoJdbc.getInstance().connect();
             userDataStore = UserDaoJdbc.getInstance();
 
-            OrderDaoJdbc.getInstance().connect();
-            orderDataStore = OrderDaoJdbc.getInstance();
+            //OrderDaoJdbc.getInstance().connect();
+            //orderDataStore = OrderDaoJdbc.getInstance();
 
-            ShippingDetailsDaoJdbc.getInstance().connect();
-            shippingDetailsDataStore = ShippingDetailsDaoJdbc.getInstance();
+            //ShippingDetailsDaoJdbc.getInstance().connect();
+            //shippingDetailsDataStore = ShippingDetailsDaoJdbc.getInstance();
 
         }
-        return new Service(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore, orderDataStore, shippingDetailsDataStore);
+        return new ProductService(productDataStore,productCategoryDataStore,supplierDataStore, userDataStore);
     }
 
 

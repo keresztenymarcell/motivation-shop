@@ -3,7 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 import com.codecool.shop.util.ServiceProvider;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -24,7 +24,7 @@ public class PaymentController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        Service service = null;
+        ProductService service = null;
         try {
             service = ServiceProvider.getService();
         } catch (SQLException e) {

@@ -4,10 +4,6 @@ public class User extends BaseModel{
 
     private String password;
     private String email;
-
-
-
-
     private Order order;
 
     public User(String name) {

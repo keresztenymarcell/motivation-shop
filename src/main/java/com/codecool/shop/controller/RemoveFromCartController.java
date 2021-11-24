@@ -3,7 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 
@@ -22,7 +22,7 @@ public class RemoveFromCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Service service = null;
+        ProductService service = null;
         try {
             service = ServiceProvider.getService();
         } catch (SQLException e) {

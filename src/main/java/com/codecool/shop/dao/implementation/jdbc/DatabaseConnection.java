@@ -17,10 +17,6 @@ public abstract class DatabaseConnection {
         String user = (String) p.get ("user");
         String password = (String) p.get ("password");
 
-        System.out.println(dbName);
-        System.out.println(user);
-        System.out.println(password);
-
         dataSource.setDatabaseName(dbName);
         dataSource.setUser(user);
         dataSource.setPassword(password);
