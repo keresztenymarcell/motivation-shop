@@ -1,13 +1,7 @@
 package com.codecool.shop.config;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
-import com.codecool.shop.dao.implementation.mem.SupplierDaoMem;
-import com.codecool.shop.dao.implementation.mem.UserDaoMem;
+import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.implementation.mem.*;
 import com.codecool.shop.model.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -26,9 +20,10 @@ public class MemInitializer {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         UserDao userDataStore = UserDaoMem.getInstance();
+        ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
 
         //Users
-        User testUser = new User("Teszt Tamás");
+        User testUser = new User("Teszt Tamás", new ShoppingCart());
         userDataStore.add(testUser);
         testUser.setOrder(new Order(testUser));
 
