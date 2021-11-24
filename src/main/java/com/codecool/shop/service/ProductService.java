@@ -71,9 +71,6 @@ public class ProductService {
         return productCategoryDao.getAll();
     }
 
-    /*public void addItemToCart(LineItem Item){
 
-
-    }*/
 
 }

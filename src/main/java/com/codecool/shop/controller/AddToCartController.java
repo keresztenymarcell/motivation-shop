@@ -52,8 +52,7 @@ public class AddToCartController extends HttpServlet {
         currentTime = InputValidator.formatLocalDateTimeNowToString();
         currentOrder.setOrderTime(currentTime);
 
-        OrderService orderService = new OrderService(currentOrder);
-        orderService.addCartItem(lineItem);
+        currentOrder.addItemToCart(lineItem);
 
 
         PaymentCredit.createJsonFromObject(resp, currentOrder);
