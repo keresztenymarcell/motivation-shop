@@ -21,6 +21,17 @@ public class ShippingDetails extends BaseModel{
     @Expose
     private String address;
 
+    public ShippingDetails() {
+    }
+
+    public ShippingDetails(String orderName, String email, String country, String zipcode, String address) {
+        this.orderName = orderName;
+        this.email = email;
+        this.country = country;
+        this.zipcode = zipcode;
+        this.address = address;
+    }
+
     public void saveToJson() throws IOException {
         String filename = "src/main/webapp/order" + id + ".json";
         FileWriter writer = new FileWriter(filename);
@@ -82,5 +93,13 @@ public class ShippingDetails extends BaseModel{
 
     public String getAddress() {
         return address;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getZipcode() {
+        return zipcode;
     }
 }
