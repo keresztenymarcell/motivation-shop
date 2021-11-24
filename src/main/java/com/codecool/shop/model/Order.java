@@ -1,29 +1,7 @@
 package com.codecool.shop.model;
 
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
-
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.sound.sampled.Line;
-import javax.swing.*;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.Set;
 
 public class Order extends BaseModel{
@@ -31,16 +9,7 @@ public class Order extends BaseModel{
     private int userId;
     private int totalItems;
     private BigDecimal orderTotalValue;
-    @Expose
-    private String orderName;
-    @Expose
-    private String email;
-    @Expose
-    private String country;
-    @Expose
-    private String zipcode;
-    @Expose
-    private String address;
+
     private boolean isSuccessPayment = false;
     private String paymentMethod;
     private String orderTime;
@@ -50,6 +19,18 @@ public class Order extends BaseModel{
         this.userId = user.getId();
         user.setOrder(this);
         shippingDetails = new ShippingDetails();
+    }
+
+    public Order(User user, ShippingDetails shippingDetails, boolean isSuccessPayment, String paymentMethod, String orderTime) {
+        this.userId = user.getId();
+        user.setOrder(this);
+        this.shippingDetails = shippingDetails;
+
+        this.isSuccessPayment = isSuccessPayment;
+        this.paymentMethod = paymentMethod;
+        this.orderTime = orderTime;
+        this.totalItems = cart.size();
+        this.orderTotalValue = getOrderTotalValue();
     }
 
     public void addItemToCart(LineItem item){
@@ -143,37 +124,6 @@ public class Order extends BaseModel{
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getOrderName() {
-        return orderName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
 
     public String getOrderTime() {
         return orderTime;
@@ -185,5 +135,9 @@ public class Order extends BaseModel{
 
     public ShippingDetails getShippingDetails() {
         return shippingDetails;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 }
