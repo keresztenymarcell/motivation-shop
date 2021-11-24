@@ -30,7 +30,7 @@ public class OrderApi extends HttpServlet {
         }
 
         User user = service.getUser(1);
-        Order currentOrder = user.getOrder();
+        Order currentOrder = user.getCart();
         String productString = new Gson().toJson(currentOrder);
         currentOrder.setOrderTime(LocalDateTime.now().toString());
 

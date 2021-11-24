@@ -23,9 +23,10 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
     }
 
     @Override
-    public void addToShoppingCart(ShoppingCart shoppingCart, Product product) {
+    public void addToShoppingCart(int userId, Product product) {
 
     }
+
 
     @Override
     public void deleteShoppingCart(int userId) {

@@ -51,7 +51,7 @@ public class CheckoutController extends HttpServlet {
             context.setVariable("message", errorMessage);
             engine.process("product/checkout.html", context, resp.getWriter());
         } else {
-            Order currentOrder = service.getUser(1).getOrder();
+            Order currentOrder = service.getUser(1).getCart();
             ShippingDetails shippingDetails = currentOrder.getShippingDetails();
             shippingDetails.setOrderName(name);
             shippingDetails.setEmail(email);

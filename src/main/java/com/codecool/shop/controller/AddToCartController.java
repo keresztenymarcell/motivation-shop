@@ -1,10 +1,8 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.model.LineItem;
-import com.codecool.shop.model.Order;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.User;
+import com.codecool.shop.model.*;
 import com.codecool.shop.service.ProductService;
+import com.codecool.shop.service.ShoppingCartService;
 import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 
@@ -21,25 +19,26 @@ import java.sql.SQLException;
 @WebServlet(name = "cartController", urlPatterns = {"/api/cart"}, loadOnStartup = 1)
 public class AddToCartController extends HttpServlet {
 
-    ProductService service = getService();
+    ShoppingCartService service = ServiceProvider.getShoppingCartService();
+    ProductService productService = ServiceProvider.getProductService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = InputValidator.checkIntInput(req.getParameter("id"));
-        int quantity = InputValidator.checkIntInput(req.getParameter("quantity"));
+//        int quantity = InputValidator.checkIntInput(req.getParameter("quantity"));
 
         User currentUser = service.getUser(1);
 
-        Order currentOrder;
+        ShoppingCart cart = new ShoppingCart();
         Product product  = service.getProduct(id);
         LineItem lineItem = new LineItem(product);
         String currentTime;
 
-        if(!currentUser.hasOrder()){
+        if(!currentUser.hasCart()){
             currentOrder = new Order(currentUser);
         }
         else{
-            currentOrder = currentUser.getOrder();
+            currentOrder = currentUser.getCart();
         }
         currentOrder.addItemToCart(lineItem);
         currentTime = InputValidator.formatLocalDateTimeNowToString();
@@ -52,7 +51,7 @@ public class AddToCartController extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductService service = getService();
         User currentUser = service.getUser(1);
-        currentUser.getOrder().emptyCart();
+        currentUser.getCart().emptyCart();
 
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
@@ -61,13 +60,13 @@ public class AddToCartController extends HttpServlet {
         out.flush();
     }
 
-    private ProductService getService(){
-        ProductService service = null;
-        try {
-            service = ServiceProvider.getService();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return service;
-    }
+//    private ProductService getService(){
+//        ProductService service = null;
+//        try {
+//            service = ServiceProvider.getShoppingCartService();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return service;
+//    }
 }

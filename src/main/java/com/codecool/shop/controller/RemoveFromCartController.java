@@ -2,7 +2,6 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.util.InputValidator;
@@ -36,7 +35,7 @@ public class RemoveFromCartController extends HttpServlet {
         LineItem lineItem = new LineItem(product);
 
         User currentUser = service.getUser(1);
-        currentUser.getOrder().removeItemFromCart(lineItem);
+        currentUser.getCart().removeItemFromCart(lineItem);
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

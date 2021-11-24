@@ -31,7 +31,7 @@ public class PaymentController extends HttpServlet {
             e.printStackTrace();
         }
         User user = service.getUser(1);
-        Order order = user.getOrder();
+        Order order = user.getCart();
         context.setVariable("order", order);
         engine.process("product/payment.html", context, resp.getWriter());
     }

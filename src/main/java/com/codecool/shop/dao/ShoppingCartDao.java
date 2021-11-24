@@ -9,7 +9,7 @@ import java.util.List;
 public interface ShoppingCartDao {
 
     ShoppingCart createShoppingCart(int userId);
-    void addToShoppingCart(ShoppingCart shoppingCart, Product product);
+    void addToShoppingCart(int userId, Product product);
     void deleteShoppingCart(int userId);
     void removeFromShoppingCart(int userId, Product product);
 

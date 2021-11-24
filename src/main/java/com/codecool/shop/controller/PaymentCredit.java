@@ -29,7 +29,7 @@ public class PaymentCredit extends HttpServlet {
         }
 
         User user = service.getUser(1);
-        Order orderWithPaymentDetails = user.getOrder();
+        Order orderWithPaymentDetails = user.getCart();
 
         String cvv = req.getParameter("cvv");
         String currentTime;

@@ -6,26 +6,18 @@ public class User extends BaseModel{
     private String email;
     private ShoppingCart cart;
 
-    private Order order;
 
-    public User(String name, ShoppingCart cart) {
+    public User(String name) {
         super(name);
+    }
+
+    public boolean hasCart(){
+        return cart != null;
+    }
+
+
+    public void setCart(ShoppingCart cart) {
         this.cart = cart;
-    }
-
-    public boolean hasOrder(){
-        return order != null;
-    }
-
-    public Order getOrder() {
-        if (order == null){
-            order = new Order(this);
-        }
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
 
@@ -33,7 +25,5 @@ public class User extends BaseModel{
         return email;
     }
 
-    public ShoppingCart getCart() {
-        return cart;
-    }
+
 }

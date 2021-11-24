@@ -29,7 +29,7 @@ public class PaymentPayPal extends HttpServlet {
         }
 
         User user = service.getUser(1);
-        Order orderWithPaymentDetails = user.getOrder();
+        Order orderWithPaymentDetails = user.getCart();
         String currentTime;
 
         String userName = req.getParameter("paypal-user");

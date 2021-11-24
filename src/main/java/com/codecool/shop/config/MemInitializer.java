@@ -7,9 +7,6 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import java.math.BigDecimal;
 
 public class MemInitializer {
@@ -23,9 +20,9 @@ public class MemInitializer {
         ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
 
         //Users
-        User testUser = new User("Teszt Tamás", new ShoppingCart());
+        User testUser = new User("Teszt Tamás");
         userDataStore.add(testUser);
-        testUser.setOrder(new Order(testUser));
+        testUser.setCart(new Order(testUser));
 
         //Suppliers
         Supplier amazon = new Supplier("Amazon", "Digital content and services");

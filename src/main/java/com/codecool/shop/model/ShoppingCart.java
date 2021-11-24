@@ -8,6 +8,7 @@ public class ShoppingCart {
     private ArrayList<LineItem> lineItems = new ArrayList<>();
     private BigDecimal totalPrice;
 
+
     public void addToShoppingCart(Product product){
         boolean alreadyInCart = false;
 

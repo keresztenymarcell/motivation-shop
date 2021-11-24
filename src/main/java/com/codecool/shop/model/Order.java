@@ -17,13 +17,13 @@ public class Order extends BaseModel{
 
     public Order(User user) {
         this.userId = user.getId();
-        user.setOrder(this);
+        user.setCart(this);
         shippingDetails = new ShippingDetails();
     }
 
     public Order(User user, ShippingDetails shippingDetails, boolean isSuccessPayment, String paymentMethod, String orderTime) {
         this.userId = user.getId();
-        user.setOrder(this);
+        user.setCart(this);
         this.shippingDetails = shippingDetails;
 
         this.isSuccessPayment = isSuccessPayment;

@@ -34,7 +34,7 @@ public class OrderConfirmation extends HttpServlet {
         }
 
         User user = service.getUser(1);
-        Order order = user.getOrder();
+        Order order = user.getCart();
 
         context.setVariable("userId", order.getTotalItems());
         context.setVariable("order", order);
@@ -46,7 +46,7 @@ public class OrderConfirmation extends HttpServlet {
             e.printStackTrace();
         }
 
-        user.setOrder(new Order(user));
+        user.setCart(new Order(user));
 
 
         engine.process("confirmation.html", context, response.getWriter());
