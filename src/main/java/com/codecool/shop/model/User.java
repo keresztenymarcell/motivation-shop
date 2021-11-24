@@ -4,14 +4,13 @@ public class User extends BaseModel{
 
     private String password;
     private String email;
-
-
-
+    private ShoppingCart cart;
 
     private Order order;
 
-    public User(String name) {
+    public User(String name, ShoppingCart cart) {
         super(name);
+        this.cart = cart;
     }
 
     public boolean hasOrder(){
@@ -32,5 +31,9 @@ public class User extends BaseModel{
 
     public String getEmail() {
         return email;
+    }
+
+    public ShoppingCart getCart() {
+        return cart;
     }
 }
