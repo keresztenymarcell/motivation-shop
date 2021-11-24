@@ -2,14 +2,12 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.jdbc.*;
-import org.postgresql.ds.PGSimpleDataSource;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class DatabaseManager extends DatabaseConnection{
 
-    LineItemDao lineItemDao;
+    ShoppingCartDao lineItemDao;
     ProductCategoryDao productCategoryDao;
     ProductDao productDao;
     SupplierDao supplierDao;
@@ -17,7 +15,7 @@ public class DatabaseManager extends DatabaseConnection{
 
     public void setup() throws SQLException{
         connect();
-        lineItemDao = new LineItemDaoJdbc(dataSource);
+        lineItemDao = new ShoppingCartDaoJdbc(dataSource);
         productCategoryDao = new ProductCategoryDaoJdbc();
         productDao = new ProductDaoJdbc();
         supplierDao = new SupplierDaoJdbc();

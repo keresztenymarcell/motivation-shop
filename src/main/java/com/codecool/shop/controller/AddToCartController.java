@@ -26,13 +26,14 @@ public class AddToCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = InputValidator.checkIntInput(req.getParameter("id"));
+        int quantity = InputValidator.checkIntInput(req.getParameter("quantity"));
+
+        User currentUser = service.getUser(1);
 
         Order currentOrder;
         Product product  = service.getProduct(id);
         LineItem lineItem = new LineItem(product);
         String currentTime;
-
-        User currentUser = service.getUser(1);
 
         if(!currentUser.hasOrder()){
             currentOrder = new Order(currentUser);

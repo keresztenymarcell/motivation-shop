@@ -32,4 +32,8 @@ public class LineItem extends BaseModel{
     public int getProductId() {
         return product.getId();
     }
+
+    public Product getProduct(){
+        return product;
+    }
 }
