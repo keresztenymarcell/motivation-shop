@@ -22,8 +22,9 @@ DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS suppliers CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
-DROP TABLE IF EXISTS line_items CASCADE;
+DROP TABLE IF EXISTS shopping_carts CASCADE;
 DROP TABLE IF EXISTS shipping_descriptions CASCADE;
+DROP TABLE IF EXISTS line_items CASCADE;
 
 ---
 --- create tables
@@ -41,7 +42,8 @@ CREATE TABLE orders (
                         id          SERIAL PRIMARY KEY  NOT NULL,
                         shipping_description_id      INTEGER        NOT NULL,
                         user_id     INTEGER              NOT NULL,
-                        payment_method VARCHAR (200)    NOT NULL
+                        payment_method VARCHAR (200)    NOT NULL,
+                        cart_id INTEGER
 );
 
 CREATE TABLE shipping_descriptions (
@@ -49,8 +51,8 @@ CREATE TABLE shipping_descriptions (
                        country   VARCHAR(200)             NOT NULL,
                        zip_code   VARCHAR (200)         NOT NULL,
                        address       VARCHAR (200)       NOT NULL,
-                       first_name  VARCHAR(200)             NOT NULL,
-                       last_name VARCHAR(200)              NOT NULL,
+                       name         VARCHAR(200)         NOT NULL,
+                       order_time  VARCHAR(200)          NOT NULL,
                        email VARCHAR(200)               NOT NULL
 );
 
@@ -80,11 +82,18 @@ CREATE TABLE categories (
 
 );
 
-CREATE TABLE line_items (
+CREATE TABLE shopping_carts(
                     id          SERIAL PRIMARY KEY NOT NULL,
-                    quantity    INTEGER,
-                    order_id    INTEGER,
-                    product_id INTEGER
+                    user_id    INTEGER             NOT NULL
+);
+
+
+CREATE TABLE line_items(
+                    id      SERIAL PRIMARY KEY NOT NULL,
+                    product_id INTEGER          NOT NULL,
+                    cart_id INTEGER             NOT NULL,
+                    quantity INTEGER            NOT NULL
+
 );
 
 
@@ -140,6 +149,9 @@ ALTER TABLE ONLY orders
 ALTER TABLE ONLY orders
     ADD CONSTRAINT fk_orders_user_id FOREIGN KEY (user_id) REFERENCES users(id);
 
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT fk_orders_cart_id FOREIGN KEY (cart_id) REFERENCES shopping_carts(id);
+
 ALTER TABLE ONLY products
     ADD CONSTRAINT fk_products_category_id FOREIGN KEY (category_id) REFERENCES  categories(id);
 
@@ -147,7 +159,12 @@ ALTER TABLE ONLY products
     ADD CONSTRAINT fk_products_supplier_id FOREIGN KEY (supplier_id) REFERENCES  suppliers(id);
 
 ALTER TABLE ONLY line_items
-    ADD CONSTRAINT fk_line_items_category_id FOREIGN KEY (order_id) REFERENCES  orders(id);
+    ADD CONSTRAINT fk_line_items_product_id FOREIGN KEY (product_id) REFERENCES products(id);
 
 ALTER TABLE ONLY line_items
-    ADD CONSTRAINT fk_line_items_product_id FOREIGN KEY (product_id) REFERENCES  products(id);
+    ADD CONSTRAINT fk_line_items_cart_id FOREIGN KEY (cart_id) REFERENCES shopping_carts(id);
+
+ALTER TABLE ONLY shopping_carts
+    ADD CONSTRAINT fk_shopping_carts_user_id FOREIGN KEY (user_id) REFERENCES  users(id);
+
+
