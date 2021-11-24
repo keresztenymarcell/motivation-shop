@@ -68,6 +68,13 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
 
     @Override
     public void remove(int id) {
+        try(Connection conn = dataSource.getConnection()){
+            String query = String.format("delete from products where id = %d", id);
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.executeUpdate();
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
     }
 
