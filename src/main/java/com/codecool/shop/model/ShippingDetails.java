@@ -20,16 +20,18 @@ public class ShippingDetails extends BaseModel{
     private String zipcode;
     @Expose
     private String address;
+    private int userId;
 
     public ShippingDetails() {
     }
 
-    public ShippingDetails(String orderName, String email, String country, String zipcode, String address) {
+    public ShippingDetails(int userId, String orderName, String email, String country, String zipcode, String address) {
         this.orderName = orderName;
         this.email = email;
         this.country = country;
         this.zipcode = zipcode;
         this.address = address;
+        this.userId = userId;
     }
 
     public void saveToJson() throws IOException {

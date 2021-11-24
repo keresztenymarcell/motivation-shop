@@ -7,7 +7,7 @@ import java.util.List;
 public interface ShippingDetailsDao {
 
     void add(ShippingDetails item);
-    ShippingDetails find(int id);
+    ShippingDetails find(int userId);
     void update(ShippingDetails shippingDetails);
     void remove(int id);
     List<ShippingDetails> getAll(int orderId);

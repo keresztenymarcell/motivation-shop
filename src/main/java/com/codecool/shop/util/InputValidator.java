@@ -1,5 +1,10 @@
 package com.codecool.shop.util;
 
+import com.google.gson.Gson;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -34,5 +39,14 @@ public class InputValidator {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return time.format(formatter);
+    }
+
+    public static void createJsonFromObject(HttpServletResponse resp, Object object) throws IOException {
+        String responseString = new Gson().toJson(object);
+        PrintWriter out = resp.getWriter();
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        out.print(responseString);
+        out.flush();
     }
 }

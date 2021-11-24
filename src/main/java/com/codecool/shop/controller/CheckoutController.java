@@ -4,6 +4,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShippingDetails;
 import com.codecool.shop.model.ShoppingCart;
+import com.codecool.shop.service.OrderService;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.service.ShoppingCartService;
 import com.codecool.shop.util.OrderInformationInputChecker;
@@ -24,6 +25,7 @@ public class CheckoutController extends HttpServlet {
 
     ProductService productService = ServiceProvider.getProductService();
     ShoppingCartService shoppingCartService = ServiceProvider.getShoppingCartService();
+    OrderService orderService = ServiceProvider.getOrderService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,21 +48,14 @@ public class CheckoutController extends HttpServlet {
         String zipcode = req.getParameter("zipcode");
         String address = req.getParameter("address");
 
+        orderService.saveShippingDetails(1, name, email, country, zipcode, address);
         String errorMessage = OrderInformationInputChecker.getErrorMessageForInputs(name, email, country, address);
 
         if (errorMessage != null) {
             context.setVariable("message", errorMessage);
             engine.process("product/checkout.html", context, resp.getWriter());
         } else {
-            ShoppingCart cart = shoppingCartService.getCartByUser(1);
-
-
-            ShippingDetails shippingDetails = currentOrder.getShippingDetails();
-            shippingDetails.setOrderName(name);
-            shippingDetails.setEmail(email);
-            shippingDetails.setCountry(country);
-            shippingDetails.setZipcode(zipcode);
-            shippingDetails.setAddress(address);
+            orderService.createOrder(1);
 
             // here we can connect Betty's servlet with the payment
             resp.sendRedirect("/payment-page");

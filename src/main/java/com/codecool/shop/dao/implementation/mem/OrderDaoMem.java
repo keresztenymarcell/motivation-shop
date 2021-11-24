@@ -4,11 +4,13 @@ import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDaoMem implements OrderDao {
 
-    private List<Order> data = new ArrayList<>();
+    private Map<Integer, Order> data = new HashMap<>();
     private static OrderDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -25,17 +27,17 @@ public class OrderDaoMem implements OrderDao {
 
     @Override
     public void add(Order order) {
-
+        data.put(order.getUserId(), order);
     }
 
     @Override
     public Order find(int id) {
-        return null;
+        return data.get(id);
     }
 
     @Override
     public void update(Order order) {
-
+        //
     }
 
     @Override

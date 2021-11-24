@@ -21,6 +21,10 @@ public class User extends BaseModel{
     }
 
 
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
     public String getEmail() {
         return email;
     }

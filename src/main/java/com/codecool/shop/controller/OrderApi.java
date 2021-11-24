@@ -1,8 +1,11 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.ProductService;
+import com.codecool.shop.service.ShoppingCartService;
+import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 import com.google.gson.Gson;
 
@@ -20,25 +23,15 @@ import java.time.LocalDateTime;
 @WebServlet(name = "orderApi", urlPatterns = {"/api/order"}, loadOnStartup = 1)
 public class OrderApi extends HttpServlet {
 
+    ShoppingCartService shoppingCartService = ServiceProvider.getShoppingCartService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductService service = null;
-        try {
-            service = ServiceProvider.getService();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
-        User user = service.getUser(1);
-        Order currentOrder = user.getCart();
-        String productString = new Gson().toJson(currentOrder);
-        currentOrder.setOrderTime(LocalDateTime.now().toString());
+        ShoppingCart shoppingCart = shoppingCartService.getCartByUser(1);
+        System.out.println(shoppingCart);
 
-        PrintWriter out = resp.getWriter();
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        out.print(productString);
-        out.flush();
+        InputValidator.createJsonFromObject(resp, shoppingCart);
 
     }
 }

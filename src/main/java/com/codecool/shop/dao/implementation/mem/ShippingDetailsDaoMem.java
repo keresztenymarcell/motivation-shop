@@ -27,12 +27,12 @@ public class ShippingDetailsDaoMem implements ShippingDetailsDao {
 
     @Override
     public void add(ShippingDetails item) {
-
+        data.put(item.getId(), item);
     }
 
     @Override
     public ShippingDetails find(int id) {
-        return null;
+        return data.get(id);
     }
 
     @Override

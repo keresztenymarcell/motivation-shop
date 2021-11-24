@@ -20,16 +20,11 @@ import java.util.List;
 @WebServlet(name = "productFilterApi", urlPatterns = {"/api/filter"}, loadOnStartup = 1)
 public class ProductFilterApi extends HttpServlet {
 
+    ProductService productService = ServiceProvider.getProductService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductService service = null;
-        try {
-            service = ServiceProvider.getService();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         String name = req.getParameter("name");
         int id = InputValidator.checkIntInput(req.getParameter("id"));
@@ -37,17 +32,11 @@ public class ProductFilterApi extends HttpServlet {
         List<Product> productList = new ArrayList<>();
 
         if (name.equals("category")) {
-            productList = service.getProductsForCategory(id);
+            productList = productService.getProductsForCategory(id);
         } else if (name.equals("supplier")) {
-            productList = service.getProductsForSupplier(id);
+            productList = productService.getProductsForSupplier(id);
         }
 
-        String productString = new Gson().toJson(productList);
-
-        PrintWriter out = resp.getWriter();
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        out.print(productString);
-        out.flush();
+        InputValidator.createJsonFromObject(resp,productList);
     }
 }

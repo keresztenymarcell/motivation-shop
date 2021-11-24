@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Order extends BaseModel{
-    private final Set<LineItem> cart = new HashSet<>();
+    private final ShoppingCart cart;
     private int userId;
     private int totalItems;
     private BigDecimal orderTotalValue;
@@ -15,70 +15,26 @@ public class Order extends BaseModel{
     private String orderTime;
     private ShippingDetails shippingDetails;
 
-    public Order(User user) {
+    public Order(User user, ShippingDetails shippingDetails) {
         this.userId = user.getId();
-        user.setCart(this);
-        shippingDetails = new ShippingDetails();
+        this.shippingDetails = shippingDetails;
+        this.cart = user.getCart();
     }
 
     public Order(User user, ShippingDetails shippingDetails, boolean isSuccessPayment, String paymentMethod, String orderTime) {
         this.userId = user.getId();
-        user.setCart(this);
+        this.cart = user.getCart();
         this.shippingDetails = shippingDetails;
 
         this.isSuccessPayment = isSuccessPayment;
         this.paymentMethod = paymentMethod;
         this.orderTime = orderTime;
-        this.totalItems = cart.size();
-        this.orderTotalValue = getOrderTotalValue();
-    }
-
-    public void addItemToCart(LineItem item){
-        if(checkIfItemInCart(item)){
-            LineItem current = cart.stream().filter(x -> x.getName().equals(item.getName())).findFirst().get();
-            current.setQuantity(current.getQuantity() + 1);
-        }
-        else{
-            cart.add(item);
-        }
-        this.orderTotalValue = getOrderTotalValue();
-        this.totalItems++;
-    }
-
-    public void removeItemFromCart(LineItem item){
-        if(checkIfItemInCart(item)){
-            LineItem current = cart.stream().filter(x -> x.getName().equals(item.getName())).findFirst().get();
-            current.setQuantity(current.getQuantity() - 1);
-            if(current.getQuantity() == 0){
-                cart.remove(current);
-            }
-        }
-        if(totalItems!=0){
-            this.totalItems--;
-        }
-        this.orderTotalValue = getOrderTotalValue();
-
-    }
-
-    public void emptyCart(){
-        cart.clear();
-        totalItems = 0;
-    }
-
-    private boolean checkIfItemInCart(LineItem item){
-        return cart.stream().anyMatch(lineItem -> lineItem.getName().equals(item.getName()));
-    }
-
-    public Set<LineItem> getCart() {
-        return cart;
+        this.totalItems = cart.getTotalItems();
+        this.orderTotalValue = cart.getTotalPrice();
     }
 
     public int getTotalItems() {
         return totalItems;
-    }
-
-    public BigDecimal getOrderTotalValue(){
-        return cart.stream().map(LineItem::getItemTotal).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
     public void setSuccessPayment(boolean successPayment) {

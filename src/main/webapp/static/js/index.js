@@ -10,7 +10,7 @@ const main = {
             await main.refreshProductsWithFetchedProducts("supplier", event.target.value);
         })
 
-        await this.refreshCartIcon();
+        //await this.refreshCartIcon();
         this.loadAddToCartButtonsWithEventListeners();
 
     },
@@ -19,6 +19,7 @@ const main = {
         const cardButtons = document.querySelectorAll(".add-to-cart");
         cardButtons.forEach(button => {
             button.addEventListener("click", async (e) => {
+                console.log("gomb")
                 if(button.getAttribute("data-cart") != null){
                     const url = `/api/order`;
                     const order = await main.fetchFromApi(url);
@@ -26,6 +27,7 @@ const main = {
 
                 }
                 else {
+                    console.log("gomb");
                     const productId = e.target.dataset.productId;
                     const url = `/api/cart?id=${productId}`
                     await main.fetchFromApi(url);
@@ -39,6 +41,7 @@ const main = {
     async refreshCartIcon() {
         const url = `/api/order`
         const order = await main.fetchFromApi(url);
+        console.log(order);
         if (order.cart.length > 0) {
             main.increaseCartContent(order);
             main.increaseCartValue(order);
@@ -72,6 +75,7 @@ const main = {
 
     async fetchFromApi(url) {
         const response = await fetch(url);
+        console.log(response.json);
         return response.json();
     },
 

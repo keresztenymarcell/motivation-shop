@@ -40,20 +40,22 @@ public class ShippingDetailsDaoJdbc extends DatabaseConnection implements Shippi
     @Override
     public ShippingDetails find(int id) {
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT country, zip_code, address, name, email FROM shipping_descriptions WHERE id = ?";
+            String sql = "SELECT country, zip_code, address, name, email, user_id FROM shipping_descriptions WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (!resultSet.next()) {
                 return null;
             }
+
             String country = resultSet.getString(1);
             String zip_code = resultSet.getString(2);
             String address = resultSet.getString(3);
             String name = resultSet.getString(4);
             String email = resultSet.getString(5);
+            int userId = resultSet.getInt(6);
 
-            ShippingDetails shippingDetails = new ShippingDetails(country, zip_code, address, name, email);
+            ShippingDetails shippingDetails = new ShippingDetails(userId, country, zip_code, address, name, email);
             shippingDetails.setId(id);
             return shippingDetails;
         } catch (SQLException e) {
@@ -86,7 +88,7 @@ public class ShippingDetailsDaoJdbc extends DatabaseConnection implements Shippi
     @Override
     public List<ShippingDetails> getAll(int orderId) {
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT id, country, zip_code, address, name, email FROM shipping_descriptions";
+            String sql = "SELECT id, country, zip_code, address, name, email, user_id FROM shipping_descriptions";
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
             List<ShippingDetails> results = new ArrayList<>();
 
@@ -97,8 +99,9 @@ public class ShippingDetailsDaoJdbc extends DatabaseConnection implements Shippi
                 String address = resultSet.getString(4);
                 String name = resultSet.getString(5);
                 String email = resultSet.getString(6);
+                int userId = resultSet.getInt(7);
 
-                ShippingDetails shippingDetails = new ShippingDetails(country, zip_code, address, name, email);
+                ShippingDetails shippingDetails = new ShippingDetails(userId, country, zip_code, address, name, email);
                 shippingDetails.setId(id);
                 results.add(shippingDetails);
             }

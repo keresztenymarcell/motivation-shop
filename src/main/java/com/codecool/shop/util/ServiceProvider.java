@@ -80,7 +80,8 @@ public class ServiceProvider {
         if(connectionType.equals("memory")){
             orderDataStore = OrderDaoMem.getInstance();
             shippingDetailsDataStore = ShippingDetailsDaoMem.getInstance();
-            return new OrderService(orderDataStore, shippingDetailsDataStore);
+            userDataStore = UserDaoMem.getInstance();
+            return new OrderService(orderDataStore, shippingDetailsDataStore, userDataStore);
 
         }
         else if(connectionType.equals("jdbc")){
@@ -88,7 +89,9 @@ public class ServiceProvider {
             orderDataStore = OrderDaoJdbc.getInstance();
             ShippingDetailsDaoJdbc.getInstance().connect();
             shippingDetailsDataStore = ShippingDetailsDaoJdbc.getInstance();
-            return new OrderService(orderDataStore, shippingDetailsDataStore);
+            UserDaoJdbc.getInstance().connect();
+            userDataStore = UserDaoJdbc.getInstance();
+            return new OrderService(orderDataStore, shippingDetailsDataStore, userDataStore);
         }
         return null;
 

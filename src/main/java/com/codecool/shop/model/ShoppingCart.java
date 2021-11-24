@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ShoppingCart {
     private ArrayList<LineItem> lineItems = new ArrayList<>();
-    private BigDecimal totalPrice;
+    private BigDecimal totalPrice = new BigDecimal(0);
 
 
     public void addToShoppingCart(Product product){
@@ -35,9 +35,18 @@ public class ShoppingCart {
                 }
             }
             totalPrice = totalPrice.subtract(product.getDefaultPrice());
-
-
         }
     }
 
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public int getTotalItems(){
+        int totalItems = 0;
+        for (LineItem lineItem : lineItems) {
+            totalItems += lineItem.getQuantity();
+        }
+        return totalItems;
+    }
 }

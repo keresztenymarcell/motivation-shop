@@ -89,8 +89,8 @@ async function updateCart(){
 
 
 async function reduceCountAndFetch(productId){
-    const url = `/api/remove-from-cart?id=${productId}`
-    await fetchFromApi(url);
+    const url = `/api/cart?id=${productId}`
+    await doPostFetch(url);
 }
 
 async function addCountAndFetch(productId){
@@ -111,6 +111,18 @@ async function fetchFromApi(url){
 async function doDeleteFetch(url, ){
     const response = fetch(url, {
         method : 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify('')
+    });
+    const content = (await response).json()
+}
+
+async function doPostFetch(url){
+    const response = fetch(url, {
+        method : 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

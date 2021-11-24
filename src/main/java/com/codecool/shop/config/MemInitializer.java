@@ -22,7 +22,7 @@ public class MemInitializer {
         //Users
         User testUser = new User("Teszt Tamás");
         userDataStore.add(testUser);
-        testUser.setCart(new Order(testUser));
+
 
         //Suppliers
         Supplier amazon = new Supplier("Amazon", "Digital content and services");

@@ -37,4 +37,14 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
     public void removeFromShoppingCart(int userId, Product product) {
 
     }
+
+    @Override
+    public void remove(int userId) {
+
+    }
+
+    @Override
+    public ShoppingCart get(int userId) {
+        return null;
+    }
 }
