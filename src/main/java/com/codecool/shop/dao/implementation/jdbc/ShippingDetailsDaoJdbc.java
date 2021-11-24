@@ -3,7 +3,6 @@ package com.codecool.shop.dao.implementation.jdbc;
 import com.codecool.shop.dao.ShippingDetailsDao;
 import com.codecool.shop.model.ShippingDetails;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

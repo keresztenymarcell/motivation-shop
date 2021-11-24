@@ -1,12 +1,10 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.dao.LineItemDao;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ShippingDetailsDao;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.*;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
