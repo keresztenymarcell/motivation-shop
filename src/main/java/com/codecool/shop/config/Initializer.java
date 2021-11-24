@@ -15,8 +15,6 @@ import java.util.Properties;
 @WebListener
 public class Initializer implements ServletContextListener {
 
-
-
     private static String connectionType;
 
     @Override

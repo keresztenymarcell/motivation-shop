@@ -62,10 +62,11 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        List<Product> result = new ArrayList<>();
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "SELECT id, name, description,default_price, default_currency, category_id, supplier_id FROM products";
+            // FIRST STEP - read book_id, author_id and title
+            String sql = "SELECT id, name, description, default_price, default_currency, category_id, supplier_id FROM products";
             ResultSet rs = conn.createStatement().executeQuery(sql);
+            List<Product> result = new ArrayList<>();
             while (rs.next()) {
                 Product product = new Product(rs.getString(2),
                         rs.getBigDecimal(4),
@@ -73,15 +74,13 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
                         rs.getString(3),
                         productCategoryDaoJDBC.find(rs.getInt(6)),
                         supplierDaoJDBC.find(rs.getInt(7)));
-
                 product.setId(rs.getInt(1));
                 result.add(product);
             }
+            return result;
         } catch (SQLException e) {
-            throw new RuntimeException("Error while reading all products: " + e);
+            throw new RuntimeException("Error while reading all authors", e);
         }
-        System.out.println(result);
-        return result;
     }
 
     @Override
