@@ -27,7 +27,7 @@ const main = {
                 }
                 else {
                     const productId = e.target.dataset.productId;
-                    const url = `/api/add-to-cart?id=${productId}`
+                    const url = `/api/cart?id=${productId}`
                     await main.fetchFromApi(url);
                     await main.refreshCartIcon();
                 }

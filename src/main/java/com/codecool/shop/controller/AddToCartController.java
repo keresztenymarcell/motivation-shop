@@ -4,7 +4,7 @@ import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
-import com.codecool.shop.service.Service;
+import com.codecool.shop.service.ProductService;
 import com.codecool.shop.util.InputValidator;
 import com.codecool.shop.util.ServiceProvider;
 
@@ -21,7 +21,7 @@ import java.sql.SQLException;
 @WebServlet(name = "cartController", urlPatterns = {"/api/cart"}, loadOnStartup = 1)
 public class AddToCartController extends HttpServlet {
 
-    Service service = getService();
+    ProductService service = getService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class AddToCartController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Service service = getService();
+        ProductService service = getService();
         User currentUser = service.getUser(1);
         currentUser.getOrder().emptyCart();
 
@@ -61,8 +61,8 @@ public class AddToCartController extends HttpServlet {
         out.flush();
     }
 
-    private Service getService(){
-        Service service = null;
+    private ProductService getService(){
+        ProductService service = null;
         try {
             service = ServiceProvider.getService();
         } catch (SQLException e) {

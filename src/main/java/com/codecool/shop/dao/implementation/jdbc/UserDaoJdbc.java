@@ -28,20 +28,21 @@ public class UserDaoJdbc extends DatabaseConnection implements UserDao {
 
     @Override
     public User find(int id) {
-        try (Connection conn = dataSource.getConnection()) {
-            String sql = "SELECT email, name, password, order_id FROM users WHERE id=?";
-            PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            if (!rs.next()) {
-                return null;
-            }
-            User user = new User(rs.getString(2));
-            user.setId(id);
-            return user;
-        } catch (SQLException e) {
-            throw new RuntimeException("Error while reading author with id: " + id, e);
-        }
+//        try (Connection conn = dataSource.getConnection()) {
+//            String sql = "SELECT email, name, password, order_id FROM users WHERE id=?";
+//            PreparedStatement st = conn.prepareStatement(sql);
+//            st.setInt(1, id);
+//            ResultSet rs = st.executeQuery();
+//            if (!rs.next()) {
+//                return null;
+//            }
+//            User user = new User(rs.getString(2));
+//            user.setId(id);
+//            return user;
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error while reading author with id: " + id, e);
+//        }
+        return null;
     }
 
     @Override
