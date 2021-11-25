@@ -10,6 +10,7 @@ public interface LineItemDao {
     void add(LineItem item);
     LineItem find(int id);
     void remove(int id);
+    void removeByCartId(int cartId);
     List<LineItem> getAll(int orderId);
     void update(LineItem item);
     LineItem getLineItemByProductId(int productId);

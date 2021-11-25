@@ -74,6 +74,19 @@ public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
     }
 
     @Override
+    public void removeByCartId(int cartId) {
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "DELETE from line_items WHERE cart_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, cartId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
     public ArrayList<LineItem> getAll(int cartId) {
         String query = "select id, product_id, quantity from line_items where cart_id = ?";
         connect();

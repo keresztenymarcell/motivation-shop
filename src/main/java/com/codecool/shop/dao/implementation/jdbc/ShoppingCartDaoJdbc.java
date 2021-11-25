@@ -74,7 +74,6 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
     @Override
     public void removeFromShoppingCart(int userId, Product product) {
 
-        ShoppingCart cart = get(userId);
         LineItem item = lineItemDaoJdbc.getLineItemByProductId(product.getId());
 
         if (item.getQuantity() > 1) {
@@ -88,6 +87,8 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
 
     @Override
     public void remove(int userId) {
+        ShoppingCart cart = get(userId);
+        lineItemDaoJdbc.removeByCartId(cart.getId());
 
     }
 

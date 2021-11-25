@@ -22,6 +22,11 @@ public class LineItemDaoMem implements LineItemDao {
     }
 
     @Override
+    public void removeByCartId(int cartId) {
+
+    }
+
+    @Override
     public List<LineItem> getAll(int orderId) {
         return null;
     }
