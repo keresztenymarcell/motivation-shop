@@ -39,6 +39,7 @@ const main = {
     async refreshCartIcon() {
         const url = `/api/order`
         const cart = await main.fetchFromApi(url);
+        console.log(cart)
         if (cart.lineItems.length > 0) {
             main.increaseCartContent(cart);
             main.increaseCartValue(cart);
