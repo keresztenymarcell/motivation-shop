@@ -30,7 +30,7 @@ public class OrderService {
     }
 
     public void saveShippingDetails(int userId, String name,String email,String country,String zipcode,String address){
-        ShippingDetails data = new ShippingDetails(1, name, email, country, zipcode, address);
+        ShippingDetails data = new ShippingDetails(userId, name, email, country, zipcode, address);
         shippingDetailsDao.add(data);
     }
 
@@ -38,12 +38,9 @@ public class OrderService {
         return shippingDetailsDao.find(userId);
     }
 
-
     public void updateOrder(Order order, String credit, boolean success) {
         order.setPaymentMethod(credit);
         order.setSuccessPayment(success);
-
         orderDao.update(order);
-
     }
 }
