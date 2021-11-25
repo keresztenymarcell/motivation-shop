@@ -1,7 +1,9 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.ShippingDetailsDao;
 import com.codecool.shop.model.ShippingDetails;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
 public class ShippingDetailsDaoJdbc extends DatabaseConnection implements ShippingDetailsDao {
 
     private static ShippingDetailsDaoJdbc instance;
+    private final Logger logger = Logger.getLogger(Initializer.class);
 
     public static ShippingDetailsDaoJdbc getInstance() {
         if (instance == null) {
@@ -33,6 +36,7 @@ public class ShippingDetailsDaoJdbc extends DatabaseConnection implements Shippi
             resultSet.next();
             shippingDetails.setId(resultSet.getInt(1));
         } catch (SQLException e) {
+            logger.error("ShippingDetails add SQL exception!");
             throw new RuntimeException(e);
         }
     }
@@ -61,6 +65,7 @@ public class ShippingDetailsDaoJdbc extends DatabaseConnection implements Shippi
             shippingDetails.setId(id);
             return shippingDetails;
         } catch (SQLException e) {
+            logger.error("ShippingDetails find SQL exception!");
             throw new RuntimeException(e);
         }
     }
@@ -78,6 +83,7 @@ public class ShippingDetailsDaoJdbc extends DatabaseConnection implements Shippi
             statement.setInt(6, shippingDetails.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("ShippingDetails update SQL exception!");
             throw new RuntimeException(e);
         }
     }
@@ -112,6 +118,7 @@ public class ShippingDetailsDaoJdbc extends DatabaseConnection implements Shippi
             return results;
 
         } catch (SQLException e) {
+            logger.error("ShippingDetails getALl SQL exception!");
             throw new RuntimeException(e);
         }
     }

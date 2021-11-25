@@ -1,8 +1,10 @@
 package com.codecool.shop.service;
 
+import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.model.*;
 import com.codecool.shop.util.InputValidator;
+import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,6 +14,8 @@ public class OrderService {
     private OrderDao orderDao;//done
     private ShippingDetailsDao shippingDetailsDao;//done
     private UserDao userDao;//done
+    private final Logger logger = Logger.getLogger(Initializer.class);
+
 
     public OrderService(OrderDao orderDao, ShippingDetailsDao shippingDetailsDao, UserDao userDao) {
         this.orderDao = orderDao;
@@ -24,6 +28,8 @@ public class OrderService {
         ShippingDetails sd = shippingDetailsDao.find(userId);// done
         Order order = new Order(user, sd);
         orderDao.add(order);//done
+        logger.info("User create an order!");
+
     }
 
     public Order getOrder(int userId){
@@ -34,6 +40,7 @@ public class OrderService {
         String orderTime = InputValidator.formatLocalDateTimeNowToString();
         ShippingDetails data = new ShippingDetails(1, name, email, country, zipcode, address, orderTime);
         shippingDetailsDao.add(data);
+        logger.info("Save shipping details to order!");
     }
 
     public ShippingDetails getShippingDetails(int userId){
@@ -44,8 +51,7 @@ public class OrderService {
     public void updateOrder(Order order, String credit, boolean success) {
         order.setPaymentMethod(credit);
         order.setSuccessPayment(success);
-
         orderDao.update(order); //done
-
+        logger.info("Order updated!");
     }
 }
