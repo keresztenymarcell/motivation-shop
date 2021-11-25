@@ -29,6 +29,20 @@ public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
     }
     @Override
     public void add(LineItem item) {
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "INSERT INTO line_items (product_id, cart_id, quantity) VALUES (?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, item.getProductId());
+            statement.setInt(2, item.getCartId());
+            statement.setInt(3, item.getQuantity());
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            resultSet.next();
+            item.setId(resultSet.getInt(1));
+        } catch (SQLException e) {
+            logger.error("OrderDao add SQL exception!");
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -74,6 +88,19 @@ public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
                 items.add(lineItem);
             }
             return items;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void update(LineItem item) {
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "UPDATE line_items SET quantity = ? WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, item.getQuantity());
+            statement.setInt(2, item.getId());
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

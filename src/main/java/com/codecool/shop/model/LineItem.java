@@ -6,6 +6,7 @@ import java.util.Currency;
 public class LineItem extends BaseModel{
     private int quantity;
     private Product product;
+    int cartId;
 
     public LineItem(Product product) {
         super(product.getName(), product.getDescription());
@@ -35,5 +36,13 @@ public class LineItem extends BaseModel{
 
     public Product getProduct(){
         return product;
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 }

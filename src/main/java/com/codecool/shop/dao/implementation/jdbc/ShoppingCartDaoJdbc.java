@@ -5,6 +5,7 @@ import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
 
+import javax.sound.sampled.Line;
 import javax.sql.DataSource;
 import java.awt.*;
 import java.sql.*;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingCartDao {
     private static ShoppingCartDaoJdbc instance;
+    private static LineItemDaoJdbc lineItemDaoJdbc = LineItemDaoJdbc.getInstance();
 
     public static ShoppingCartDaoJdbc getInstance() {
         if (instance == null) {
@@ -21,29 +23,55 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
         return instance;
     }
 
+
+
     @Override
     public ShoppingCart createShoppingCart(int userId) {
-        ShoppingCart cart = new ShoppingCart();
-        String query = "insert into shopping_carts (user_id) values (?)";
-        connect();
-        try {
-            Connection conn  = dataSource.getConnection();
-            PreparedStatement statement = conn.prepareStatement(query);
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "INSERT INTO shopping_carts (user_id) VALUES (?)";
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, userId);
+
             statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return cart;
+        return null;
     }
 
     @Override
     public void addToShoppingCart(int userId, Product product) {
+
         if(get(userId) != null){
             get(userId).addToShoppingCart(product);
+            ShoppingCart cart = get(userId);
+            ArrayList<LineItem> items = lineItemDaoJdbc.getAll(cart.getId());
+            LineItem foundItem = items.stream().filter(x -> x.getCartId() == cart.getId()).findFirst().orElse(null);
+
+            if (foundItem != null) {
+                foundItem.setQuantity(foundItem.getQuantity() + 1);
+                lineItemDaoJdbc.update(foundItem);
+            } else {
+                LineItem newLineItem = new LineItem(product);
+                newLineItem.setCartId(cart.getId());
+                newLineItem.setQuantity(1);
+                lineItemDaoJdbc.add(newLineItem);
+            }
+
         }
         else{
-            ShoppingCart cart = createShoppingCart(userId);
-            cart.addToShoppingCart(product);
+            ShoppingCart dummyCart = createShoppingCart(userId);
+            ShoppingCart cart = get(userId);
+            LineItem lineItem = new LineItem(product);
+            lineItem.setCartId(cart.getId());
+            lineItem.setQuantity(1);
+            lineItemDaoJdbc.add(lineItem);
+
+
+
+
         }
 
     }
@@ -65,7 +93,7 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
 
     @Override
     public ShoppingCart get(int userId) {
-        String query = "select id, user_id from shopping_carts where user_id = ?";
+        String query = "select id, user_id from shopping_carts where user_id = ? ORDER BY id desc limit 1";
         connect();
 
         try {
@@ -80,6 +108,7 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
             ShoppingCart cart = new ShoppingCart();
             ArrayList<LineItem> lineItems = LineItemDaoJdbc.getInstance().getAll(cartId);
             cart.setLineItems(lineItems);
+            cart.setId(cartId);
 
             return cart;
         } catch (SQLException e) {

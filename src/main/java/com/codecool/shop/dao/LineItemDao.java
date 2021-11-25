@@ -11,5 +11,6 @@ public interface LineItemDao {
     LineItem find(int id);
     void remove(int id);
     List<LineItem> getAll(int orderId);
+    void update(LineItem item);
 
 }

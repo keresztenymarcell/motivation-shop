@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 
-public class ShoppingCart {
+public class ShoppingCart extends BaseModel {
     private ArrayList<LineItem> lineItems = new ArrayList<>();
     private BigDecimal totalPrice = new BigDecimal(0);
     private int totalItems = 0;

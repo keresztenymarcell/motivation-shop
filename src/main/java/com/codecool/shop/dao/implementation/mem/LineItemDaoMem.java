@@ -25,4 +25,9 @@ public class LineItemDaoMem implements LineItemDao {
     public List<LineItem> getAll(int orderId) {
         return null;
     }
+
+    @Override
+    public void update(LineItem item) {
+
+    }
 }
