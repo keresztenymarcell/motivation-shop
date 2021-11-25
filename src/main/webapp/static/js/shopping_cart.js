@@ -69,21 +69,21 @@ async function removeCartItem(productId) {
 }
 
 async function updateCart(){
-    const order = await fetchOrder();
+    const cart = await fetchOrder();
     const itemTotalDivs = document.getElementsByClassName("amount");
     const subTotalDiv = document.querySelectorAll(".total-amount")[0];
     const itemsDiv = document.querySelectorAll(".items")[0];
     const cartItemsDivs = document.querySelectorAll(".Cart-Items");
     const countDivs = document.querySelectorAll(".count");
 
-    subTotalDiv.innerHTML = order.orderTotalValue;
-    itemsDiv.innerHTML = order.totalItems + ' items';
+    subTotalDiv.innerHTML = '$' + cart.totalPrice;
+    itemsDiv.innerHTML = cart.totalItems + ' items';
 
-    for (let i = 0; i < order.cart.length; i++) {
+    for (let i = 0; i < cart.lineItems.length; i++) {
         if(parseInt(countDivs[i].innerHTML)===0){
             cartItemsDivs[i].innerHTML = "";
         }
-        itemTotalDivs[i].innerHTML = '$' + order.cart[i].quantity * order.cart[i].product.defaultPrice;
+        itemTotalDivs[i].innerHTML = '$' + cart.lineItems[i].quantity * cart.lineItems[i].product.defaultPrice;
     }
 }
 
@@ -91,6 +91,7 @@ async function updateCart(){
 async function reduceCountAndFetch(productId){
     const url = `/api/cart?id=${productId}`
     await doPostFetch(url);
+
 }
 
 async function addCountAndFetch(productId){
