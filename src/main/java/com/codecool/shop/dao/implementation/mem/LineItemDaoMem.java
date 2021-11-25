@@ -30,4 +30,9 @@ public class LineItemDaoMem implements LineItemDao {
     public void update(LineItem item) {
 
     }
+
+    @Override
+    public LineItem getLineItemByProductId(int productId) {
+        return null;
+    }
 }

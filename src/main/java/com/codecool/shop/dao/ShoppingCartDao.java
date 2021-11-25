@@ -15,5 +15,4 @@ public interface ShoppingCartDao {
     ShoppingCart get(int userId);
 
 
-
 }

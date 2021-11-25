@@ -62,6 +62,14 @@ public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
 
     @Override
     public void remove(int id) {
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "DELETE from line_items WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -105,4 +113,35 @@ public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public LineItem getLineItemByProductId(int productId) {
+        try(Connection conn = dataSource.getConnection()){
+            String query = String.format("select * from line_items where product_id = %d", productId);
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+            if (!result.next()) {
+                return null;
+            }
+            int id = result.getInt(1);
+
+            int cartId = result.getInt(3);
+            int quantity = result.getInt(4);
+
+            Product product = productDaoJdbc.find(productId);
+            LineItem lineItem = new LineItem(product);
+            lineItem.setCartId(cartId);
+            lineItem.setId(id);
+            lineItem.setQuantity(quantity);
+
+            return lineItem;
+
+        }catch(SQLException e){
+            e.printStackTrace();
+            logger.error("LineItem find SQL exception!");
+        }
+        return null;
+    }
+
+
 }
