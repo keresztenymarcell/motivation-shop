@@ -23,9 +23,9 @@ public abstract class DatabaseConnection {
             dataSource.setPassword(password);
 
 
-            System.out.println("Trying to connect");
+            //System.out.println("Trying to connect");
             dataSource.getConnection().close();
-            System.out.println("Connection ok.");
+            //System.out.println("Connection ok.");
 
             this.dataSource = dataSource;
         }

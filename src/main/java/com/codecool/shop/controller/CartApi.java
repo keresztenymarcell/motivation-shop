@@ -21,8 +21,7 @@ import java.sql.SQLException;
 public class CartApi extends HttpServlet {
 
     ShoppingCartService shoppingCartservice = ServiceProvider.getShoppingCartService();
-    ProductService productService = ServiceProvider.getProductService();
-    UserService userService = ServiceProvider.getUserService();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,11 +36,8 @@ public class CartApi extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int productId = InputValidator.checkIntInput(req.getParameter("id"));
 
-        System.out.println(shoppingCartservice.getCartByUser(1).getTotalItems());
         shoppingCartservice.removeProductFromCart(1, productId);
 
-        System.out.println("post");
-        System.out.println(shoppingCartservice.getCartByUser(1).getTotalItems());
         InputValidator.createJsonFromObject(resp, shoppingCartservice.getCartByUser(1));
         //TODO javascript fetch to POST
     }
@@ -56,14 +52,5 @@ public class CartApi extends HttpServlet {
         out.flush();
     }
 
-//    private ProductService getService(){
-//        ProductService service = null;
-//        try {
-//            service = ServiceProvider.getShoppingCartService();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return service;
-//    }
 
 }
