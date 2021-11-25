@@ -21,7 +21,6 @@ import java.sql.SQLException;
 @WebServlet(name = "paymentCredit", urlPatterns = {"/payment/credit"}, loadOnStartup = 1)
 public class PaymentCredit extends HttpServlet {
 
-    ShoppingCartService shoppingCartService = ServiceProvider.getShoppingCartService();
     OrderService orderService = ServiceProvider.getOrderService();
 
     @Override

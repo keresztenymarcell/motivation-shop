@@ -14,8 +14,6 @@ import java.io.IOException;
 @WebServlet(name = "payment", urlPatterns = {"/payment"}, loadOnStartup = 1)
 public class PaymentApi extends HttpServlet {
 
-    OrderService orderService = ServiceProvider.getOrderService();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/confirmation");

@@ -25,7 +25,6 @@ public class ProductFilterApi extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         String name = req.getParameter("name");
         int id = InputValidator.checkIntInput(req.getParameter("id"));
 
