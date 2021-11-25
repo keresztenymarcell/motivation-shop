@@ -4,14 +4,15 @@ import com.codecool.shop.dao.*;
 import com.codecool.shop.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class OrderServiceTest {
     Order mockOrder;
@@ -21,6 +22,9 @@ class OrderServiceTest {
     OrderDao mockOrderDao;
     UserDao mockUserDao;
     ShippingDetailsDao mockShippingDetailsDao;
+
+    List<Order> mockOrders;
+    List<ShippingDetails> mockShippingDetailsContainer;
 
     OrderService orderService;
 
@@ -33,6 +37,16 @@ class OrderServiceTest {
         mockOrderDao = mock(OrderDao.class);
         mockUserDao = mock(UserDao.class);
         mockShippingDetailsDao = mock(ShippingDetailsDao.class);
+
+        mockOrders = new LinkedList<>(Arrays.asList(
+                mock(Order.class),
+                mock(Order.class),
+                mock(Order.class)));
+
+        mockShippingDetailsContainer = new LinkedList<>(Arrays.asList(
+                mock(ShippingDetails.class),
+                mock(ShippingDetails.class),
+                mock(ShippingDetails.class)));
 
         orderService = new OrderService(mockOrderDao, mockShippingDetailsDao, mockUserDao);
 
@@ -49,4 +63,5 @@ class OrderServiceTest {
         when(mockShippingDetailsDao.find(1)).thenReturn(mockShippingDetails);
         assertEquals(mockShippingDetails, orderService.getShippingDetails(1));
     }
+
 }

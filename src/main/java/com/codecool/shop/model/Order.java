@@ -65,4 +65,6 @@ public class Order extends BaseModel{
     public int getUserId() {
         return userId;
     }
+
+
 }
