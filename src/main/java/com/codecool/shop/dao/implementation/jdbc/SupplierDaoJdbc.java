@@ -1,7 +1,9 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class SupplierDaoJdbc extends DatabaseConnection implements SupplierDao {
     private static SupplierDaoJdbc instance;
+    private final Logger logger = Logger.getLogger(Initializer.class);
 
     public static SupplierDaoJdbc getInstance() {
         if (instance == null) {
@@ -41,6 +44,7 @@ public class SupplierDaoJdbc extends DatabaseConnection implements SupplierDao {
             supplier.setId(id);
             return supplier;
         } catch (SQLException e) {
+            logger.error("SupplierDao find SQL exception!");
             throw new RuntimeException("Error while reading author with id: " + id, e);
         }
     }
@@ -63,6 +67,7 @@ public class SupplierDaoJdbc extends DatabaseConnection implements SupplierDao {
                 result.add(supplier);
             }
         } catch (SQLException e) {
+            logger.error("SupplierDao getAll SQL exception!");
             throw new RuntimeException("Error while reading all products: " + e);
         }
         return result;

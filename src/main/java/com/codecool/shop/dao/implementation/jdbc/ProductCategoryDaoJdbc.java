@@ -1,8 +1,10 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -15,6 +17,7 @@ import java.util.List;
 public class ProductCategoryDaoJdbc extends DatabaseConnection implements ProductCategoryDao {
 
     private static ProductCategoryDaoJdbc instance;
+    private final Logger logger = Logger.getLogger(Initializer.class);
 
     public static ProductCategoryDaoJdbc getInstance() {
         if (instance == null) {
@@ -42,6 +45,7 @@ public class ProductCategoryDaoJdbc extends DatabaseConnection implements Produc
             category.setId(id);
             return category;
         } catch (SQLException e) {
+            logger.error("ProductCategoryDao find SQL exception!");
             throw new RuntimeException("Error while reading author with id: " + id, e);
         }
     }
@@ -65,6 +69,7 @@ public class ProductCategoryDaoJdbc extends DatabaseConnection implements Produc
             }
             return result;
         } catch (SQLException e) {
+            logger.error("ProductCategoryDao getAll SQL exception!");
             throw new RuntimeException("Error while reading all authors", e);
         }
 
