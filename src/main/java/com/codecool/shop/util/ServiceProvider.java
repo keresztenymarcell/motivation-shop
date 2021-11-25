@@ -55,8 +55,8 @@ public class ServiceProvider {
         else if(connectionType.equals("jdbc")){
             ProductDaoJdbc.getInstance().connect();
             productDataStore = ProductDaoJdbc.getInstance();
-            ShippingDetailsDaoJdbc.getInstance().connect();
-            shippingDetailsDataStore = ShippingDetailsDaoJdbc.getInstance();
+            ShoppingCartDaoJdbc.getInstance().connect();
+            shoppingCartDataStore = ShoppingCartDaoJdbc.getInstance();
             return new ShoppingCartService(shoppingCartDataStore, productDataStore);
         }
         return null;

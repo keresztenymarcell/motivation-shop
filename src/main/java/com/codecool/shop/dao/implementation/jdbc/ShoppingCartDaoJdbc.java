@@ -10,11 +10,13 @@ import java.sql.*;
 import java.util.List;
 
 public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingCartDao {
+    private static ShoppingCartDaoJdbc instance;
 
-    DataSource dataSource;
-
-    public ShoppingCartDaoJdbc(DataSource dataSource){
-        this.dataSource = dataSource;
+    public static ShoppingCartDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new ShoppingCartDaoJdbc();
+        }
+        return instance;
     }
 
     @Override
