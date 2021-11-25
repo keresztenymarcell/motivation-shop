@@ -1,9 +1,11 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ShippingDetailsDao;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.*;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class OrderDaoJdbc extends DatabaseConnection implements OrderDao {
     private static OrderDaoJdbc instance;
     UserDao userDao = UserDaoJdbc.getInstance();
     ShippingDetailsDao shippingDetailsDao = ShippingDetailsDaoJdbc.getInstance();
+    private final Logger logger = Logger.getLogger(Initializer.class);
 
     public static OrderDaoJdbc getInstance() {
         if (instance == null) {
@@ -36,6 +39,7 @@ public class OrderDaoJdbc extends DatabaseConnection implements OrderDao {
             resultSet.next();
             order.setId(resultSet.getInt(1));
         } catch (SQLException e) {
+            logger.error("OrderDao add SQL exception!");
             throw new RuntimeException(e);
         }
     }
@@ -62,6 +66,7 @@ public class OrderDaoJdbc extends DatabaseConnection implements OrderDao {
             order.setId(id);
             return order;
         } catch (SQLException e) {
+            logger.error("OrderDao find SQL exception!");
             throw new RuntimeException(e);
         }
     }
@@ -78,6 +83,7 @@ public class OrderDaoJdbc extends DatabaseConnection implements OrderDao {
 
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("OrderDao update SQL exception!");
             throw new RuntimeException(e);
         }
     }

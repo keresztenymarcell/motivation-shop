@@ -1,9 +1,11 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
@@ -19,6 +21,7 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
     private static ProductDaoJdbc instance;
     private ProductCategoryDaoJdbc productCategoryDaoJDBC = ProductCategoryDaoJdbc.getInstance();
     private SupplierDaoJdbc supplierDaoJDBC = SupplierDaoJdbc.getInstance();
+    private final Logger logger = Logger.getLogger(Initializer.class);
 
     public static ProductDaoJdbc getInstance() {
         if (instance == null) {
@@ -39,6 +42,7 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("ProductDao add SQL exception!");
             e.printStackTrace();
         }
     }
@@ -62,6 +66,7 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
             product.setId(rs.getInt(1));
             return product;
         } catch (SQLException e) {
+            logger.error("ProductDao find SQL exception!");
             throw new RuntimeException("Error while reading author with id: " + id, e);
         }
     }
@@ -73,6 +78,7 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.executeUpdate();
         }catch (SQLException ex) {
+            logger.error("ProductDao remove SQL exception!");
             ex.printStackTrace();
         }
 
@@ -97,6 +103,7 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
             }
             return result;
         } catch (SQLException e) {
+            logger.error("ProductDao getAll SQL exception!");
             throw new RuntimeException("Error while reading all authors", e);
         }
     }
@@ -120,6 +127,7 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
                 result.add(product);
             }
         } catch (SQLException e) {
+            logger.error("ProductDao getBySupplier SQL exception!");
             throw new RuntimeException("Error while reading all products: " + e);
         }
         return result;
@@ -144,6 +152,7 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
                 result.add(product);
             }
         } catch (SQLException e) {
+            logger.error("ProductDao getByCategory SQL exception!");
             throw new RuntimeException("Error while reading all products: " + e);
         }
         return result;

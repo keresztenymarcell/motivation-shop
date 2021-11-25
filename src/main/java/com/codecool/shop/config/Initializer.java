@@ -24,14 +24,7 @@ public class Initializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         PropertyConfigurator.configure("src/main/resources/log4j.properties");
         Logger logger = Logger.getLogger(Initializer.class);
-        logger.info("First info");
-        logger.info("second info");
-        logger.warn("Dafuq");
 
-        int temperature = 50;
-        int oldTemp = 30;
-
-        logger.debug("Temperature set to!!!");
 
         Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
 
