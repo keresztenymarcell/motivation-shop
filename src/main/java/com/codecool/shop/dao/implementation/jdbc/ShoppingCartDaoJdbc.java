@@ -59,7 +59,6 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
                 newLineItem.setQuantity(1);
                 lineItemDaoJdbc.add(newLineItem);
             }
-
         }
         else{
             ShoppingCart dummyCart = createShoppingCart(userId);
@@ -68,16 +67,7 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
             lineItem.setCartId(cart.getId());
             lineItem.setQuantity(1);
             lineItemDaoJdbc.add(lineItem);
-
-
-
-
         }
-
-    }
-
-    @Override
-    public void deleteShoppingCart(int userId) {
 
     }
 

@@ -28,11 +28,6 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
         return cart;
     }
 
-    public void deleteShoppingCart(int userId){
-        shoppingCarts.remove(userId);
-    }
-
-
     @Override
     public void addToShoppingCart(int userId, Product product){
         if(shoppingCarts.get(userId)!=null){
