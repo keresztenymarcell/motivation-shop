@@ -22,8 +22,9 @@ const main = {
                 console.log("gomb")
                 if(button.getAttribute("data-cart") != null){
                     const url = `/api/order`;
-                    const order = await main.fetchFromApi(url);
-                    main.fillShoppingCart(order.cart);
+                    const cart = await main.fetchFromApi(url);
+                    console.log(cart)
+                    main.fillShoppingCart(cart);
 
                 }
                 else {
@@ -123,17 +124,17 @@ const main = {
         document.getElementById("products").textContent = "";
     },
 
-    fillShoppingCart(productsInCart){
+    fillShoppingCart(cart){
         const dropDownMenu = document.getElementById("shopping-review");
         dropDownMenu.textContent = "";
-        dropDownMenu.innerHTML += main.createReviewHeaderAndButton(productsInCart);
-        main.loadProduct(productsInCart, dropDownMenu);
+        dropDownMenu.innerHTML += main.createReviewHeaderAndButton(cart);
+        main.loadProduct(cart, dropDownMenu);
         dropDownMenu.innerHTML += main.addCheckOutButton();
     },
 
-    createReviewHeaderAndButton(productsInCart) {
-        let cartValue = main.getTotalPrice(productsInCart);
-        let numberOfProducts = main.getProductsNumber(productsInCart);
+    createReviewHeaderAndButton(cart) {
+        let cartValue = cart.totalPrice;
+        let numberOfProducts = cart.totalItems;
 
         return `<div class="row total-header-section">
                     <div class="col-lg-6 col-sm-6 col-6">
@@ -146,8 +147,8 @@ const main = {
                 </div>`
     },
 
-    loadProduct(productsInCart, menu){
-        productsInCart.forEach(lineItem => {
+    loadProduct(cart, menu){
+        cart.lineItems.forEach(lineItem => {
             menu.innerHTML += main.fill(lineItem);
         })
 
@@ -183,13 +184,13 @@ const main = {
         cartValue.textContent = order.totalPrice +" "+ "USD";
     },
 
-    getTotalPrice(productsInCart){
+    /*getTotalPrice(cart){
         let totalPrice = 0;
-        productsInCart.forEach(product => {
+        cart.lineItems.forEach(product => {
             totalPrice += product.product.defaultPrice * product.quantity;
         })
         return totalPrice;
-    },
+    },*/
 
     getProductsNumber(productsInCart){
         let products = 0;
