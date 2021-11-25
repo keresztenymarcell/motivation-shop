@@ -9,7 +9,7 @@ import com.codecool.shop.model.ShoppingCart;
 public class ShoppingCartService {
 
     ShoppingCartDao shoppingCartDao;
-    ProductDao productDao;
+    ProductDao productDao;//done
 
 
     public ShoppingCartService(ShoppingCartDao shoppingCartDao, ProductDao productDao) {
