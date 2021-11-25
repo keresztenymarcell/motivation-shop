@@ -48,7 +48,7 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
             get(userId).addToShoppingCart(product);
             ShoppingCart cart = get(userId);
             ArrayList<LineItem> items = lineItemDaoJdbc.getAll(cart.getId());
-            LineItem foundItem = items.stream().filter(x -> x.getCartId() == cart.getId()).findFirst().orElse(null);
+            LineItem foundItem = items.stream().filter(x -> x.getProductId() == product.getId()).findFirst().orElse(null);
 
             if (foundItem != null) {
                 foundItem.setQuantity(foundItem.getQuantity() + 1);
