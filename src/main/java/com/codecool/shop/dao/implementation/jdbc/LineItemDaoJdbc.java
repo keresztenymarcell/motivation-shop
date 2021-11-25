@@ -15,7 +15,7 @@ public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
     //private OrderDaoJdbc orderDaoJdbc = OrderDaoJdbc.getInstance();
     private ProductDaoJdbc productDaoJdbc = ProductDaoJdbc.getInstance();
 
-    private LineItemDaoJdbc(){}
+    public LineItemDaoJdbc(){}
 
     public static LineItemDaoJdbc getInstance() {
         if (instance == null) {

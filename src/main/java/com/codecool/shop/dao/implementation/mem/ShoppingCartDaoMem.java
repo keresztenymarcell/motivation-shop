@@ -25,7 +25,6 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     public ShoppingCart createShoppingCart(int userId) {
         ShoppingCart cart = new ShoppingCart();
         shoppingCarts.put(userId, cart);
-
         return cart;
     }
 

@@ -24,6 +24,15 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
     @Override
     public ShoppingCart createShoppingCart(int userId) {
         ShoppingCart cart = new ShoppingCart();
+        String query = "insert into shopping_carts (user_id) values (?)";
+        connect();
+        try {
+            Connection conn  = dataSource.getConnection();
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return cart;
     }
 
