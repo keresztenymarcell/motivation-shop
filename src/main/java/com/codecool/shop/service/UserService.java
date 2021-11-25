@@ -5,7 +5,7 @@ import com.codecool.shop.model.User;
 
 public class UserService {
 
-    UserDao userDataStore;
+    UserDao userDataStore;//done
 
     public UserService(UserDao userDataStore) {
         this.userDataStore = userDataStore;

@@ -21,17 +21,20 @@ public class ShippingDetails extends BaseModel{
     @Expose
     private String address;
     private int userId;
+    private String order_time;
 
     public ShippingDetails() {
     }
 
-    public ShippingDetails(int userId, String orderName, String email, String country, String zipcode, String address) {
+    public ShippingDetails(int userId, String orderName, String email, String country, String zipcode,
+                           String address, String order_time) {
         this.orderName = orderName;
         this.email = email;
         this.country = country;
         this.zipcode = zipcode;
         this.address = address;
         this.userId = userId;
+        this.order_time = order_time;
     }
 
     public void saveToJson() throws IOException {
