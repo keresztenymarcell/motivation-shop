@@ -15,31 +15,12 @@ public class ProductService {
     private SupplierDao supplierDao;
     private UserDao userDao;
 
-
-
     public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao, UserDao userDao) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
         this.supplierDao = supplierDao;
         this.userDao = userDao;
     }
-
-    public ProductCategory getProductCategory(int categoryId){
-        return productCategoryDao.find(categoryId);
-    }
-
-    public Supplier getSupplier(int supplierId){
-        return supplierDao.find(supplierId);
-    }
-
-
-    public Product getProduct(int productId){
-        return productDao.find(productId);
-    }
-
-
-
-
 
     //index page filter help methods
     public List<Product> getProductsForCategory(int categoryId){
@@ -51,7 +32,6 @@ public class ProductService {
         var supplier = supplierDao.find(supplierId);
         return productDao.getBy(supplier);
     }
-
 
     //index page display All help methods
     public List<Product> getAllProducts() {
@@ -65,7 +45,5 @@ public class ProductService {
     public List<ProductCategory> getAllCategories() {
         return productCategoryDao.getAll();
     }
-
-
 
 }
