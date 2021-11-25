@@ -30,8 +30,7 @@ public class CartApi extends HttpServlet {
 //        int quantity = InputValidator.checkIntInput(req.getParameter("quantity"));
 
         shoppingCartservice.addProductToCart(1, productId);
-
-        //PaymentCredit.createJsonFromObject(resp, currentOrder);
+        InputValidator.createJsonFromObject(resp, shoppingCartservice.getCartByUser(1));
     }
 
     @Override

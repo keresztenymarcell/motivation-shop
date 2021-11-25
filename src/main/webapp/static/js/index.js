@@ -10,7 +10,7 @@ const main = {
             await main.refreshProductsWithFetchedProducts("supplier", event.target.value);
         })
 
-        // await this.refreshCartIcon();
+        //await this.refreshCartIcon();
         this.loadAddToCartButtonsWithEventListeners();
 
     },
@@ -75,7 +75,7 @@ const main = {
 
     async fetchFromApi(url) {
         const response = await fetch(url);
-        console.log(response.json);
+        console.log(response)
         return response.json();
     },
 
