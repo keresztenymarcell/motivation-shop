@@ -7,6 +7,8 @@ import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.*;
 import com.codecool.shop.util.InputValidator;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ProductService {

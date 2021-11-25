@@ -31,7 +31,6 @@ public class OrderApi extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ShoppingCart shoppingCart = shoppingCartService.getCartByUser(1);
-        System.out.println(shoppingCart);
 
         InputValidator.createJsonFromObject(resp, shoppingCart);
 

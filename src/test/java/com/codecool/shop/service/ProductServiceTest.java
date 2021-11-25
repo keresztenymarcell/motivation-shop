@@ -105,5 +105,4 @@ class ProductServiceTest {
         assertEquals(mockCategories, productService.getAllCategories());
     }
 
-
 }

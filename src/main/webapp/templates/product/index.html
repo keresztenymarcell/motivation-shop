@@ -56,15 +56,15 @@
 </div>
 
 <div id="main-container" class="container">
-    <div class="category-container container" th:each="category,iterStat : ${categories}">
+    <div class="category-container container">
 
 
     <div class="card">
-        <strong th:text="${category.name}" id="category-title">Category Title</strong>
+        <strong id="category-title"> </strong>
     </div>
 
     <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${category.products}">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
