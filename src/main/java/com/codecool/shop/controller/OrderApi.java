@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.User;
+import com.codecool.shop.service.OrderService;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.service.ShoppingCartService;
 import com.codecool.shop.util.InputValidator;
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
 public class OrderApi extends HttpServlet {
 
     ShoppingCartService shoppingCartService = ServiceProvider.getShoppingCartService();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

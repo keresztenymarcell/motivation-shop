@@ -104,4 +104,8 @@ public class ShippingDetails extends BaseModel{
     public String getZipcode() {
         return zipcode;
     }
+
+    public int getUserId() {
+        return userId;
+    }
 }

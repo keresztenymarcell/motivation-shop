@@ -75,6 +75,9 @@ async function updateCart(){
     const itemsDiv = document.querySelectorAll(".items")[0];
     const cartItemsDivs = document.querySelectorAll(".Cart-Items");
     const countDivs = document.querySelectorAll(".count");
+    console.log(cart)
+    console.log(cart.totalPrice)
+    console.log(cart.totalItems)
 
     subTotalDiv.innerHTML = '$' + cart.totalPrice;
     itemsDiv.innerHTML = cart.totalItems + ' items';
@@ -91,7 +94,6 @@ async function updateCart(){
 async function reduceCountAndFetch(productId){
     const url = `/api/cart?id=${productId}`
     await doPostFetch(url);
-
 }
 
 async function addCountAndFetch(productId){
@@ -110,7 +112,7 @@ async function fetchFromApi(url){
 }
 
 async function doDeleteFetch(url, ){
-    const response = fetch(url, {
+    const response = await fetch(url, {
         method : 'DELETE',
         headers: {
             'Accept': 'application/json',
@@ -122,7 +124,7 @@ async function doDeleteFetch(url, ){
 }
 
 async function doPostFetch(url){
-    const response = fetch(url, {
+    const response = await fetch(url, {
         method : 'POST',
         headers: {
             'Accept': 'application/json',

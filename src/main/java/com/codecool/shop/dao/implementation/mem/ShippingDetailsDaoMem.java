@@ -27,7 +27,7 @@ public class ShippingDetailsDaoMem implements ShippingDetailsDao {
 
     @Override
     public void add(ShippingDetails item) {
-        data.put(item.getId(), item);
+        data.put(item.getUserId(), item);
     }
 
     @Override

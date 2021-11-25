@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 import javax.sound.sampled.Line;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 
 public class ShoppingCart {
@@ -37,9 +38,9 @@ public class ShoppingCart {
                     lineItems.remove(item);
                 }
             }
-            totalPrice = totalPrice.subtract(product.getDefaultPrice());
-            totalItems = getTotalItems();
         }
+        totalPrice = totalPrice.subtract(product.getDefaultPrice());
+        totalItems = getTotalItems();
     }
 
     public BigDecimal getTotalPrice() {

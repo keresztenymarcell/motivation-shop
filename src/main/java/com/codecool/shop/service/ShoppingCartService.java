@@ -25,6 +25,8 @@ public class ShoppingCartService {
     }
 
     public void removeProductFromCart(int userId, int productId){
+        Product product = productDao.find(productId);
+        shoppingCartDao.removeFromShoppingCart(1, product);
 
     }
 

@@ -36,7 +36,13 @@ public class CartApi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int productId = InputValidator.checkIntInput(req.getParameter("id"));
+
+        System.out.println(shoppingCartservice.getCartByUser(1).getTotalItems());
         shoppingCartservice.removeProductFromCart(1, productId);
+
+        System.out.println("post");
+        System.out.println(shoppingCartservice.getCartByUser(1).getTotalItems());
+        InputValidator.createJsonFromObject(resp, shoppingCartservice.getCartByUser(1));
         //TODO javascript fetch to POST
     }
 

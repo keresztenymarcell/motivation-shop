@@ -32,11 +32,14 @@ public class OrderConfirmation extends HttpServlet {
         WebContext context = new WebContext(request, response, request.getServletContext());
 
         Order order = orderService.getOrder(1);
+        ShoppingCart cart = shoppingCartService.getCartByUser(1);
 
-        context.setVariable("userId", order.getTotalItems());
+        context.setVariable("cartItems", cart.getTotalItems());
+        context.setVariable("cart", cart);
         context.setVariable("order", order);
 
         orderService.getShippingDetails(1).saveToJson();
+
         shoppingCartService.emptyCart(1);
 
         try {
