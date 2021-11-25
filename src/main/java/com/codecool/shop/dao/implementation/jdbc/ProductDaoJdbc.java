@@ -95,7 +95,6 @@ public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
                 product.setId(rs.getInt(1));
                 result.add(product);
             }
-            System.out.println(result);
             return result;
         } catch (SQLException e) {
             throw new RuntimeException("Error while reading all authors", e);
