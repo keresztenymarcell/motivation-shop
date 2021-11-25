@@ -19,16 +19,13 @@ const main = {
         const cardButtons = document.querySelectorAll(".add-to-cart");
         cardButtons.forEach(button => {
             button.addEventListener("click", async (e) => {
-                console.log("gomb")
                 if(button.getAttribute("data-cart") != null){
                     const url = `/api/order`;
                     const cart = await main.fetchFromApi(url);
-                    console.log(cart)
                     main.fillShoppingCart(cart);
 
                 }
                 else {
-                    console.log("gomb");
                     const productId = e.target.dataset.productId;
                     const url = `/api/cart?id=${productId}`
                     await main.fetchFromApi(url);
@@ -42,7 +39,6 @@ const main = {
     async refreshCartIcon() {
         const url = `/api/order`
         const cart = await main.fetchFromApi(url);
-        console.log(cart);
         if (cart.lineItems.length > 0) {
             main.increaseCartContent(cart);
             main.increaseCartValue(cart);
@@ -76,7 +72,6 @@ const main = {
 
     async fetchFromApi(url) {
         const response = await fetch(url);
-        console.log(response)
         return response.json();
     },
 
@@ -182,23 +177,6 @@ const main = {
     increaseCartValue(order){
         const cartValue = document.getElementById("shop-value");
         cartValue.textContent = order.totalPrice +" "+ "USD";
-    },
-
-    /*getTotalPrice(cart){
-        let totalPrice = 0;
-        cart.lineItems.forEach(product => {
-            totalPrice += product.product.defaultPrice * product.quantity;
-        })
-        return totalPrice;
-    },*/
-
-    getProductsNumber(productsInCart){
-        let products = 0;
-        productsInCart.forEach(product => {
-            products += product.quantity;
-        })
-        return products;
-
     },
 
 }
