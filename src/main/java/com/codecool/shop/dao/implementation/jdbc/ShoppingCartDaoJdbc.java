@@ -6,7 +6,9 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
 
 import javax.sql.DataSource;
+import java.awt.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingCartDao {
@@ -21,7 +23,8 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
 
     @Override
     public ShoppingCart createShoppingCart(int userId) {
-        return null;
+        ShoppingCart cart = new ShoppingCart();
+        return cart;
     }
 
     @Override
@@ -47,6 +50,26 @@ public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingC
 
     @Override
     public ShoppingCart get(int userId) {
-        return null;
+        String query = "select id, user_id from shopping_carts where user_id = ?";
+        connect();
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, userId);
+            ResultSet result = statement.executeQuery();
+            if(!result.next()){
+                return null;
+            }
+            int cartId = result.getInt(1);
+            ShoppingCart cart = new ShoppingCart();
+            ArrayList<LineItem> lineItems = LineItemDaoJdbc.getInstance().getAll(cartId);
+            cart.setLineItems(lineItems);
+
+            return cart;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

@@ -58,4 +58,8 @@ public class ShoppingCart {
     public ArrayList<LineItem> getLineItems() {
         return lineItems;
     }
+
+    public void setLineItems(ArrayList<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
 }
