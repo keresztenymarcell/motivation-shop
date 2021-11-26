@@ -34,13 +34,13 @@ public class Initializer implements ServletContextListener {
         connectionType = dao;
 
         if (dao.equals("memory")) {
-            System.out.println("I run Mem");
+            logger.info("Server running with In-memory DAO");
             MemInitializer memInitializer = new MemInitializer();
             memInitializer.initializeMem();
 
         }
         else if (dao.equals("jdbc")) {
-            System.out.println("I run JDBC");
+            logger.info("Server running with JDBC DAO");
             DatabaseManager dbmanager = new DatabaseManager();
             try {
                 dbmanager.setup();
