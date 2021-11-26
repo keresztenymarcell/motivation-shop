@@ -12,17 +12,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserDaoJdbc extends DatabaseConnection implements UserDao {
+public class UserDaoJdbc implements UserDao {
 
-    private static UserDaoJdbc instance;
+
     private final Logger logger = Logger.getLogger(Initializer.class);
+    private DataSource dataSource;
 
-
-    public static UserDaoJdbc getInstance() {
-        if (instance == null) {
-            instance = new UserDaoJdbc();
-        }
-        return instance;
+    public UserDaoJdbc(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override

@@ -5,20 +5,18 @@ import com.codecool.shop.dao.ShippingDetailsDao;
 import com.codecool.shop.model.ShippingDetails;
 import org.apache.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShippingDetailsDaoJdbc extends DatabaseConnection implements ShippingDetailsDao {
 
-    private static ShippingDetailsDaoJdbc instance;
+    DataSource dataSource;
     private final Logger logger = Logger.getLogger(Initializer.class);
 
-    public static ShippingDetailsDaoJdbc getInstance() {
-        if (instance == null) {
-            instance = new ShippingDetailsDaoJdbc();
-        }
-        return instance;
+    public ShippingDetailsDaoJdbc(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override

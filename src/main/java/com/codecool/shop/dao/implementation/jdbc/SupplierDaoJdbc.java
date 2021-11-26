@@ -14,15 +14,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierDaoJdbc extends DatabaseConnection implements SupplierDao {
-    private static SupplierDaoJdbc instance;
-    private final Logger logger = Logger.getLogger(Initializer.class);
+public class SupplierDaoJdbc implements SupplierDao {
 
-    public static SupplierDaoJdbc getInstance() {
-        if (instance == null) {
-            instance = new SupplierDaoJdbc();
-        }
-        return instance;
+    private final Logger logger = Logger.getLogger(Initializer.class);
+    private DataSource dataSource;
+
+    public SupplierDaoJdbc(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override

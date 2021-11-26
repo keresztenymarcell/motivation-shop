@@ -7,24 +7,24 @@ import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.*;
 import org.apache.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDaoJdbc extends DatabaseConnection implements OrderDao {
+public class OrderDaoJdbc implements OrderDao {
 
-    private static OrderDaoJdbc instance;
+
     UserDao userDao = UserDaoJdbc.getInstance();
     ShippingDetailsDao shippingDetailsDao = ShippingDetailsDaoJdbc.getInstance();
     private final Logger logger = Logger.getLogger(Initializer.class);
 
-    public static OrderDaoJdbc getInstance() {
-        if (instance == null) {
-            instance = new OrderDaoJdbc();
-        }
-        return instance;
-    }
 
+    private DataSource dataSource;
+
+    public OrderDaoJdbc(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public void add(Order order) {

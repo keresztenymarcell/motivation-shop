@@ -20,7 +20,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-class ProductServiceTest {
+class xProductServiceTest {
 
     Product mockProduct;
     ProductCategory mockProductCategory;

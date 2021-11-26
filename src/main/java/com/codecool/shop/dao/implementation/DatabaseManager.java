@@ -7,7 +7,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public class DatabaseManager extends DatabaseConnection{
+public class DatabaseManager{
     LineItemDao lineItemDao;
     ProductCategoryDao productCategoryDao;
     ProductDao productDao;
@@ -17,7 +17,10 @@ public class DatabaseManager extends DatabaseConnection{
     ShippingBillingDao shippingBillingDao;
 
     public void setup() throws SQLException{
-        connect();
+        DatabaseConnection dc = new DatabaseConnection();
+        DataSource ds = dc.connect();
+
+
         lineItemDao = new LineItemDaoJdbc();
         productCategoryDao = new ProductCategoryDaoJdbc();
         productDao = new ProductDaoJdbc();

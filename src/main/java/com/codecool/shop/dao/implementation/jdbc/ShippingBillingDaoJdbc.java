@@ -3,16 +3,14 @@ package com.codecool.shop.dao.implementation.jdbc;
 import com.codecool.shop.dao.ShippingBillingDao;
 import com.codecool.shop.model.Order;
 
+import javax.sql.DataSource;
 import java.util.List;
 
-public class ShippingBillingDaoJdbc extends DatabaseConnection implements ShippingBillingDao {
-    private static ShippingBillingDaoJdbc instance;
+public class ShippingBillingDaoJdbc implements ShippingBillingDao {
 
-    public static ShippingBillingDaoJdbc getInstance() {
-        if (instance == null) {
-            instance = new ShippingBillingDaoJdbc();
-        }
-        return instance;
+    private DataSource dataSource;
+    public ShippingBillingDaoJdbc(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override

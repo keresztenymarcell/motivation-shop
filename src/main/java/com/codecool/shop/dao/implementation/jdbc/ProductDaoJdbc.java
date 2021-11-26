@@ -17,17 +17,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDaoJdbc extends DatabaseConnection implements ProductDao {
-    private static ProductDaoJdbc instance;
+public class ProductDaoJdbc implements ProductDao {
+
+
+    private DataSource dataSource;
     private ProductCategoryDaoJdbc productCategoryDaoJDBC = ProductCategoryDaoJdbc.getInstance();
     private SupplierDaoJdbc supplierDaoJDBC = SupplierDaoJdbc.getInstance();
     private final Logger logger = Logger.getLogger(Initializer.class);
 
-    public static ProductDaoJdbc getInstance() {
-        if (instance == null) {
-            instance = new ProductDaoJdbc();
-        }
-        return instance;
+    public ProductDaoJdbc(DataSource dataSource){
+        this.dataSource = dataSource;
     }
 
 

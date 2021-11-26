@@ -7,26 +7,23 @@ import com.codecool.shop.model.Product;
 import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class LineItemDaoJdbc extends DatabaseConnection implements LineItemDao {
-    private static LineItemDaoJdbc instance;
     //private OrderDaoJdbc orderDaoJdbc = OrderDaoJdbc.getInstance();
     //private ProductDaoJdbc productDaoJdbc = ProductDaoJdbc.getInstance();
     private final Logger logger = Logger.getLogger(Initializer.class);
     private ProductDaoJdbc productDaoJdbc = ProductDaoJdbc.getInstance();
+    private DataSource dataSource;
 
-    public LineItemDaoJdbc(){}
-
-    public static LineItemDaoJdbc getInstance() {
-        if (instance == null) {
-            instance = new LineItemDaoJdbc();
-        }
-        return instance;
+    public LineItemDaoJdbc(DataSource dataSource){
+        this.dataSource = dataSource;
     }
+
     @Override
     public void add(LineItem item) {
         try (Connection connection = dataSource.getConnection()) {
