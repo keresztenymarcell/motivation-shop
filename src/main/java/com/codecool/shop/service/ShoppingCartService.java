@@ -24,23 +24,24 @@ public class ShoppingCartService {
     public void addProductToCart(int userId, int productId){
         Product product = productDao.find(productId);
         shoppingCartDao.addToShoppingCart(userId, product);
-        logger.info("User add product to cart!");
+        logger.info(String.format("User (ID=%d) added a product (ID=%d) to the cart!", userId, productId));
+
 
     }
 
     public void removeProductFromCart(int userId, int productId){
         Product product = productDao.find(productId);
         shoppingCartDao.removeFromShoppingCart(1, product);
-        logger.info("User remove product from cart!");
+        logger.info(String.format("User (ID=%d) removed a product (ID=%d) from the cart!", userId, productId));
     }
 
     public void emptyCart(int userId){
         shoppingCartDao.remove(userId);
-        logger.info("User empty his/her cart!");
+        logger.info("User emptied their cart!");
     }
 
     public ShoppingCart getCartByUser(int userId){
-        logger.info("Get user shopping cart!");
+
         return shoppingCartDao.get(userId);
     }
 

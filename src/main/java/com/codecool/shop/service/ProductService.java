@@ -30,29 +30,29 @@ public class ProductService {
     //index page filter help methods
     public List<Product> getProductsForCategory(int categoryId){
         var category = productCategoryDao.find(categoryId);
-        logger.info("Get product by category!");
+        //logger.info("Get product by category!");
         return productDao.getBy(category);
     }
 
     public List<Product> getProductsForSupplier(int supplierId){
         var supplier = supplierDao.find(supplierId);
-        logger.info("Get product by supplier!");
+        //logger.info("Get product by supplier!");
         return productDao.getBy(supplier);
     }
 
     //index page display All help methods
     public List<Product> getAllProducts() {
-        logger.info("Get all product!");
+        //logger.info("Get all product!");
         return productDao.getAll();
     }
 
     public List<Supplier> getAllSuppliers() {
-        logger.info("Get all supplier!");
+        //logger.info("Get all supplier!");
         return supplierDao.getAll();
     }
 
     public List<ProductCategory> getAllCategories() {
-        logger.info("Get all categories!");
+        //logger.info("Get all categories!");
         return productCategoryDao.getAll();
     }
 
