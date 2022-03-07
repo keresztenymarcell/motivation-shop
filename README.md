@@ -7,11 +7,15 @@ This was a teamwork project during my 3rd module called OOP room in Codecool. We
 ## Technologies
 
 - Java 11
-- Thymeleaf templating engine
+- Thymeleaf templating engine!
 - PostgreSQL
 - HTML + CSS
 - JavaScript ES6
 - Bootstrap 5 libary
 - Apache Maven
+
+
+[Képernyőfotó 2022-03-07 - 17 49 06](https://user-images.githubusercontent.com/79151717/157106708-66a0c2aa-2565-4c60-8e4c-063ba7af7934.png)
+
 
 
