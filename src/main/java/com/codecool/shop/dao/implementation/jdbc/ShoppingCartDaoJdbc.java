@@ -12,14 +12,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartDaoJdbc implements ShoppingCartDao {
-
+public class ShoppingCartDaoJdbc extends DatabaseConnection implements ShoppingCartDao {
+    private static ShoppingCartDaoJdbc instance;
     private static LineItemDaoJdbc lineItemDaoJdbc = LineItemDaoJdbc.getInstance();
-    private DataSource dataSource;
 
-    public ShoppingCartDaoJdbc(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public static ShoppingCartDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new ShoppingCartDaoJdbc();
+        }
+        return instance;
     }
+
+
 
     @Override
     public ShoppingCart createShoppingCart(int userId) {

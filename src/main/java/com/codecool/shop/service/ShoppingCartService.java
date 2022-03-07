@@ -31,7 +31,7 @@ public class ShoppingCartService {
 
     public void removeProductFromCart(int userId, int productId){
         Product product = productDao.find(productId);
-        shoppingCartDao.removeFromShoppingCart(userId, product);
+        shoppingCartDao.removeFromShoppingCart(1, product);
         logger.info(String.format("User (ID=%d) removed a product (ID=%d) from the cart!", userId, productId));
     }
 

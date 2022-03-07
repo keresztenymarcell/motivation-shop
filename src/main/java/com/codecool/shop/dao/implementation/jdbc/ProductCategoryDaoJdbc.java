@@ -14,19 +14,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoJdbc implements ProductCategoryDao {
+public class ProductCategoryDaoJdbc extends DatabaseConnection implements ProductCategoryDao {
 
-    private DataSource dataSource;
+    private static ProductCategoryDaoJdbc instance;
     private final Logger logger = Logger.getLogger(Initializer.class);
 
+    public static ProductCategoryDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new ProductCategoryDaoJdbc();
+        }
+        return instance;
+    }
 
     @Override
     public void add(ProductCategory category) {
 
-    }
-
-    public ProductCategoryDaoJdbc(DataSource dataSource) {
-        this.dataSource = dataSource;
     }
 
     @Override

@@ -22,14 +22,16 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-
         PropertyConfigurator.configure("src/main/resources/log4j.properties");
         Logger logger = Logger.getLogger(Initializer.class);
+
+
         Properties p = PropertyProvider.getPropertiesFromConnectionConfig();
+
+
         String dao= (String) p.get ("dao");
+
         connectionType = dao;
-
-
 
         if (dao.equals("memory")) {
             logger.info("Server running with In-memory DAO");

@@ -2,7 +2,6 @@ package com.codecool.shop.util;
 
 import com.codecool.shop.config.Initializer;
 import com.codecool.shop.dao.*;
-import com.codecool.shop.dao.implementation.DatabaseManager;
 import com.codecool.shop.dao.implementation.jdbc.*;
 import com.codecool.shop.dao.implementation.mem.*;
 import com.codecool.shop.service.OrderService;
@@ -10,18 +9,11 @@ import com.codecool.shop.service.ProductService;
 import com.codecool.shop.service.ShoppingCartService;
 import com.codecool.shop.service.UserService;
 
-import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 import java.sql.SQLException;
 
 public class ServiceProvider {
 
     private final static String connectionType = Initializer.getConnectionType();
-    private DataSource dataSource = DatabaseConnection.connect();
-
-
-
-    static ProductService productService;
 
     static ProductDao productDataStore = null;
     static SupplierDao supplierDataStore = null;
@@ -33,26 +25,24 @@ public class ServiceProvider {
 
 
     public static ProductService getProductService(){
-        if(productService == null){
             if (connectionType.equals("memory")) {
                 productDataStore = ProductDaoMem.getInstance();
                 productCategoryDataStore = ProductCategoryDaoMem.getInstance();
                 supplierDataStore = SupplierDaoMem.getInstance();
                 userDataStore = UserDaoMem.getInstance();
-                productService = new ProductService(productDataStore, productCategoryDataStore, supplierDataStore, userDataStore);
-                return productService;
+                return new ProductService(productDataStore, productCategoryDataStore, supplierDataStore, userDataStore);
 
             } else if (connectionType.equals("jdbc")) {
+                ProductDaoJdbc.getInstance().connect();
                 productDataStore = ProductDaoJdbc.getInstance();
+                SupplierDaoJdbc.getInstance().connect();
                 supplierDataStore = SupplierDaoJdbc.getInstance();
+                ProductCategoryDaoJdbc.getInstance().connect();
+                productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
+                UserDaoJdbc.getInstance().connect();
                 userDataStore = UserDaoJdbc.getInstance();
-                productService = new ProductService(productDataStore, productCategoryDataStore, supplierDataStore, userDataStore);
-                return productService;
+                return new ProductService(productDataStore, productCategoryDataStore, supplierDataStore, userDataStore);
             }
-        }
-        else{
-            return productService;
-        }
         return null;
         }
 

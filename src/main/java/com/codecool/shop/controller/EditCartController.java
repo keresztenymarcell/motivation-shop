@@ -24,6 +24,9 @@ import java.util.Set;
 public class EditCartController extends HttpServlet {
     ShoppingCartService shoppingCartService = ServiceProvider.getShoppingCartService();
 
+    public EditCartController(){
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
